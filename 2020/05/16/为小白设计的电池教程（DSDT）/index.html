@@ -22,13 +22,13 @@
 <meta property="og:image" content="http://fp1.fghrsh.net/2020/05/08/f489ad3bacd013bab00a468e61af80f9.png">
 <meta property="og:image" content="http://fp1.fghrsh.net/2020/04/08/b456b320c3ef57b623dab19f40c4013b.png">
 <meta property="article:published_time" content="2020-05-16T14:10:18.000Z">
-<meta property="article:modified_time" content="2020-05-16T14:10:36.521Z">
+<meta property="article:modified_time" content="2020-05-16T14:36:07.835Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://fp1.fghrsh.net/2020/05/08/f489ad3bacd013bab00a468e61af80f9.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1589639117145">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1589639942442">-->
 <meta name="generator" content="Hexo 4.2.1"></head>
 
 <body class="mdui-drawer-body-left">
@@ -166,7 +166,7 @@
 <p><strong><strong>这个教程会尽量写的简单，只要你认真，你绝对看得懂！</strong></strong></p>
 <p>此教程整理，修改，借鉴于：<a href="http://bbs.pcbeta.com/viewthread-1751487-1-1.html" target="_blank" rel="noopener">http://bbs.pcbeta.com/viewthread-1751487-1-1.html</a></p>
 <p>对其进行了完善，以及一些有问题的地方进行了修改。</p>
-<p># <strong>初步了解</strong></p>
+<p>## <strong>初步了解</strong></p>
 <p>实现原理 : 由于苹果无法使用ACPI EC中超过8位的寄存器（<strong><strong>又叫EC缓冲区，Embedded Controller Buffer</strong></strong>），我们需要利用Hotpatch的原理更名涉及到EC的Method使其失效并在新建的SSDT补丁中重新定义它们，使macOS能够通过SMC电池驱动正确识别电池EC信息。</p>
 <p>好了，我觉得你应该得有个<strong><strong>可以用的DSDT</strong></strong>吧，如果没有请去提取自己的DSDT并反编译，排好错。具体见群文件的教程。</p>
 <p>首先打开我们的DSDT，搜索（Command + F）<strong><strong>Embeddedcontrol</strong></strong></p>
@@ -177,7 +177,7 @@
 <p>我们需要用到的工具：<strong><strong>计算器（Mac自带）</strong></strong>，<strong><strong>Maciasl</strong></strong>，<strong><strong>新建一个txt文件</strong></strong>。</p>
 <p>打开txt文件，我们先把一下代码复制进去（我会把这个做成样例放在<strong><strong>群文件</strong></strong>）</p>
 <p>处理方法补丁如下</p>
-<p>```Swift</p>
+<p>```</p>
 <p># created by GZxioabai</p>
 <p># add method B1B2 </p>
 <p>into method label B1B2 remove_entry;</p>
@@ -259,7 +259,7 @@
 <p>end;</p>
 <p>```</p>
 <p>以上的这些东西是同用的处理方法，包括<strong>B1B2（16字节处理），B1B4（32字节处理），WECB和RECB（这两个是处理32字节以上的）</strong></p>
-<p># <strong>16位处理方法</strong></p>
+<p>## <strong>16位处理方法</strong></p>
 <p>接下来，我们来讲讲16位如何处理。</p>
 <p>比如我们在Field下找到的这个<strong><strong>16位的BADC</strong></strong>，我们需要将它拆分掉，拆成来<strong><strong>两个8字节</strong></strong>，这样就能被电池驱动处理了。</p>
 <p><strong><strong>读取操作：</strong></strong></p>
@@ -353,7 +353,7 @@
 <p>其中这段文字中的\s代表的是一个空格，\n代表的是换行，也就是回车，主要的是在搜索那里，需要注意符号转义，在任何符号前都要加一个反斜杠转义，也就是加一个\</p>
 <p>那最后的处理结果是：</p>
 <p>未处理：</p>
-<p>```swift</p>
+<p>```</p>
 <p>Store (Arg0, BADC)</p>
 <p>```</p>
 <p>打了补丁后：</p>
@@ -361,7 +361,7 @@
 <p>Store (ShiftRight(Arg0,8),DCA1)</p>
 <p>Store (Arg0,DCA0)</p>
 <p>```</p>
-<p># <strong>32字节处理方法</strong></p>
+<p>## <strong>32字节处理方法</strong></p>
 <p>32位字段的处理方法其实跟16位一样，用到的是B1B4，区别就是，16位拆除<strong><strong>2个</strong></strong>，32拆除<strong><strong>4个</strong></strong></p>
 <p>在Field里查找32位的，这里我们也是举一个例子，比如<strong><strong>B1CH</strong></strong></p>
 <p>补丁如下：</p>
@@ -378,20 +378,20 @@
 <p>那这个也就不解释了，差不多的意思。其中<strong><strong>B1B4</strong></strong>是<strong><strong>32位</strong></strong>处理方法</p>
 <p>处理结果：</p>
 <p>未处理：</p>
-<p>```swift</p>
+<p>```</p>
 <p>​            Method (_BIF, 0, NotSerialized)</p>
 <p>​            {</p>
 <p>​                Store (B1CH, IFCH)                                                  //未处理前</p>
 <p>​            }</p>
 <p>```</p>
 <p>打了补丁后：</p>
-<p>```swift</p>
+<p>```</p>
 <p>​            Method (_BIF, 0, NotSerialized)</p>
 <p>​            {</p>
 <p>​                Store (B1B4 (BC0H, BC1H, BC2H, BC3H), IFCH)                  //把被调用B1CH两处拆分为4个字节</p>
 <p>​            }</p>
 <p>```</p>
-<p># <strong>偏移量计算</strong></p>
+<p>## <strong>偏移量计算</strong></p>
 <p>到了32位以上的字段处理，我们会使用到<strong><strong>RECB（读）</strong></strong>和<strong><strong>WECB（写）</strong></strong>两个处理方法</p>
 <p>我先给你看两个例子：</p>
 <p><strong><strong>RECB(0x98, 64)</strong></strong></p>
@@ -404,7 +404,7 @@
 <p><strong><strong>SMD0</strong></strong>是<strong><strong>256位的需要处理的字段</strong></strong>，在这里是<strong><strong>写入</strong></strong>，那么它的前参数，顾名思义就是前面那个<strong><strong>FB4</strong></strong></p>
 <p>那么其实，最主要的问题是<strong><strong>偏移量</strong></strong>了。</p>
 <p>举例1：</p>
-<p>```swift</p>
+<p>```</p>
 <p>Offset (0x04), （基地址）</p>
 <p>CMCM,   8, //0x04</p>
 <p>CMD1,   8, //0x05</p>
@@ -422,7 +422,7 @@
 <p>```</p>
 <p>我们看这里的，<strong><strong>MBMN</strong></strong>是需要处理的<strong><strong>80位字段</strong></strong>，它的偏移量的计算就要涉及到它上面的<strong><strong>基地址</strong></strong>，我们看到了那个基地址是<strong><strong>0x19</strong></strong>，我们还可以发现它前面有个<strong><strong>8位的SMST</strong></strong>，我们将8除以8，得到1，再把0x19加上这个1，最后得到了<strong><strong>0x1A</strong></strong>，那么下面那个MBPN的偏移量怎么算呢，就是<strong><strong>将前面的都加起来除以8</strong></strong>，再加上<strong><strong>基地址</strong></strong>，就是8加上80得到88，除以8，等于11，转换为16进制就是B，0x19加上B，等于0x24.（<strong><strong>注意的是，在除以8后的数字，一定要转换为16进制，再加上基地址！</strong></strong>）</p>
 <p>举例二：</p>
-<p>```swift</p>
+<p>```</p>
 <p>Offset (0x53),      //（基地址）     </p>
 <p>B0TP,   16,      // 从基地址起 ，为0x53   </p>
 <p>B0VL,   16,      //16，为2个字节；  计算：上一个的起始地址0x53+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x55</p>
@@ -446,7 +446,7 @@
 <p>```</p>
 <p>这里我就不说明了，自己看右边的注释理解一下吧。</p>
 <p>举例3：</p>
-<p>```swift</p>
+<p>```</p>
 <p>Offset (0x5D),     //（基地址）  </p>
 <p>ENIB,   16,     // 16，为2个字节；   从基地址起 ，为0x5D</p>
 <p>ENDD,   8,     //8，为1个字节；  计算：上一个的起始地址0x5D+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x5F</p>
@@ -459,7 +459,7 @@
 <p>SMAA,   24,      //8，为1个字节；  计算：上一个的起始地址0x84+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x85</p>
 <p>```</p>
 <p>举例4  最为简单：</p>
-<p>```swift</p>
+<p>```</p>
 <p>​            Field (ERAM, ByteAcc, NoLock, Preserve)</p>
 <p>​                {</p>
 <p>​                    Offset (0x04),</p>
@@ -482,7 +482,7 @@
 <p>​                }</p>
 <p>```</p>
 <p>举例五 特殊：</p>
-<p>```swift</p>
+<p>```</p>
 <p>OperationRegion (SMBX, EmbeddedControl, 0x18, 0x28)            //第三个值是起始地址</p>
 <p>Field (SMBX, ByteAcc, NoLock, Preserve)</p>
 <p>{</p>
@@ -501,7 +501,7 @@
 <p>​        ALD1,   8</p>
 <p>}</p>
 <p>```</p>
-<p># <strong>32位以上字段的处理（包括64，128，256等）</strong></p>
+<p>## <strong>32位以上字段的处理（包括64，128，256等）</strong></p>
 <p>在Field下，我们需要对其进行<strong><strong>重命名</strong></strong>使其失效。</p>
 <p>补丁如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">into Device label EC0 code_regex (SMD0,)\s+(256) replace_matched begin SMDX,%2,&#x2F;&#x2F;%1%2 end;</span><br></pre></td></tr></table></figure>
@@ -525,10 +525,10 @@
 
 <p>值得注意的是，我们这边是<strong><strong>将整个Store语句进行了替换</strong></strong>，这也是<strong><strong>WECB</strong></strong>处理的不同之处。</p>
 <p>处理结果：<code>Store (FB4, SMD0) —&gt; WECB (0x1C, 256, FB4)</code></p>
-<p># <strong>Mutex确认，最后检查</strong></p>
+<p>## <strong>Mutex确认，最后检查</strong></p>
 <p>确保DSDT里的<strong><strong>Mutex</strong></strong>都是<strong><strong>0x00</strong></strong>，不然可能会出现电量显示0%的情况。</p>
 <p>在DSDT里搜索<strong><strong>Mutex</strong></strong>，如果有的不是0x00，你就自己手动改成0x00。</p>
-<p># <strong>补充</strong></p>
+<p>## <strong>补充</strong></p>
 <p>当电池有时能正常显示电量，有时不能会出现一个小叉，则可能是多个电池的位置导致的，如图有两个位置，分别为“BAT0”和“BAT1”，我们需要禁用掉“BAT1”这个位置，以达到正常读取电量</p>
 
   </article>
@@ -578,7 +578,7 @@
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
 
 
-<script src="/js/app.js?v=1589639117146"></script>
+<script src="/js/app.js?v=1589639942443"></script>
   
 
 

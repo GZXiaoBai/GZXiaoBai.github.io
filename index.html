@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1589639117152">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1589639942456">-->
 <meta name="generator" content="Hexo 4.2.1"></head>
 
 <body class="mdui-drawer-body-left">
@@ -147,10 +147,10 @@
         <article>
             
                 <p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/05/08/6b431d7264edaf8854ff6de7850a1e8b.jpg" alt="6b431d7264edaf8854ff6de7850a1e8b.jpg" class="lazyload"></p>
-<p># <strong>前言</strong></p>
+<p>## <strong>前言</strong></p>
 <p>当你的触摸板无法正常工作时，或者一点也不工作时，那你可能就需要修改ACPI来修补修补你的触摸板来，使其能够正常工作。</p>
 <p>毕竟一台笔记本电脑，用不了触摸板实在是太难受了。（如果你有钱买妙控板，那就另当别论了）</p>
-<p># <strong>确定设备路径</strong></p>
+<p>## <strong>确定设备路径</strong></p>
 <p>1.进入<strong><strong>Windows系统</strong></strong>，打开<strong><strong>设备管理器</strong></strong>，找到<strong><strong>人体输入学设备</strong></strong>，确认自己是不是I2C触摸板（有可能是I2C USB），如果不是I2C，请跳转到<strong><strong>安装步骤</strong></strong>。</p>
 <p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/05/15/065c4eaccd5a62c43319886336d12ca8.png" alt="065c4eaccd5a62c43319886336d12ca8.png" class="lazyload"></p>
 <p>2.然后右键查看属性，在详细信息里找到触摸板的<strong><strong>位置路径</strong></strong></p>
@@ -159,7 +159,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_SB.PCI0.I2C0.TPD0</span><br></pre></td></tr></table></figure>
 
 <p>我们把它记下来吧，之后会用到。</p>
-<p># <strong>确定ACPI PIn</strong></p>
+<p>## <strong>确定ACPI PIn</strong></p>
 <p>到Mac系统下，使用<strong><strong>IORegistryExplorer</strong></strong>查看<strong><strong>ACPI Pin</strong></strong></p>
 <p>在右上角搜索自己的触摸板名称，比如根据我们之前照出来的路径，触摸板设备的名称就为<strong><strong>TPD0</strong></strong></p>
 <p>&gt; 常见的触摸板名称，如，TPD0，TPDX，ETPD，TPAD等</p>
@@ -233,15 +233,15 @@
         <article>
             
                 <p><a href="https://img.fghrsh.net/image/Xpbv4" target="_blank" rel="noopener"><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/05/08/bbfcbf8b80dbe7ca2a4aed83f8089e0d.png" alt="bbfcbf8b80dbe7ca2a4aed83f8089e0d.png" class="lazyload"></a></p>
-<p># <strong>前言</strong></p>
+<p>## <strong>前言</strong></p>
 <p>在有了OpenCore的引导后，已经<strong><strong>不在推荐使用DSDT</strong></strong>了，况且，现在也是主要推广<strong><strong>热补丁（HotPatch）</strong></strong>，热补丁具有比DSDT更好的<strong><strong>灵活性</strong></strong>，于是便开始写这篇文章了。</p>
-<p># <strong>准备步骤</strong></p>
+<p>## <strong>准备步骤</strong></p>
 <p>首先，我们需要下载我提供的电池热补丁的样本（SSDT-BATT.dsl)。同时，我还准备了联想X260的电池热补丁作为例子。</p>
 <p>链接如下：<a href="https://pan.baidu.com/s/1E85uJJGzq5EXUpcTTE-CDQ" target="_blank" rel="noopener">百度云</a>  <strong><strong>密码:fn1v</strong></strong></p>
 <p>然后，准备你的DSDT或者SSDT（存储有EC缓冲区的，Embedded Controller Buffer）</p>
 <p>需要工具：<code>Hackintool，Maciasl，科学计算器（Mac自带）</code></p>
 <p>要求：最好有一定的电池的基础知识，详细看见我之前写的<a href="https://gzxiaobai.github.io/post/wei-xiao-bai-she-ji-de-dian-chi-jiao-cheng-dsdt/" target="_blank" rel="noopener">电池DSDT的教程</a></p>
-<p># <strong>初步动作</strong></p>
+<p>## <strong>初步动作</strong></p>
 <p>打开热补丁样本，我们来进行一些修改。（按照我自己的习惯来的）</p>
 <p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/e65fd584f0449f65f06dcab8da3027bc.png" alt="e65fd584f0449f65f06dcab8da3027bc.png" class="lazyload"></p>
 <p>我们要修改的有三处：</p>
@@ -251,7 +251,7 @@
 <p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/9bc4f9b7ac2ad30173bf11d795d7898c.png" alt="9bc4f9b7ac2ad30173bf11d795d7898c.png" class="lazyload"></p>
 <p>这里我们有一处要修改：</p>
 <p>1.Scope路径下，改为自己DSDT里的实际路径</p>
-<p># <strong>16位和32位的处理</strong></p>
+<p>## <strong>16位和32位的处理</strong></p>
 <p>这里的处理，其实与DSDT里的差不多。</p>
 <p>我们先将Field复制到SSDT里</p>
 <p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/e15fd60ebcd7ceb6a922c9b7148a0c83.png" alt="e15fd60ebcd7ceb6a922c9b7148a0c83.png" class="lazyload"></p>
@@ -260,7 +260,7 @@
 <p><strong><strong><em>注意⚠️：你不难发现，我这里有许多的Field，那是因为X260的DSDT里，就是像这样的分散的Field。因此，当你制作电池热补丁时，搜索EmbeddedControllerBuffer找到Field后，记得同时搜索Field的名称，比如，ECOR，看看有没有分散在其它地方的</em></strong></strong></p>
 <p>复制过来后，我们需要将Field进行<strong><strong>改名</strong></strong>，比如，ECOR，我改为了ECOX，这样就不会与原ACPI里的发生冲突。</p>
 <p>热补丁与DSDT的拆分不同，我们直接将需要拆分的，拆好放到SSDT中，我们创建的Field下。</p>
-<p>```swift</p>
+<p>```</p>
 <p>​        OperationRegion (ECOX, EmbeddedControl, Zero, 0x0100)</p>
 <p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
 <p>​        {</p>
@@ -309,13 +309,14 @@
 
 
 <p>那么我们就在SSDT中加上这个Scope：</p>
-<p>```swift</p>
+<p>```</p>
 <p>​    Scope (_SB.PCI0.LPC.EC)</p>
 <p>​    {</p>
 <p>​    }</p>
 <p>```</p>
 <p>然后，我们将GBIF这一整个Method复制到这个路径下，在对字节进行拆分。（以此类推，其它Method也是这么处理）</p>
-<p>```swift</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>​        Method (GBIF, 3, NotSerialized)</p>
 <p>​        {</p>
 <p>​            If (_OSI (“Darwin”))</p>
@@ -478,12 +479,12 @@
 <p>​        }</p>
 <p>```</p>
 <p>如上所示，即为最后的处理结果。</p>
-<p># <strong>32位以上字节的处理</strong></p>
+<p>## <strong>32位以上字节的处理</strong></p>
 <p>步骤基本相同，也是搜索所需修改字节对应对Method，然后找到对应路径，添加到SSDT中。</p>
 <p><strong><strong><em>32位以上的，不需要Field下的更改，只需要改Method，进行RECB和WECB的处理</em></strong></strong></p>
 <p>详细见DSDT教程中。</p>
 <p>以下为完整处理结果（其实也在上文Method的GBIF，GBST中）（包含了全部）</p>
-<p>```swift</p>
+<p>```</p>
 <p>​    Scope (_SB.PCI0.LPC.EC)</p>
 <p>​    {</p>
 <p>​        Method (RE1B, 1, NotSerialized)</p>
@@ -711,7 +712,7 @@
 <p>​    }</p>
 <p>```</p>
 <p>可以对照给出的X260的热补丁看看</p>
-<p># <strong>排错，补充引用声明</strong></p>
+<p>## <strong>排错，补充引用声明</strong></p>
 <p>完成这些步骤后，点击编译会发现错误</p>
 <p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/63be505b7792df708a4d5b51ca8892a4.png" alt="63be505b7792df708a4d5b51ca8892a4.png" class="lazyload"></p>
 <p>这些都是因为没有被定义，因此我们需要进行引用，来排除这些错误。</p>
@@ -731,27 +732,27 @@
 <p>​    {</p>
 <p>```</p>
 <p>补丁中添加的代码示例</p>
-<p>```swift</p>
+<p>```</p>
 <p>External (<em>SB</em>.PCI0.LPCB.H_EC, DeviceObj)</p>
 <p>```</p>
 <p>Method：原始 ACPI 定义示例</p>
-<p>```swift</p>
+<p>```</p>
 <p>Method (_STA, 0, NotSerialized)  /* _STA: Status */</p>
 <p>```</p>
 <p>补丁中添加的代码示例</p>
-<p>```swift</p>
+<p>```</p>
 <p>External (<em>SB</em>.BAT0._STA, MethodObj)</p>
 <p>```</p>
 <p>Mutex：原始 ACPI 定义示例</p>
-<p>```swift</p>
+<p>```</p>
 <p>Mutex (BATM, 0x07)</p>
 <p>```</p>
 <p>补丁中添加的代码示例</p>
-<p>```swift</p>
+<p>```</p>
 <p>External (<em>SB</em>.PCI0.LPCB.H_EC.BATM, MutexObj)</p>
 <p>```</p>
 <p>FieldUnit：原始 ACPI 定义示例</p>
-<p>```swift</p>
+<p>```</p>
 <p>Field(…)</p>
 <p>{</p>
 <p>…</p>
@@ -760,19 +761,19 @@
 <p>}</p>
 <p>```</p>
 <p>补丁中添加的代码示例</p>
-<p>```swift</p>
+<p>```</p>
 <p>External (<em>SB</em>.PCI0.LPCB.H_EC.BCNT, FieldUnitObj)</p>
 <p>```</p>
 <p>Integer：原始 ACPI 定义示例</p>
-<p>```swift</p>
+<p>```</p>
 <p>Name (ECA2, Zero)</p>
 <p>```</p>
 <p>补丁中添加的代码示例</p>
-<p>```swift</p>
+<p>```</p>
 <p>External (<em>SB</em>.PCI0.LPCB.H_EC.ECA2, IntObj)</p>
 <p>```</p>
 <p>Package：原始 ACPI 定义示例</p>
-<p>```swift</p>
+<p>```</p>
 <p>Name (PBIF, Package (0x0D)</p>
 <p>{</p>
 <p>​    One,</p>
@@ -791,13 +792,13 @@
 <p>})</p>
 <p>```</p>
 <p>补丁中添加的代码示例</p>
-<p>```swift</p>
+<p>```</p>
 <p>External (<em>SB</em>.BAT0.PBIF, PkgObj)</p>
 <p>```</p>
-<p># <strong>添加if判断语句</strong></p>
+<p>## <strong>添加if判断语句</strong></p>
 <p>为了让自己修改的Method不会影响Windows系统，我们需要添加if判断语句，明确它的内容作用在哪个系统。</p>
 <p>如，在GBIF这个Method的第一个括号下加入<strong><strong>If (_OSI (“Darwin”))</strong></strong></p>
-<p>```swift</p>
+<p>```</p>
 <p>​        Method (GBIF, 3, NotSerialized)</p>
 <p>​        {</p>
 <p>​            If (_OSI (“Darwin”))</p>
@@ -811,7 +812,7 @@
 <p>对于有返回语句的，我们需要在Else下加上Return，没有则不需要。</p>
 <p>Else部分自己加在Method末尾。</p>
 <p>最终结果如下：</p>
-<p>```swift</p>
+<p>```</p>
 <p>​        Method (GBIF, 3, NotSerialized)</p>
 <p>​        {</p>
 <p>​            If (_OSI (“Darwin”))</p>
@@ -901,18 +902,18 @@
 <p>我们发现，我将GBIF在Else中重命名为了XBIF，这需要与后面config里添加重命名对应。</p>
 <p>那么，你们可能会有疑问，这个Arg0这些是这么来的？</p>
 <p>这个需要观察：</p>
-<p>```swift</p>
+<p>```</p>
 <p>Method (GBIF, 3, NotSerialized)</p>
 <p>```</p>
 <p>就是中间这个数字得来的，3的话就是在XBIF后面的括号里填写，Arg0， Arg1， Arg2。</p>
 <p>是多少，你就从Arg0开始往后一个个按顺序加。0就不填，留空。</p>
 <p>添加完了这些后，你再编译，发现报错了，然后一样，补充引用声明。</p>
 <p>如，</p>
-<p>```swift</p>
+<p>```</p>
 <p>External (_SB.PCI0.LPC.EC.XBIF, MethodObj)</p>
 <p>```</p>
 <p>这样就可以了。</p>
-<p># <strong>重命名与Mutex检查</strong></p>
+<p>## <strong>重命名与Mutex检查</strong></p>
 <p>最后，我们来进行重命名和Mutex检查</p>
 <p>比如GBIF，我们来重命名为XBIF，这样就不会与ACPI中的GBIF冲突了</p>
 <p>规则如下：</p>
@@ -920,7 +921,7 @@
 
 <p>利用Hackintool，将GBIF转换为16进制为：47424946</p>
 <p>我们再补上两位，这两位就需要看Method了</p>
-<p>```swift</p>
+<p>```</p>
 <p>Method (GBIF, 3, NotSerialized)</p>
 <p>```</p>
 <p>NotSerialized代表0，Serialized代表8</p>
@@ -951,7 +952,7 @@
 
 <p>其它Mutex对象按照同样的方法处理即可</p>
 <p>这样下来你的电池热补丁就基本制作完毕了，对于双电池系统的电池（实际只有一块电池的），我们需要禁用其中一个。</p>
-<p># <strong>双电池系统，屏蔽其中一个</strong></p>
+<p>## <strong>双电池系统，屏蔽其中一个</strong></p>
 <p>比如，你的DSDT中有BAT0或BAT1两个电池设备，但你实际只在用其中一个。那么，你先看看另一个是否开启，如果另一个也是开启的，你需要屏蔽它。</p>
 <p>参考我给的<strong><strong>SSDT-BAT0-Disable-X260.aml</strong></strong></p>
 <p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/623eacaa93ddd83f4c6e702f3386d33f.png" alt="623eacaa93ddd83f4c6e702f3386d33f.png" class="lazyload"></p>
@@ -1001,7 +1002,7 @@
 <p><strong><strong>这个教程会尽量写的简单，只要你认真，你绝对看得懂！</strong></strong></p>
 <p>此教程整理，修改，借鉴于：<a href="http://bbs.pcbeta.com/viewthread-1751487-1-1.html" target="_blank" rel="noopener">http://bbs.pcbeta.com/viewthread-1751487-1-1.html</a></p>
 <p>对其进行了完善，以及一些有问题的地方进行了修改。</p>
-<p># <strong>初步了解</strong></p>
+<p>## <strong>初步了解</strong></p>
 <p>实现原理 : 由于苹果无法使用ACPI EC中超过8位的寄存器（<strong><strong>又叫EC缓冲区，Embedded Controller Buffer</strong></strong>），我们需要利用Hotpatch的原理更名涉及到EC的Method使其失效并在新建的SSDT补丁中重新定义它们，使macOS能够通过SMC电池驱动正确识别电池EC信息。</p>
 <p>好了，我觉得你应该得有个<strong><strong>可以用的DSDT</strong></strong>吧，如果没有请去提取自己的DSDT并反编译，排好错。具体见群文件的教程。</p>
 <p>首先打开我们的DSDT，搜索（Command + F）<strong><strong>Embeddedcontrol</strong></strong></p>
@@ -1012,7 +1013,7 @@
 <p>我们需要用到的工具：<strong><strong>计算器（Mac自带）</strong></strong>，<strong><strong>Maciasl</strong></strong>，<strong><strong>新建一个txt文件</strong></strong>。</p>
 <p>打开txt文件，我们先把一下代码复制进去（我会把这个做成样例放在<strong><strong>群文件</strong></strong>）</p>
 <p>处理方法补丁如下</p>
-<p>```Swift</p>
+<p>```</p>
 <p># created by GZxioabai</p>
 <p># add method B1B2 </p>
 <p>into method label B1B2 remove_entry;</p>
@@ -1094,7 +1095,7 @@
 <p>end;</p>
 <p>```</p>
 <p>以上的这些东西是同用的处理方法，包括<strong>B1B2（16字节处理），B1B4（32字节处理），WECB和RECB（这两个是处理32字节以上的）</strong></p>
-<p># <strong>16位处理方法</strong></p>
+<p>## <strong>16位处理方法</strong></p>
 <p>接下来，我们来讲讲16位如何处理。</p>
 <p>比如我们在Field下找到的这个<strong><strong>16位的BADC</strong></strong>，我们需要将它拆分掉，拆成来<strong><strong>两个8字节</strong></strong>，这样就能被电池驱动处理了。</p>
 <p><strong><strong>读取操作：</strong></strong></p>
@@ -1188,7 +1189,7 @@
 <p>其中这段文字中的\s代表的是一个空格，\n代表的是换行，也就是回车，主要的是在搜索那里，需要注意符号转义，在任何符号前都要加一个反斜杠转义，也就是加一个\</p>
 <p>那最后的处理结果是：</p>
 <p>未处理：</p>
-<p>```swift</p>
+<p>```</p>
 <p>Store (Arg0, BADC)</p>
 <p>```</p>
 <p>打了补丁后：</p>
@@ -1196,7 +1197,7 @@
 <p>Store (ShiftRight(Arg0,8),DCA1)</p>
 <p>Store (Arg0,DCA0)</p>
 <p>```</p>
-<p># <strong>32字节处理方法</strong></p>
+<p>## <strong>32字节处理方法</strong></p>
 <p>32位字段的处理方法其实跟16位一样，用到的是B1B4，区别就是，16位拆除<strong><strong>2个</strong></strong>，32拆除<strong><strong>4个</strong></strong></p>
 <p>在Field里查找32位的，这里我们也是举一个例子，比如<strong><strong>B1CH</strong></strong></p>
 <p>补丁如下：</p>
@@ -1213,20 +1214,20 @@
 <p>那这个也就不解释了，差不多的意思。其中<strong><strong>B1B4</strong></strong>是<strong><strong>32位</strong></strong>处理方法</p>
 <p>处理结果：</p>
 <p>未处理：</p>
-<p>```swift</p>
+<p>```</p>
 <p>​            Method (_BIF, 0, NotSerialized)</p>
 <p>​            {</p>
 <p>​                Store (B1CH, IFCH)                                                  //未处理前</p>
 <p>​            }</p>
 <p>```</p>
 <p>打了补丁后：</p>
-<p>```swift</p>
+<p>```</p>
 <p>​            Method (_BIF, 0, NotSerialized)</p>
 <p>​            {</p>
 <p>​                Store (B1B4 (BC0H, BC1H, BC2H, BC3H), IFCH)                  //把被调用B1CH两处拆分为4个字节</p>
 <p>​            }</p>
 <p>```</p>
-<p># <strong>偏移量计算</strong></p>
+<p>## <strong>偏移量计算</strong></p>
 <p>到了32位以上的字段处理，我们会使用到<strong><strong>RECB（读）</strong></strong>和<strong><strong>WECB（写）</strong></strong>两个处理方法</p>
 <p>我先给你看两个例子：</p>
 <p><strong><strong>RECB(0x98, 64)</strong></strong></p>
@@ -1239,7 +1240,7 @@
 <p><strong><strong>SMD0</strong></strong>是<strong><strong>256位的需要处理的字段</strong></strong>，在这里是<strong><strong>写入</strong></strong>，那么它的前参数，顾名思义就是前面那个<strong><strong>FB4</strong></strong></p>
 <p>那么其实，最主要的问题是<strong><strong>偏移量</strong></strong>了。</p>
 <p>举例1：</p>
-<p>```swift</p>
+<p>```</p>
 <p>Offset (0x04), （基地址）</p>
 <p>CMCM,   8, //0x04</p>
 <p>CMD1,   8, //0x05</p>
@@ -1257,7 +1258,7 @@
 <p>```</p>
 <p>我们看这里的，<strong><strong>MBMN</strong></strong>是需要处理的<strong><strong>80位字段</strong></strong>，它的偏移量的计算就要涉及到它上面的<strong><strong>基地址</strong></strong>，我们看到了那个基地址是<strong><strong>0x19</strong></strong>，我们还可以发现它前面有个<strong><strong>8位的SMST</strong></strong>，我们将8除以8，得到1，再把0x19加上这个1，最后得到了<strong><strong>0x1A</strong></strong>，那么下面那个MBPN的偏移量怎么算呢，就是<strong><strong>将前面的都加起来除以8</strong></strong>，再加上<strong><strong>基地址</strong></strong>，就是8加上80得到88，除以8，等于11，转换为16进制就是B，0x19加上B，等于0x24.（<strong><strong>注意的是，在除以8后的数字，一定要转换为16进制，再加上基地址！</strong></strong>）</p>
 <p>举例二：</p>
-<p>```swift</p>
+<p>```</p>
 <p>Offset (0x53),      //（基地址）     </p>
 <p>B0TP,   16,      // 从基地址起 ，为0x53   </p>
 <p>B0VL,   16,      //16，为2个字节；  计算：上一个的起始地址0x53+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x55</p>
@@ -1281,7 +1282,7 @@
 <p>```</p>
 <p>这里我就不说明了，自己看右边的注释理解一下吧。</p>
 <p>举例3：</p>
-<p>```swift</p>
+<p>```</p>
 <p>Offset (0x5D),     //（基地址）  </p>
 <p>ENIB,   16,     // 16，为2个字节；   从基地址起 ，为0x5D</p>
 <p>ENDD,   8,     //8，为1个字节；  计算：上一个的起始地址0x5D+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x5F</p>
@@ -1294,7 +1295,7 @@
 <p>SMAA,   24,      //8，为1个字节；  计算：上一个的起始地址0x84+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x85</p>
 <p>```</p>
 <p>举例4  最为简单：</p>
-<p>```swift</p>
+<p>```</p>
 <p>​            Field (ERAM, ByteAcc, NoLock, Preserve)</p>
 <p>​                {</p>
 <p>​                    Offset (0x04),</p>
@@ -1317,7 +1318,7 @@
 <p>​                }</p>
 <p>```</p>
 <p>举例五 特殊：</p>
-<p>```swift</p>
+<p>```</p>
 <p>OperationRegion (SMBX, EmbeddedControl, 0x18, 0x28)            //第三个值是起始地址</p>
 <p>Field (SMBX, ByteAcc, NoLock, Preserve)</p>
 <p>{</p>
@@ -1336,7 +1337,7 @@
 <p>​        ALD1,   8</p>
 <p>}</p>
 <p>```</p>
-<p># <strong>32位以上字段的处理（包括64，128，256等）</strong></p>
+<p>## <strong>32位以上字段的处理（包括64，128，256等）</strong></p>
 <p>在Field下，我们需要对其进行<strong><strong>重命名</strong></strong>使其失效。</p>
 <p>补丁如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">into Device label EC0 code_regex (SMD0,)\s+(256) replace_matched begin SMDX,%2,&#x2F;&#x2F;%1%2 end;</span><br></pre></td></tr></table></figure>
@@ -1360,10 +1361,10 @@
 
 <p>值得注意的是，我们这边是<strong><strong>将整个Store语句进行了替换</strong></strong>，这也是<strong><strong>WECB</strong></strong>处理的不同之处。</p>
 <p>处理结果：<code>Store (FB4, SMD0) —&gt; WECB (0x1C, 256, FB4)</code></p>
-<p># <strong>Mutex确认，最后检查</strong></p>
+<p>## <strong>Mutex确认，最后检查</strong></p>
 <p>确保DSDT里的<strong><strong>Mutex</strong></strong>都是<strong><strong>0x00</strong></strong>，不然可能会出现电量显示0%的情况。</p>
 <p>在DSDT里搜索<strong><strong>Mutex</strong></strong>，如果有的不是0x00，你就自己手动改成0x00。</p>
-<p># <strong>补充</strong></p>
+<p>## <strong>补充</strong></p>
 <p>当电池有时能正常显示电量，有时不能会出现一个小叉，则可能是多个电池的位置导致的，如图有两个位置，分别为“BAT0”和“BAT1”，我们需要禁用掉“BAT1”这个位置，以达到正常读取电量</p>
 
             
@@ -1391,14 +1392,14 @@
                 <p><a href="https://img.fghrsh.net/image/Xpgcv" target="_blank" rel="noopener"><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/05/08/5da10200a4e3148f16260962f51ce44a.jpg" alt="5da10200a4e3148f16260962f51ce44a.jpg" class="lazyload"></a></p>
 <p>以下内容基本摘自<strong><strong>Eternal Qiu</strong></strong>的博客，日后准备进行修改</p>
 <p>链接：<a href="https://blog.qiuxiangzhi.top/2019/07/15/macOS-Guide/" target="_blank" rel="noopener">https://blog.qiuxiangzhi.top/2019/07/15/macOS-Guide/</a></p>
-<p># <strong>前言</strong></p>
+<p>## <strong>前言</strong></p>
 <p>我打算写一个教程来引导小白入坑，不在本文介绍那些复杂需要折腾的驱动问题。</p>
-<p># <strong>警告</strong></p>
+<p>## <strong>警告</strong></p>
 <p>请注意，本贴只做技术与学习探讨，不做任何商业和违法用途。同时请各位在实践学习后，于<strong><strong>24小时内自行消除</strong></strong>。</p>
 <p>在非苹果设备上安装macOS操作系统需要承担一定责任，希望各位明确用途后，仔细思考。<strong><strong>作者不提倡</strong></strong>读者进行下面的操作，本贴<strong><strong>仅供技术参考</strong></strong>。</p>
 <p>可能涉及到的法律问题：<strong><strong>macOS1014</strong></strong>；</p>
 <p><strong><strong>如果您是非个人用户或用作商业用途，您应该观看上述材料中所提及问题，并不要接触实施下述操作。</strong></strong></p>
-<p># <strong>资源准备工作</strong></p>
+<p>## <strong>资源准备工作</strong></p>
 <p>\1. 一台电脑，最好是搭载Windows 7及以上的操作系统，<strong><strong>推荐Windows 10</strong></strong>；</p>
 <p>\2. 一个不少于4G的U盘，<strong><strong>8GB起步</strong></strong>；如果安装macOS10.15（Catalina）请使用<strong><strong>16G</strong></strong>的U盘。</p>
 <p>\3. 工具软件（<a href="http://www.diskgenius.cn/" target="_blank" rel="noopener">DiskGenius专业版</a>，<a href="https://www.balena.io/etcher/" target="_blank" rel="noopener">balenaEtcher官方版</a>，<a href="http://www.wepe.com.cn/download.html" target="_blank" rel="noopener">微PE官方版</a>）；</p>
@@ -1406,7 +1407,7 @@
 <p>\5. 解压工具（此处链接的是<a href="https://www.7-zip.org" target="_blank" rel="noopener">7-Zip</a>）；</p>
 <p>\6. <strong><strong>知道如何百度</strong></strong>；</p>
 <p>知道如何百度是<strong><strong>非常重要</strong></strong>的一件事情，因为里面涉及到一些概念，这些概念比较不那么专业，但确实也不是很常见，因此需要有一定的百度能力（主要还是有一些小白太懒了，常见诸如如何进BIOS都不愿意去百度了解）。</p>
-<p># <strong>电脑调试工作</strong></p>
+<p>## <strong>电脑调试工作</strong></p>
 <p>\1. 下载或安装好上述软件，其中<strong><strong>DiskGenius专业版</strong></strong>最好是免安装版的。</p>
 <p>\2. 打开DiskGenius专业版，右键自己的<strong><strong>磁盘</strong></strong>（不是分区），查看是否是<strong><strong>GPT分区</strong></strong>，若不是，需要在PE下转换。</p>
 <p>\3. 双击微PE.exe，点击右下角生成.iso文件，解压该iso文件到你的（<strong><strong>确保它是Fat 32格式并最好转移其他文件</strong></strong>）U盘里。</p>
@@ -1419,7 +1420,7 @@
 
 
 <p>\8. 电脑准备工作完成。</p>
-<p># <strong>安装调试过程</strong></p>
+<p>## <strong>安装调试过程</strong></p>
 <p>\1. 打开<strong><strong>balenaEtcher</strong></strong>，插入U盘，按照提示操作，选择<strong><strong>下载好的镜像</strong></strong>进行烧录。</p>
 <p>\2. 烧录好后可以有两种选择，一步一步继续往下走或者<strong><strong>直接跳转到第6步</strong></strong>，（若下载的镜像为我推荐的则）两种方式都可以完成安装，推荐一步一步走。</p>
 <p>\3. 在<a href="https://github.com/daliansky/Hackintosh" target="_blank" rel="noopener">这里</a>找到你的机型或类似配置的EFI，下载备用。若找不到请<strong><strong>直接跳第6步操作</strong></strong>。</p>
@@ -1431,7 +1432,7 @@
 <p>\9. 接下来就可以进行安装了，一路下一步，选择自己刚刚命名的磁盘安装，等待安装完成。</p>
 <p>\10. 安装完成会重启回到引导界面，此时选择<strong><strong>Boot macOS install From 【你自己起的磁盘名字】</strong></strong>，空格同样可以选择代码模式。进入第二次安装，此时不需要手动操作，等待安装完成重启即可。</p>
 <p>\11. 此时回到引导界面应是已经安装完成，选择<strong><strong>Boot macOS From 【你自己起的磁盘名字】</strong></strong>，进入设置界面，接下来等着你的就是macOS的全新体验了。</p>
-<p># <strong>macOS、Windows 双引导</strong></p>
+<p>## <strong>macOS、Windows 双引导</strong></p>
 <p>在安装完成之后，要做的就是进行引导的设置。</p>
 <p>有两种设置引导的方式，此处推荐使用的是PE进行引导的建立，也介绍Windows下设置引导的方法介绍。</p>
 <p>\1. <strong><strong>Windows环境下完成引导的设置。</strong></strong></p>
@@ -1457,7 +1458,7 @@
 <p>（<strong><strong>Windows、macOS在不同磁盘下时</strong></strong>）也可以复制整个EFI文件夹到macOS所在磁盘的ESP分区。</p>
 <p>新手小白建议前述操作。</p>
 <p>此处的引导建立使用<strong><strong>Bootice</strong></strong>这款软件，选择引导，UEFI设置。引导文件同样选择<strong><strong>CLOVERX64.efi</strong></strong>，名称随意，选择粘贴了引导文件的分区。</p>
-<p># <strong>安装过程常见问题解答</strong></p>
+<p>## <strong>安装过程常见问题解答</strong></p>
 <p>\1. 抹除时出现“磁盘空间不足，无法完成操作”怎么办？</p>
 <p>``答：这是你在<strong>电脑调试阶段</strong>中，给ESP分区空间预留不足200MB，需要重新操作，将空间扩大`。</p>
 <p>\2. 怎么才知道我的磁盘是不是GPT格式呢？`</p>
@@ -1484,7 +1485,7 @@
 <p>一般只需选第一条加粗补丁即可</p>
 <p>\6. 安装10.15时，卡<strong><strong>VoodooPS2Controller</strong></strong>怎么办(一般是<strong><strong>10.15</strong></strong>的问题)</p>
 <p>到<strong><strong>EFI/CLOVER/kexts/others/</strong></strong>目录下，删除<strong><strong>VoodooPS2Controller.kexts</strong></strong></p>
-<p># <strong>其他</strong></p>
+<p>## <strong>其他</strong></p>
 <p>我希望各位小白，在明确步骤后，可以通过自己百度、找帖子之后解决掉大部分问题，之后才是找大神寻求帮助。</p>
 <p><strong><strong>我比较推荐以下方式问问题：</strong></strong></p>
 <p>\1. 这个我应该怎么做？Not 大神帮我搞定！</p>
@@ -1492,7 +1493,7 @@
 <p><strong><strong>帮完忙，比较喜欢这种回复：</strong></strong></p>
 <p>\1. 我知道了，谢谢你！Not 好/嗯/哦。</p>
 <p>如果希望别人帮你安装，自己不想动手不想研究的话，希望你还是左转淘宝或者别接触黑苹果以及玩黑果的人，白嫖可耻，时间宝贵。</p>
-<p># <strong>感谢</strong></p>
+<p>## <strong>感谢</strong></p>
 <p>感谢<code>QQ群：706372078</code>里的群主Eternal Qiu</p>
 <p>本人QQ：<code>3467365604</code></p>
 
@@ -1547,7 +1548,7 @@
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
 
 
-<script src="/js/app.js?v=1589639117155"></script>
+<script src="/js/app.js?v=1589639942458"></script>
   
 
 
