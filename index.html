@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1589637412735">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1589638590156">-->
 <meta name="generator" content="Hexo 4.2.1"></head>
 
 <body class="mdui-drawer-body-left">
@@ -45,7 +45,7 @@
         </a>
     </div>
     <div class="nexmoe-count">
-        <div><span>Articles</span>1</div>
+        <div><span>Articles</span>6</div>
         <div><span>Tags</span>0</div>
         <div><span>Categories</span>0</div>
     </div>
@@ -122,6 +122,1378 @@
         <section class="nexmoe-posts">
     
     <div class="nexmoe-post">
+        <a href="/2020/05/16/%E7%94%A8%E7%83%AD%E8%A1%A5%E4%B8%81%E4%BF%AE%E7%90%86%E4%BD%A0%E7%9A%84%E8%A7%A6%E6%91%B8%E6%9D%BF%EF%BC%88TouchPad-Hotpatch%EF%BC%89/">
+            
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
+                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="用热补丁修理你的触摸板（TouchPad-Hotpatch）(正在施工)" class="lazyload">
+                    <h1>用热补丁修理你的触摸板（TouchPad-Hotpatch）(正在施工)</h1>
+                </div>
+            
+        </a>
+
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+            <a><i class="nexmoefont icon-calendar-fill"></i>2020年05月16日</a>
+            <a><i class="nexmoefont icon-areachart"></i>281 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
+        </div>
+
+        <article>
+            
+                <p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/05/08/6b431d7264edaf8854ff6de7850a1e8b.jpg" alt="6b431d7264edaf8854ff6de7850a1e8b.jpg" class="lazyload"></p>
+<p># <strong>前言</strong></p>
+<p>当你的触摸板无法正常工作时，或者一点也不工作时，那你可能就需要修改ACPI来修补修补你的触摸板来，使其能够正常工作。</p>
+<p>毕竟一台笔记本电脑，用不了触摸板实在是太难受了。（如果你有钱买妙控板，那就另当别论了）</p>
+<p># <strong>确定设备路径</strong></p>
+<p>1.进入<strong><strong>Windows系统</strong></strong>，打开<strong><strong>设备管理器</strong></strong>，找到<strong><strong>人体输入学设备</strong></strong>，确认自己是不是I2C触摸板（有可能是I2C USB），如果不是I2C，请跳转到<strong><strong>安装步骤</strong></strong>。</p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/05/15/065c4eaccd5a62c43319886336d12ca8.png" alt="065c4eaccd5a62c43319886336d12ca8.png" class="lazyload"></p>
+<p>2.然后右键查看属性，在详细信息里找到触摸板的<strong><strong>位置路径</strong></strong></p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/05/15/06527804fef2b42517c715b9c3dbdd6b.png" alt="06527804fef2b42517c715b9c3dbdd6b.png" class="lazyload"></p>
+<p>像这里的路径就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_SB.PCI0.I2C0.TPD0</span><br></pre></td></tr></table></figure>
+
+<p>我们把它记下来吧，之后会用到。</p>
+<p># <strong>确定ACPI PIn</strong></p>
+<p>到Mac系统下，使用<strong><strong>IORegistryExplorer</strong></strong>查看<strong><strong>ACPI Pin</strong></strong></p>
+<p>在右上角搜索自己的触摸板名称，比如根据我们之前照出来的路径，触摸板设备的名称就为<strong><strong>TPD0</strong></strong></p>
+<p>&gt; 常见的触摸板名称，如，TPD0，TPDX，ETPD，TPAD等</p>
+<p>&gt; 常见的触摸屏名称，如，ETPD，TPLX等</p>
+
+            
+        </article>
+    </div>
+    
+    <div class="nexmoe-post">
+        <a href="/2020/05/16/%E5%A6%82%E4%BD%95%E7%AE%80%E5%8D%95%E7%9A%84%E7%BC%96%E8%AF%91OpenCore/">
+            
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
+                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="如何简单的编译OpenCore" class="lazyload">
+                    <h1>如何简单的编译OpenCore</h1>
+                </div>
+            
+        </a>
+
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+            <a><i class="nexmoefont icon-calendar-fill"></i>2020年05月16日</a>
+            <a><i class="nexmoefont icon-areachart"></i>316 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
+        </div>
+
+        <article>
+            
+                <p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/2a512f724ce790b2434ce28bdffe6edd.png" alt="2a512f724ce790b2434ce28bdffe6edd.png" class="lazyload"></p>
+<p><strong><strong>1、编译之前，请确保电脑里安装了 Command Line Tools，安装方法：</strong></strong></p>
+<p>终端执行：<strong><strong>sudo xcode-select –install</strong></strong></p>
+<p>如果因为一些不可抗力出现下载失败的问题，请尝试去苹果官网手动下载安装。</p>
+<p>P.S.安装过 Xcode 的朋友无需安装 Command Line Tools；同时安装过正式版和 Beta 版 Xcode 的朋友，可以通过如下命令选择目标 Tools，<strong><strong>如果没有请忽略本条</strong></strong>。</p>
+<p>在终端执行：sudo xcode-select -s /Applications/Xcode-beta.app/Contents/Developer</p>
+<p>2、编译最新版 OC：</p>
+<p>终端执行：cd /Users/你的用户名/Desktop/</p>
+<p>终端执行：git clone <a href="https://github.com/acidanthera/****OpenCore****Pkg.git" target="_blank" rel="noopener">https://github.com/acidanthera/****OpenCore****Pkg.git</a></p>
+<p>终端执行：cd <strong><strong>OpenCore</strong></strong>Pkg</p>
+<p>终端执行：./macbuild.tool</p>
+<p>然后等待一大串的东西，选YES就行！等待编译完就好。</p>
+<p>最后去路径 OpenCorePkg/UDK/Build/OpenCorePkg/RELEASE_XCODE5/X64/ 路径拷贝 OpenCore-x.x.x-RELEASE.zip 至桌面备用。</p>
+<p>3、编译所需 efi 文件：</p>
+<p>步骤跟上面一样</p>
+<p>终端执行：cd /Users/你的用户名/Desktop/</p>
+<p>终端执行：git clone <a href="https://github.com/acidanthera/AppleSupportPkg.git" target="_blank" rel="noopener">https://github.com/acidanthera/AppleSupportPkg.git</a></p>
+<p>终端执行：cd AppleSupportPkg</p>
+<p>终端执行：./macbuild.tool</p>
+<p>4、到此为止，我们得到如下两个文件：</p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/08/fc33d2ef43f20c57fdd93e3a2439943a.png" alt="fc33d2ef43f20c57fdd93e3a2439943a.png" class="lazyload"></p>
+<p>解压 OpenCore-x.x.x-RELEASE 获取 BOOT、OC 文件夹。解压 AppleSupport-x.x.x-RELEASE.zip 获得所需 efi 文件。</p>
+
+            
+        </article>
+    </div>
+    
+    <div class="nexmoe-post">
+        <a href="/2020/05/16/%E8%BF%9B%E9%98%B6%EF%BC%9A%E7%94%B5%E6%B1%A0%E7%83%AD%E8%A1%A5%E4%B8%81%EF%BC%88Battery-Hotpatch%EF%BC%89%E4%B9%8B%E8%B7%AF/">
+            
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
+                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="进阶：电池热补丁（Battery-Hotpatch）之路" class="lazyload">
+                    <h1>进阶：电池热补丁（Battery-Hotpatch）之路</h1>
+                </div>
+            
+        </a>
+
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+            <a><i class="nexmoefont icon-calendar-fill"></i>2020年05月16日</a>
+            <a><i class="nexmoefont icon-areachart"></i>3.3k 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 16 分钟</a>
+        </div>
+
+        <article>
+            
+                <p><a href="https://img.fghrsh.net/image/Xpbv4" target="_blank" rel="noopener"><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/05/08/bbfcbf8b80dbe7ca2a4aed83f8089e0d.png" alt="bbfcbf8b80dbe7ca2a4aed83f8089e0d.png" class="lazyload"></a></p>
+<p># <strong>前言</strong></p>
+<p>在有了OpenCore的引导后，已经<strong><strong>不在推荐使用DSDT</strong></strong>了，况且，现在也是主要推广<strong><strong>热补丁（HotPatch）</strong></strong>，热补丁具有比DSDT更好的<strong><strong>灵活性</strong></strong>，于是便开始写这篇文章了。</p>
+<p># <strong>准备步骤</strong></p>
+<p>首先，我们需要下载我提供的电池热补丁的样本（SSDT-BATT.dsl)。同时，我还准备了联想X260的电池热补丁作为例子。</p>
+<p>链接如下：<a href="https://pan.baidu.com/s/1E85uJJGzq5EXUpcTTE-CDQ" target="_blank" rel="noopener">百度云</a>  <strong><strong>密码:fn1v</strong></strong></p>
+<p>然后，准备你的DSDT或者SSDT（存储有EC缓冲区的，Embedded Controller Buffer）</p>
+<p>需要工具：<code>Hackintool，Maciasl，科学计算器（Mac自带）</code></p>
+<p>要求：最好有一定的电池的基础知识，详细看见我之前写的<a href="https://gzxiaobai.github.io/post/wei-xiao-bai-she-ji-de-dian-chi-jiao-cheng-dsdt/" target="_blank" rel="noopener">电池DSDT的教程</a></p>
+<p># <strong>初步动作</strong></p>
+<p>打开热补丁样本，我们来进行一些修改。（按照我自己的习惯来的）</p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/e65fd584f0449f65f06dcab8da3027bc.png" alt="e65fd584f0449f65f06dcab8da3027bc.png" class="lazyload"></p>
+<p>我们要修改的有三处：</p>
+<p>1.DefinitionBlock的修改，将这里的<strong><strong>ACDT</strong></strong>改为自己<strong><strong>DSDT开头DefinitionBlock里的第三项</strong></strong></p>
+<p>2.DefinitionBlock的修改，将最后的数值也改成自己DSDT里的</p>
+<p>3.External引用路径里的EC路径，改成自己DSDT里的实际路径</p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/9bc4f9b7ac2ad30173bf11d795d7898c.png" alt="9bc4f9b7ac2ad30173bf11d795d7898c.png" class="lazyload"></p>
+<p>这里我们有一处要修改：</p>
+<p>1.Scope路径下，改为自己DSDT里的实际路径</p>
+<p># <strong>16位和32位的处理</strong></p>
+<p>这里的处理，其实与DSDT里的差不多。</p>
+<p>我们先将Field复制到SSDT里</p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/e15fd60ebcd7ceb6a922c9b7148a0c83.png" alt="e15fd60ebcd7ceb6a922c9b7148a0c83.png" class="lazyload"></p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/dbd31d6f597da35e49aa1a5edeab9af1.png" alt="dbd31d6f597da35e49aa1a5edeab9af1.png" class="lazyload"></p>
+<p>像我这样复制下来，里面到内容不复制。</p>
+<p><strong><strong><em>注意⚠️：你不难发现，我这里有许多的Field，那是因为X260的DSDT里，就是像这样的分散的Field。因此，当你制作电池热补丁时，搜索EmbeddedControllerBuffer找到Field后，记得同时搜索Field的名称，比如，ECOR，看看有没有分散在其它地方的</em></strong></strong></p>
+<p>复制过来后，我们需要将Field进行<strong><strong>改名</strong></strong>，比如，ECOR，我改为了ECOX，这样就不会与原ACPI里的发生冲突。</p>
+<p>热补丁与DSDT的拆分不同，我们直接将需要拆分的，拆好放到SSDT中，我们创建的Field下。</p>
+<p>```swift</p>
+<p>​        OperationRegion (ECOX, EmbeddedControl, Zero, 0x0100)</p>
+<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
+<p>​        {</p>
+<p>​            Offset (0xA0), </p>
+<p>​            RCB0,   8, </p>
+<p>​            RCB1,   8, </p>
+<p>​            FCB0,   8, </p>
+<p>​            FCB1,   8, </p>
+<p>​            Offset (0xA8), </p>
+<p>​            ACB0,   8, </p>
+<p>​            ACB1,   8, </p>
+<p>​            VOB0,   8, </p>
+<p>​            VOB1,   8</p>
+<p>​        }</p>
+<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
+<p>​        {</p>
+<p>​            Offset (0xA0), </p>
+<p>​            BMB0,   8, </p>
+<p>​            BMB1,   8</p>
+<p>​        }</p>
+<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
+<p>​        {</p>
+<p>​            Offset (0xA0), </p>
+<p>​            DCB0,   8, </p>
+<p>​            DCB1,   8, </p>
+<p>​            DVB0,   8, </p>
+<p>​            DVB1,   8, </p>
+<p>​            Offset (0xAA), </p>
+<p>​            SNB0,   8, </p>
+<p>​            SNB1,   8</p>
+<p>​        }</p>
+<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
+<p>​        {</p>
+<p>​            Offset (0xA0), </p>
+<p>​            CHB0,   8, </p>
+<p>​            CHB1,   8, </p>
+<p>​            CHB2,   8, </p>
+<p>​            CHB3,   8</p>
+<p>​        }</p>
+<p>```</p>
+<p>最后的结果就如上所示，正确拆分，正确计算偏移量。（这些都包含在我DSDT的教程中）</p>
+<p>接着我们在DSDT中搜索需要被拆分的字节，找到所在的Method，记下路径，然后在SSDT里，添加这个路径。</p>
+<p>比如我们，发现GBIF这个Method里面有需要拆分的自己，观察所得，GBIF所在的路径为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_SB.PCI0.LPC.EC</span><br></pre></td></tr></table></figure>
+
+
+
+<p>那么我们就在SSDT中加上这个Scope：</p>
+<p>```swift</p>
+<p>​    Scope (_SB.PCI0.LPC.EC)</p>
+<p>​    {</p>
+<p>​    }</p>
+<p>```</p>
+<p>然后，我们将GBIF这一整个Method复制到这个路径下，在对字节进行拆分。（以此类推，其它Method也是这么处理）</p>
+<p>```swift</p>
+<p>​        Method (GBIF, 3, NotSerialized)</p>
+<p>​        {</p>
+<p>​            If (_OSI (“Darwin”))</p>
+<p>​            {</p>
+<p>​                Acquire (BATM, 0xFFFF)</p>
+<p>​                If (Arg2)</p>
+<p>​                {</p>
+<p>​                    Or (Arg0, One, HIID)</p>
+<p>​                    Store (B1B2 (BMB0, BMB1), Local7)</p>
+<p>​                    ShiftRight (Local7, 0x0F, Local7)</p>
+<p>​                    XOr (Local7, One, Index (Arg1, Zero))</p>
+<p>​                    Store (Arg0, HIID)</p>
+<p>​                    If (Local7)</p>
+<p>​                    {</p>
+<p>​                        Multiply (B1B2 (FCB0, FCB1), 0x0A, Local1)</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (B1B2 (FCB0, FCB1), Local1)</p>
+<p>​                    }</p>
+<p>​                    Store (Local1, Index (Arg1, 0x02))</p>
+<p>​                    Or (Arg0, 0x02, HIID)</p>
+<p>​                    If (Local7)</p>
+<p>​                    {</p>
+<p>​                        Multiply (B1B2 (DCB0, DCB1), 0x0A, Local0)</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (B1B2 (DCB0, DCB1), Local0)</p>
+<p>​                    }</p>
+<p>​                    Store (Local0, Index (Arg1, One))</p>
+<p>​                    Divide (Local1, 0x14, Local2, Index (Arg1, 0x05))</p>
+<p>​                    If (Local7)</p>
+<p>​                    {</p>
+<p>​                        Store (0xC8, Index (Arg1, 0x06))</p>
+<p>​                    }</p>
+<p>​                    ElseIf (B1B2 (DVB0, DVB1))</p>
+<p>​                    {</p>
+<p>​                        Divide (0x00030D40, B1B2 (DVB0, DVB1), Local2, Index (Arg1, 0x06))</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (Zero, Index (Arg1, 0x06))</p>
+<p>​                    }</p>
+<p>​                    Store (B1B2 (DVB0, DVB1), Index (Arg1, 0x04))</p>
+<p>​                    Store (B1B2 (SNB0, SNB1), Local0)</p>
+<p>​                    Name (SERN, Buffer (0x06)</p>
+<p>​                    {</p>
+<p>​                        “     “</p>
+<p>​                    })</p>
+<p>​                    Store (0x04, Local2)</p>
+<p>​                    While (Local0)</p>
+<p>​                    {</p>
+<p>​                        Divide (Local0, 0x0A, Local1, Local0)</p>
+<p>​                        Add (Local1, 0x30, Index (SERN, Local2))</p>
+<p>​                        Decrement (Local2)</p>
+<p>​                    }</p>
+<p>​                    Store (SERN, Index (Arg1, 0x0A))</p>
+<p>​                    Or (Arg0, 0x06, HIID)</p>
+<p>​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x09))</p>
+<p>​                    Or (Arg0, 0x04, HIID)</p>
+<p>​                    Name (BTYP, Buffer (0x05)</p>
+<p>​                    {</p>
+<p>​                         0x00, 0x00, 0x00, 0x00, 0x00                   </p>
+<p>​                    })</p>
+<p>​                    Store (B1B4 (CHB0, CHB1, CHB2, CHB3), BTYP)</p>
+<p>​                    Store (BTYP, Index (Arg1, 0x0B))</p>
+<p>​                    Or (Arg0, 0x05, HIID)</p>
+<p>​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x0C))</p>
+<p>​                }</p>
+<p>​                Else</p>
+<p>​                {</p>
+<p>​                    Store (0xFFFFFFFF, Index (Arg1, One))</p>
+<p>​                    Store (Zero, Index (Arg1, 0x05))</p>
+<p>​                    Store (Zero, Index (Arg1, 0x06))</p>
+<p>​                    Store (0xFFFFFFFF, Index (Arg1, 0x02))</p>
+<p>​                }</p>
+<p>​                Release (BATM)</p>
+<p>​                Return (Arg1)</p>
+<p>​            }</p>
+<p>​            Else</p>
+<p>​            {</p>
+<p>​                Return (XBIF (Arg0, Arg1, Arg2))</p>
+<p>​            }</p>
+<p>​        }</p>
+<p>​        Method (GBST, 4, NotSerialized)</p>
+<p>​        {</p>
+<p>​            If (_OSI (“Darwin”))</p>
+<p>​            {</p>
+<p>​                Acquire (BATM, 0xFFFF)</p>
+<p>​                If (And (Arg1, 0x20))</p>
+<p>​                {</p>
+<p>​                    Store (0x02, Local0)</p>
+<p>​                }</p>
+<p>​                ElseIf (And (Arg1, 0x40))</p>
+<p>​                {</p>
+<p>​                    Store (One, Local0)</p>
+<p>​                }</p>
+<p>​                Else</p>
+<p>​                {</p>
+<p>​                    Store (Zero, Local0)</p>
+<p>​                }</p>
+<p>​                If (And (Arg1, 0x07)){}</p>
+<p>​                Else</p>
+<p>​                {</p>
+<p>​                    Or (Local0, 0x04, Local0)</p>
+<p>​                }</p>
+<p>​                If (LEqual (And (Arg1, 0x07), 0x07))</p>
+<p>​                {</p>
+<p>​                    Store (0x04, Local0)</p>
+<p>​                    Store (Zero, Local1)</p>
+<p>​                    Store (Zero, Local2)</p>
+<p>​                    Store (Zero, Local3)</p>
+<p>​                }</p>
+<p>​                Else</p>
+<p>​                {</p>
+<p>​                    Store (Arg0, HIID)</p>
+<p>​                    Store (B1B2 (VOB0, VOB1), Local3)</p>
+<p>​                    If (Arg2)</p>
+<p>​                    {</p>
+<p>​                        Multiply (B1B2 (RCB0, RCB1), 0x0A, Local2)</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (B1B2 (RCB0, RCB1), Local2)</p>
+<p>​                    }</p>
+<p>​                    Store (B1B2 (ACB0, ACB1), Local1)</p>
+<p>​                    If (LGreaterEqual (Local1, 0x8000))</p>
+<p>​                    {</p>
+<p>​                        If (And (Local0, One))</p>
+<p>​                        {</p>
+<p>​                            Subtract (0x00010000, Local1, Local1)</p>
+<p>​                        }</p>
+<p>​                        Else</p>
+<p>​                        {</p>
+<p>​                            Store (Zero, Local1)</p>
+<p>​                        }</p>
+<p>​                    }</p>
+<p>​                    ElseIf (LNot (And (Local0, 0x02)))</p>
+<p>​                    {</p>
+<p>​                        Store (Zero, Local1)</p>
+<p>​                    }</p>
+<p>​                    If (Arg2)</p>
+<p>​                    {</p>
+<p>​                        Multiply (Local3, Local1, Local1)</p>
+<p>​                        Divide (Local1, 0x03E8, Local7, Local1)</p>
+<p>​                    }</p>
+<p>​                }</p>
+<p>​                Store (Local0, Index (Arg3, Zero))</p>
+<p>​                Store (Local1, Index (Arg3, One))</p>
+<p>​                Store (Local2, Index (Arg3, 0x02))</p>
+<p>​                Store (Local3, Index (Arg3, 0x03))</p>
+<p>​                Release (BATM)</p>
+<p>​                Return (Arg3)</p>
+<p>​            }</p>
+<p>​            Else</p>
+<p>​            {</p>
+<p>​                Return (XBST (Arg0, Arg1, Arg2, Arg3))</p>
+<p>​            }</p>
+<p>​        }</p>
+<p>```</p>
+<p>如上所示，即为最后的处理结果。</p>
+<p># <strong>32位以上字节的处理</strong></p>
+<p>步骤基本相同，也是搜索所需修改字节对应对Method，然后找到对应路径，添加到SSDT中。</p>
+<p><strong><strong><em>32位以上的，不需要Field下的更改，只需要改Method，进行RECB和WECB的处理</em></strong></strong></p>
+<p>详细见DSDT教程中。</p>
+<p>以下为完整处理结果（其实也在上文Method的GBIF，GBST中）（包含了全部）</p>
+<p>```swift</p>
+<p>​    Scope (_SB.PCI0.LPC.EC)</p>
+<p>​    {</p>
+<p>​        Method (RE1B, 1, NotSerialized)</p>
+<p>​        {</p>
+<p>​            OperationRegion (ERM2, EmbeddedControl, Arg0, One)</p>
+<p>​            Field (ERM2, ByteAcc, NoLock, Preserve)</p>
+<p>​            {</p>
+<p>​                BYTE,   8</p>
+<p>​            }</p>
+<p>​            Return (BYTE)</p>
+<p>​        }</p>
+<p>​        Method (RECB, 2, Serialized)</p>
+<p>​        {</p>
+<p>​            ShiftRight (Add (Arg1, 0x07), 0x03, Arg1)</p>
+<p>​            Name (TEMP, Buffer (Arg1){})</p>
+<p>​            Add (Arg1, Arg0, Arg1)</p>
+<p>​            Store (Zero, Local0)</p>
+<p>​            While (LLess (Arg0, Arg1))</p>
+<p>​            {</p>
+<p>​                Store (RE1B (Arg0), Index (TEMP, Local0))</p>
+<p>​                Increment (Arg0)</p>
+<p>​                Increment (Local0)</p>
+<p>​            }</p>
+<p>​            Return (TEMP)</p>
+<p>​        }</p>
+<p>​        OperationRegion (ECOX, EmbeddedControl, Zero, 0x0100)</p>
+<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
+<p>​        {</p>
+<p>​            Offset (0xA0), </p>
+<p>​            RCB0,   8, </p>
+<p>​            RCB1,   8, </p>
+<p>​            FCB0,   8, </p>
+<p>​            FCB1,   8, </p>
+<p>​            Offset (0xA8), </p>
+<p>​            ACB0,   8, </p>
+<p>​            ACB1,   8, </p>
+<p>​            VOB0,   8, </p>
+<p>​            VOB1,   8</p>
+<p>​        }</p>
+<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
+<p>​        {</p>
+<p>​            Offset (0xA0), </p>
+<p>​            BMB0,   8, </p>
+<p>​            BMB1,   8</p>
+<p>​        }</p>
+<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
+<p>​        {</p>
+<p>​            Offset (0xA0), </p>
+<p>​            DCB0,   8, </p>
+<p>​            DCB1,   8, </p>
+<p>​            DVB0,   8, </p>
+<p>​            DVB1,   8, </p>
+<p>​            Offset (0xAA), </p>
+<p>​            SNB0,   8, </p>
+<p>​            SNB1,   8</p>
+<p>​        }</p>
+<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
+<p>​        {</p>
+<p>​            Offset (0xA0), </p>
+<p>​            CHB0,   8, </p>
+<p>​            CHB1,   8, </p>
+<p>​            CHB2,   8, </p>
+<p>​            CHB3,   8</p>
+<p>​        }</p>
+<p>​        Method (GBIF, 3, NotSerialized)</p>
+<p>​        {</p>
+<p>​            If (_OSI (“Darwin”))</p>
+<p>​            {</p>
+<p>​                Acquire (BATM, 0xFFFF)</p>
+<p>​                If (Arg2)</p>
+<p>​                {</p>
+<p>​                    Or (Arg0, One, HIID)</p>
+<p>​                    Store (B1B2 (BMB0, BMB1), Local7)</p>
+<p>​                    ShiftRight (Local7, 0x0F, Local7)</p>
+<p>​                    XOr (Local7, One, Index (Arg1, Zero))</p>
+<p>​                    Store (Arg0, HIID)</p>
+<p>​                    If (Local7)</p>
+<p>​                    {</p>
+<p>​                        Multiply (B1B2 (FCB0, FCB1), 0x0A, Local1)</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (B1B2 (FCB0, FCB1), Local1)</p>
+<p>​                    }</p>
+<p>​                    Store (Local1, Index (Arg1, 0x02))</p>
+<p>​                    Or (Arg0, 0x02, HIID)</p>
+<p>​                    If (Local7)</p>
+<p>​                    {</p>
+<p>​                        Multiply (B1B2 (DCB0, DCB1), 0x0A, Local0)</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (B1B2 (DCB0, DCB1), Local0)</p>
+<p>​                    }</p>
+<p>​                    Store (Local0, Index (Arg1, One))</p>
+<p>​                    Divide (Local1, 0x14, Local2, Index (Arg1, 0x05))</p>
+<p>​                    If (Local7)</p>
+<p>​                    {</p>
+<p>​                        Store (0xC8, Index (Arg1, 0x06))</p>
+<p>​                    }</p>
+<p>​                    ElseIf (B1B2 (DVB0, DVB1))</p>
+<p>​                    {</p>
+<p>​                        Divide (0x00030D40, B1B2 (DVB0, DVB1), Local2, Index (Arg1, 0x06))</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (Zero, Index (Arg1, 0x06))</p>
+<p>​                    }</p>
+<p>​                    Store (B1B2 (DVB0, DVB1), Index (Arg1, 0x04))</p>
+<p>​                    Store (B1B2 (SNB0, SNB1), Local0)</p>
+<p>​                    Name (SERN, Buffer (0x06)</p>
+<p>​                    {</p>
+<p>​                        “     “</p>
+<p>​                    })</p>
+<p>​                    Store (0x04, Local2)</p>
+<p>​                    While (Local0)</p>
+<p>​                    {</p>
+<p>​                        Divide (Local0, 0x0A, Local1, Local0)</p>
+<p>​                        Add (Local1, 0x30, Index (SERN, Local2))</p>
+<p>​                        Decrement (Local2)</p>
+<p>​                    }</p>
+<p>​                    Store (SERN, Index (Arg1, 0x0A))</p>
+<p>​                    Or (Arg0, 0x06, HIID)</p>
+<p>​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x09))</p>
+<p>​                    Or (Arg0, 0x04, HIID)</p>
+<p>​                    Name (BTYP, Buffer (0x05)</p>
+<p>​                    {</p>
+<p>​                         0x00, 0x00, 0x00, 0x00, 0x00                   </p>
+<p>​                    })</p>
+<p>​                    Store (B1B4 (CHB0, CHB1, CHB2, CHB3), BTYP)</p>
+<p>​                    Store (BTYP, Index (Arg1, 0x0B))</p>
+<p>​                    Or (Arg0, 0x05, HIID)</p>
+<p>​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x0C))</p>
+<p>​                }</p>
+<p>​                Else</p>
+<p>​                {</p>
+<p>​                    Store (0xFFFFFFFF, Index (Arg1, One))</p>
+<p>​                    Store (Zero, Index (Arg1, 0x05))</p>
+<p>​                    Store (Zero, Index (Arg1, 0x06))</p>
+<p>​                    Store (0xFFFFFFFF, Index (Arg1, 0x02))</p>
+<p>​                }</p>
+<p>​                Release (BATM)</p>
+<p>​                Return (Arg1)</p>
+<p>​            }</p>
+<p>​            Else</p>
+<p>​            {</p>
+<p>​                Return (XBIF (Arg0, Arg1, Arg2))</p>
+<p>​            }</p>
+<p>​        }</p>
+<p>​        Method (GBST, 4, NotSerialized)</p>
+<p>​        {</p>
+<p>​            If (_OSI (“Darwin”))</p>
+<p>​            {</p>
+<p>​                Acquire (BATM, 0xFFFF)</p>
+<p>​                If (And (Arg1, 0x20))</p>
+<p>​                {</p>
+<p>​                    Store (0x02, Local0)</p>
+<p>​                }</p>
+<p>​                ElseIf (And (Arg1, 0x40))</p>
+<p>​                {</p>
+<p>​                    Store (One, Local0)</p>
+<p>​                }</p>
+<p>​                Else</p>
+<p>​                {</p>
+<p>​                    Store (Zero, Local0)</p>
+<p>​                }</p>
+<p>​                If (And (Arg1, 0x07)){}</p>
+<p>​                Else</p>
+<p>​                {</p>
+<p>​                    Or (Local0, 0x04, Local0)</p>
+<p>​                }</p>
+<p>​                If (LEqual (And (Arg1, 0x07), 0x07))</p>
+<p>​                {</p>
+<p>​                    Store (0x04, Local0)</p>
+<p>​                    Store (Zero, Local1)</p>
+<p>​                    Store (Zero, Local2)</p>
+<p>​                    Store (Zero, Local3)</p>
+<p>​                }</p>
+<p>​                Else</p>
+<p>​                {</p>
+<p>​                    Store (Arg0, HIID)</p>
+<p>​                    Store (B1B2 (VOB0, VOB1), Local3)</p>
+<p>​                    If (Arg2)</p>
+<p>​                    {</p>
+<p>​                        Multiply (B1B2 (RCB0, RCB1), 0x0A, Local2)</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (B1B2 (RCB0, RCB1), Local2)</p>
+<p>​                    }</p>
+<p>​                    Store (B1B2 (ACB0, ACB1), Local1)</p>
+<p>​                    If (LGreaterEqual (Local1, 0x8000))</p>
+<p>​                    {</p>
+<p>​                        If (And (Local0, One))</p>
+<p>​                        {</p>
+<p>​                            Subtract (0x00010000, Local1, Local1)</p>
+<p>​                        }</p>
+<p>​                        Else</p>
+<p>​                        {</p>
+<p>​                            Store (Zero, Local1)</p>
+<p>​                        }</p>
+<p>​                    }</p>
+<p>​                    ElseIf (LNot (And (Local0, 0x02)))</p>
+<p>​                    {</p>
+<p>​                        Store (Zero, Local1)</p>
+<p>​                    }</p>
+<p>​                    If (Arg2)</p>
+<p>​                    {</p>
+<p>​                        Multiply (Local3, Local1, Local1)</p>
+<p>​                        Divide (Local1, 0x03E8, Local7, Local1)</p>
+<p>​                    }</p>
+<p>​                }</p>
+<p>​                Store (Local0, Index (Arg3, Zero))</p>
+<p>​                Store (Local1, Index (Arg3, One))</p>
+<p>​                Store (Local2, Index (Arg3, 0x02))</p>
+<p>​                Store (Local3, Index (Arg3, 0x03))</p>
+<p>​                Release (BATM)</p>
+<p>​                Return (Arg3)</p>
+<p>​            }</p>
+<p>​            Else</p>
+<p>​            {</p>
+<p>​                Return (XBST (Arg0, Arg1, Arg2, Arg3))</p>
+<p>​            }</p>
+<p>​        }</p>
+<p>​    }</p>
+<p>```</p>
+<p>可以对照给出的X260的热补丁看看</p>
+<p># <strong>排错，补充引用声明</strong></p>
+<p>完成这些步骤后，点击编译会发现错误</p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/63be505b7792df708a4d5b51ca8892a4.png" alt="63be505b7792df708a4d5b51ca8892a4.png" class="lazyload"></p>
+<p>这些都是因为没有被定义，因此我们需要进行引用，来排除这些错误。</p>
+<p>以BATM为例，在DSDT中进行搜索，找到它被定义的路径和类型，写成External</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">External (_SB.PCI0.LPC.EC_BATM, MutexObj)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>前者为路径，后者为类型</p>
+<p>更多详见如下：</p>
+<p>以下摘自iStar的博客：</p>
+<p>Device：原始 ACPI 定义示例</p>
+<p>```swift</p>
+<p>Scope (_SB.PCI0.LPCB)</p>
+<p>{</p>
+<p>​    Device (H_EC)</p>
+<p>​    {</p>
+<p>```</p>
+<p>补丁中添加的代码示例</p>
+<p>```swift</p>
+<p>External (<em>SB</em>.PCI0.LPCB.H_EC, DeviceObj)</p>
+<p>```</p>
+<p>Method：原始 ACPI 定义示例</p>
+<p>```swift</p>
+<p>Method (_STA, 0, NotSerialized)  /* _STA: Status */</p>
+<p>```</p>
+<p>补丁中添加的代码示例</p>
+<p>```swift</p>
+<p>External (<em>SB</em>.BAT0._STA, MethodObj)</p>
+<p>```</p>
+<p>Mutex：原始 ACPI 定义示例</p>
+<p>```swift</p>
+<p>Mutex (BATM, 0x07)</p>
+<p>```</p>
+<p>补丁中添加的代码示例</p>
+<p>```swift</p>
+<p>External (<em>SB</em>.PCI0.LPCB.H_EC.BATM, MutexObj)</p>
+<p>```</p>
+<p>FieldUnit：原始 ACPI 定义示例</p>
+<p>```swift</p>
+<p>Field(…)</p>
+<p>{</p>
+<p>…</p>
+<p>BCNT,   8,</p>
+<p>…</p>
+<p>}</p>
+<p>```</p>
+<p>补丁中添加的代码示例</p>
+<p>```swift</p>
+<p>External (<em>SB</em>.PCI0.LPCB.H_EC.BCNT, FieldUnitObj)</p>
+<p>```</p>
+<p>Integer：原始 ACPI 定义示例</p>
+<p>```swift</p>
+<p>Name (ECA2, Zero)</p>
+<p>```</p>
+<p>补丁中添加的代码示例</p>
+<p>```swift</p>
+<p>External (<em>SB</em>.PCI0.LPCB.H_EC.ECA2, IntObj)</p>
+<p>```</p>
+<p>Package：原始 ACPI 定义示例</p>
+<p>```swift</p>
+<p>Name (PBIF, Package (0x0D)</p>
+<p>{</p>
+<p>​    One,</p>
+<p>​    0xFFFFFFFF,</p>
+<p>​    0xFFFFFFFF,</p>
+<p>​    One,</p>
+<p>​    0xFFFFFFFF,</p>
+<p>​    0xFA,</p>
+<p>​    0x96,</p>
+<p>​    0x0A,</p>
+<p>​    0x19,</p>
+<p>​    “BAT0”,</p>
+<p>​    “ “,</p>
+<p>​    “ “,</p>
+<p>​    “ “</p>
+<p>})</p>
+<p>```</p>
+<p>补丁中添加的代码示例</p>
+<p>```swift</p>
+<p>External (<em>SB</em>.BAT0.PBIF, PkgObj)</p>
+<p>```</p>
+<p># <strong>添加if判断语句</strong></p>
+<p>为了让自己修改的Method不会影响Windows系统，我们需要添加if判断语句，明确它的内容作用在哪个系统。</p>
+<p>如，在GBIF这个Method的第一个括号下加入<strong><strong>If (_OSI (“Darwin”))</strong></strong></p>
+<p>```swift</p>
+<p>​        Method (GBIF, 3, NotSerialized)</p>
+<p>​        {</p>
+<p>​            If (_OSI (“Darwin”))</p>
+<p>​            {</p>
+<p>​                Acquire (BATM, 0xFFFF)</p>
+<p>​                If (Arg2)</p>
+<p>​       …..</p>
+<p>```</p>
+<p>然后，我们去到这个Method的尾部，看看这个Method，最后有没有返回（Return）</p>
+<p>很显然这个GBIF有的，就是<strong><strong>Return (Arg1)</strong></strong></p>
+<p>对于有返回语句的，我们需要在Else下加上Return，没有则不需要。</p>
+<p>Else部分自己加在Method末尾。</p>
+<p>最终结果如下：</p>
+<p>```swift</p>
+<p>​        Method (GBIF, 3, NotSerialized)</p>
+<p>​        {</p>
+<p>​            If (_OSI (“Darwin”))</p>
+<p>​            {</p>
+<p>​                Acquire (BATM, 0xFFFF)</p>
+<p>​                If (Arg2)</p>
+<p>​                {</p>
+<p>​                    Or (Arg0, One, HIID)</p>
+<p>​                    Store (B1B2 (BMB0, BMB1), Local7)</p>
+<p>​                    ShiftRight (Local7, 0x0F, Local7)</p>
+<p>​                    XOr (Local7, One, Index (Arg1, Zero))</p>
+<p>​                    Store (Arg0, HIID)</p>
+<p>​                    If (Local7)</p>
+<p>​                    {</p>
+<p>​                        Multiply (B1B2 (FCB0, FCB1), 0x0A, Local1)</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (B1B2 (FCB0, FCB1), Local1)</p>
+<p>​                    }</p>
+<p>​                    Store (Local1, Index (Arg1, 0x02))</p>
+<p>​                    Or (Arg0, 0x02, HIID)</p>
+<p>​                    If (Local7)</p>
+<p>​                    {</p>
+<p>​                        Multiply (B1B2 (DCB0, DCB1), 0x0A, Local0)</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (B1B2 (DCB0, DCB1), Local0)</p>
+<p>​                    }</p>
+<p>​                    Store (Local0, Index (Arg1, One))</p>
+<p>​                    Divide (Local1, 0x14, Local2, Index (Arg1, 0x05))</p>
+<p>​                    If (Local7)</p>
+<p>​                    {</p>
+<p>​                        Store (0xC8, Index (Arg1, 0x06))</p>
+<p>​                    }</p>
+<p>​                    ElseIf (B1B2 (DVB0, DVB1))</p>
+<p>​                    {</p>
+<p>​                        Divide (0x00030D40, B1B2 (DVB0, DVB1), Local2, Index (Arg1, 0x06))</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (Zero, Index (Arg1, 0x06))</p>
+<p>​                    }</p>
+<p>​                    Store (B1B2 (DVB0, DVB1), Index (Arg1, 0x04))</p>
+<p>​                    Store (B1B2 (SNB0, SNB1), Local0)</p>
+<p>​                    Name (SERN, Buffer (0x06)</p>
+<p>​                    {</p>
+<p>​                        “     “</p>
+<p>​                    })</p>
+<p>​                    Store (0x04, Local2)</p>
+<p>​                    While (Local0)</p>
+<p>​                    {</p>
+<p>​                        Divide (Local0, 0x0A, Local1, Local0)</p>
+<p>​                        Add (Local1, 0x30, Index (SERN, Local2))</p>
+<p>​                        Decrement (Local2)</p>
+<p>​                    }</p>
+<p>​                    Store (SERN, Index (Arg1, 0x0A))</p>
+<p>​                    Or (Arg0, 0x06, HIID)</p>
+<p>​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x09))</p>
+<p>​                    Or (Arg0, 0x04, HIID)</p>
+<p>​                    Name (BTYP, Buffer (0x05)</p>
+<p>​                    {</p>
+<p>​                         0x00, 0x00, 0x00, 0x00, 0x00                   </p>
+<p>​                    })</p>
+<p>​                    Store (B1B4 (CHB0, CHB1, CHB2, CHB3), BTYP)</p>
+<p>​                    Store (BTYP, Index (Arg1, 0x0B))</p>
+<p>​                    Or (Arg0, 0x05, HIID)</p>
+<p>​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x0C))</p>
+<p>​                }</p>
+<p>​                Else</p>
+<p>​                {</p>
+<p>​                    Store (0xFFFFFFFF, Index (Arg1, One))</p>
+<p>​                    Store (Zero, Index (Arg1, 0x05))</p>
+<p>​                    Store (Zero, Index (Arg1, 0x06))</p>
+<p>​                    Store (0xFFFFFFFF, Index (Arg1, 0x02))</p>
+<p>​                }</p>
+<p>​                Release (BATM)</p>
+<p>​                Return (Arg1)</p>
+<p>​            }</p>
+<p>​            Else</p>
+<p>​            {</p>
+<p>​                Return (XBIF (Arg0, Arg1, Arg2))</p>
+<p>​            }</p>
+<p>​        }</p>
+<p>```</p>
+<p>我们发现，我将GBIF在Else中重命名为了XBIF，这需要与后面config里添加重命名对应。</p>
+<p>那么，你们可能会有疑问，这个Arg0这些是这么来的？</p>
+<p>这个需要观察：</p>
+<p>```swift</p>
+<p>Method (GBIF, 3, NotSerialized)</p>
+<p>```</p>
+<p>就是中间这个数字得来的，3的话就是在XBIF后面的括号里填写，Arg0， Arg1， Arg2。</p>
+<p>是多少，你就从Arg0开始往后一个个按顺序加。0就不填，留空。</p>
+<p>添加完了这些后，你再编译，发现报错了，然后一样，补充引用声明。</p>
+<p>如，</p>
+<p>```swift</p>
+<p>External (_SB.PCI0.LPC.EC.XBIF, MethodObj)</p>
+<p>```</p>
+<p>这样就可以了。</p>
+<p># <strong>重命名与Mutex检查</strong></p>
+<p>最后，我们来进行重命名和Mutex检查</p>
+<p>比如GBIF，我们来重命名为XBIF，这样就不会与ACPI中的GBIF冲突了</p>
+<p>规则如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Comment：BAT GBIF to XBIF</span><br></pre></td></tr></table></figure>
+
+<p>利用Hackintool，将GBIF转换为16进制为：47424946</p>
+<p>我们再补上两位，这两位就需要看Method了</p>
+<p>```swift</p>
+<p>Method (GBIF, 3, NotSerialized)</p>
+<p>```</p>
+<p>NotSerialized代表0，Serialized代表8</p>
+<p>我们将其相加，中间的数字+N或S</p>
+<p>GBIF就是：3+0=3，3转换为16进制就是3</p>
+<p>那么最后的两位就是03</p>
+<p>XBIF的16进制为：58424946</p>
+<p>完整的如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Comment：BAT GBIF to XBIF</span><br><span class="line">Find：47424946 03</span><br><span class="line">Replace：58424946 03</span><br></pre></td></tr></table></figure>
+
+
+
+<p>GBST的就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Method (GBST, 4, NotSerialized)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Comment：BAT GBST to XBST</span><br><span class="line">Find：47425354 04</span><br><span class="line">Replace：58425354 04</span><br></pre></td></tr></table></figure>
+
+
+
+<p>把这些重命名加到Config里。</p>
+<p>你需要检查Mutex，确保他们全部为0 在当前使用的DSDT文件里搜索Mutex，看出现的几个变量是否为0，目前所知道的绝大多数机器的ACPI Mutex都是默认置0的，但是对于一些联想机器，它们往往有几个Mutex初始值并不是0，这里我们利用ACPI二进制更名的方法实现置0</p>
+<p>以Mutex (BATM, 0x07)为例，先转换BATM为十六进制代码，得到 42 41 54 4D</p>
+<p>在前后加上完整定义的十六进制代码，01代表Mutex，07则代表默认值，最终得到 01 42 41 54 4D 07</p>
+<p>我们的目的是使Mutex对象置0，所以config的更名应填</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Comment Set Mutex BATM, 0x07 to 0x0</span><br><span class="line">Find 01 42 41 54 4D 07</span><br><span class="line">Repalce 01 42 41 54 4D 00</span><br></pre></td></tr></table></figure>
+
+<p>其它Mutex对象按照同样的方法处理即可</p>
+<p>这样下来你的电池热补丁就基本制作完毕了，对于双电池系统的电池（实际只有一块电池的），我们需要禁用其中一个。</p>
+<p># <strong>双电池系统，屏蔽其中一个</strong></p>
+<p>比如，你的DSDT中有BAT0或BAT1两个电池设备，但你实际只在用其中一个。那么，你先看看另一个是否开启，如果另一个也是开启的，你需要屏蔽它。</p>
+<p>参考我给的<strong><strong>SSDT-BAT0-Disable-X260.aml</strong></strong></p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/623eacaa93ddd83f4c6e702f3386d33f.png" alt="623eacaa93ddd83f4c6e702f3386d33f.png" class="lazyload"></p>
+<p>将DefinitionBlock框出来的位置，改成自己的，同时修改External和Scope为自己所要屏蔽的电池设备的路径。</p>
+<p>然后保存即可。</p>
+<p>然后我们要对所屏蔽电池设备下的_STA进行更名：</p>
+<p><strong><strong>CLOVER</strong></strong>：处理比较简单，将所需屏蔽的电池设备，转换为16进制，比如BAT1（42415430）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Comment：BAT _STA to XSTA in BAT1</span><br><span class="line">Find：5F535441</span><br><span class="line">Replace：58535441</span><br><span class="line">TgtBridge：42415431</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong><strong>OC</strong></strong>：OpenCore因为没有TgtBridge，因此处理比较麻烦</p>
+<p>1.选择使用skip，count：Skip为跳过，就看你所要更改的_STA上有几个一样的_STA就跳过几个，count是替换次数，填1次即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Comment：BAT _STA to XSTA in BAT1</span><br><span class="line">Find：5F535441</span><br><span class="line">Replace：58535441</span><br><span class="line">Skip:（填跳过的次数）</span><br><span class="line">Count：1</span><br></pre></td></tr></table></figure>
+
+
+
+<p>到这里，你已经做好一个电池热补丁和屏蔽补丁了，然后再加上ACPIBatteryManager.kext或者SMCBatteryManager.kext，不出问题，你就可以看到你可爱的电池图标了！</p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/62971b7a3ea5acec10213463913ea58f.png" alt="62971b7a3ea5acec10213463913ea58f.png" class="lazyload"></p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/e6f18d2331d465d9513490e29845e1db.png" alt="e6f18d2331d465d9513490e29845e1db.png" class="lazyload"></p>
+
+            
+        </article>
+    </div>
+    
+    <div class="nexmoe-post">
+        <a href="/2020/05/16/%E4%B8%BA%E5%B0%8F%E7%99%BD%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%94%B5%E6%B1%A0%E6%95%99%E7%A8%8B%EF%BC%88DSDT%EF%BC%89/">
+            
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
+                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="为小白设计的电池教程（DSDT）" class="lazyload">
+                    <h1>为小白设计的电池教程（DSDT）</h1>
+                </div>
+            
+        </a>
+
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+            <a><i class="nexmoefont icon-calendar-fill"></i>2020年05月16日</a>
+            <a><i class="nexmoefont icon-areachart"></i>4.2k 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 19 分钟</a>
+        </div>
+
+        <article>
+            
+                <p> <img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/05/08/f489ad3bacd013bab00a468e61af80f9.png" alt="f489ad3bacd013bab00a468e61af80f9.png" class="lazyload"></p>
+<p>​                                 为小白设计的电池教程（DSDT）</p>
+<p>​                                       编写者：G.Z.小白</p>
+<p><strong><strong>这个教程会尽量写的简单，只要你认真，你绝对看得懂！</strong></strong></p>
+<p>此教程整理，修改，借鉴于：<a href="http://bbs.pcbeta.com/viewthread-1751487-1-1.html" target="_blank" rel="noopener">http://bbs.pcbeta.com/viewthread-1751487-1-1.html</a></p>
+<p>对其进行了完善，以及一些有问题的地方进行了修改。</p>
+<p># <strong>初步了解</strong></p>
+<p>实现原理 : 由于苹果无法使用ACPI EC中超过8位的寄存器（<strong><strong>又叫EC缓冲区，Embedded Controller Buffer</strong></strong>），我们需要利用Hotpatch的原理更名涉及到EC的Method使其失效并在新建的SSDT补丁中重新定义它们，使macOS能够通过SMC电池驱动正确识别电池EC信息。</p>
+<p>好了，我觉得你应该得有个<strong><strong>可以用的DSDT</strong></strong>吧，如果没有请去提取自己的DSDT并反编译，排好错。具体见群文件的教程。</p>
+<p>首先打开我们的DSDT，搜索（Command + F）<strong><strong>Embeddedcontrol</strong></strong></p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/08/b456b320c3ef57b623dab19f40c4013b.png" alt="b456b320c3ef57b623dab19f40c4013b.png" class="lazyload"></p>
+<p>OperationRegion名称，此为<strong><strong>EC操作区</strong></strong>的名称，一般名称为<strong><strong>ERAM、ECF2、ECF3、ECOR</strong></strong>等，并且有的机器可能不止一个</p>
+<p>好了现在，我们找到了这里，仔细观察，发现它在EC0控制器下，具体路径是_SB.PCI0.LPCB.EC0。当然每个人的可能不一样，最后的EC0，还可能是ECDV、EC、H_EC。</p>
+<p>这里我们主要关注Field里的东西，就是那一堆四个字母的东西。在这一堆东西中，我们只要注意<strong><strong>8位以上</strong></strong>的就行（就是右边的数字）。因为电池驱动无法处理8位以上的字节，所以就需要我们手动来处理来。</p>
+<p>我们需要用到的工具：<strong><strong>计算器（Mac自带）</strong></strong>，<strong><strong>Maciasl</strong></strong>，<strong><strong>新建一个txt文件</strong></strong>。</p>
+<p>打开txt文件，我们先把一下代码复制进去（我会把这个做成样例放在<strong><strong>群文件</strong></strong>）</p>
+<p>处理方法补丁如下</p>
+<p>```Swift</p>
+<p># created by GZxioabai</p>
+<p># add method B1B2 </p>
+<p>into method label B1B2 remove_entry;</p>
+<p>into definitionblock code_regex . insert</p>
+<p>begin</p>
+<p>Method (B1B2, 2, NotSerialized)\n</p>
+<p>{\n</p>
+<p>Return(Or(Arg0, ShiftLeft(Arg1, 8)))\n</p>
+<p>}\n</p>
+<p>end;</p>
+<p> # add method B1B4</p>
+<p>into method label B1B4 remove_entry;</p>
+<p>into definitionblock code_regex . insert</p>
+<p>begin</p>
+<p>Method (B1B4, 4, NotSerialized)\n</p>
+<p>{\n</p>
+<p>   Store(Arg3, Local0)\n</p>
+<p>   Or(Arg2, ShiftLeft(Local0, 8), Local0)\n</p>
+<p>   Or(Arg1, ShiftLeft(Local0, 8), Local0)\n</p>
+<p>   Or(Arg0, ShiftLeft(Local0, 8), Local0)\n</p>
+<p>   Return(Local0)\n</p>
+<p>}\n</p>
+<p>end;</p>
+<p># add utility methods to read/write buffers from/to _SB.PCI0.LPCB.EC0</p>
+<p>into method label RE1B parent_label _SB.PCI0.LPCB.EC0 remove_entry;</p>
+<p>into method label RECB parent_label _SB.PCI0.LPCB.EC0 remove_entry;</p>
+<p>into Device label EC0 insert</p>
+<p>begin</p>
+<p>Method (RE1B, 1, NotSerialized)\n</p>
+<p>{\n</p>
+<p>   OperationRegion(ERAM, EmbeddedControl, Arg0, 1)\n</p>
+<p>   Field(ERAM, ByteAcc, NoLock, Preserve) { BYTE, 8 }\n</p>
+<p>   Return(BYTE)\n</p>
+<p>}\n</p>
+<p>Method (RECB, 2, Serialized)\n</p>
+<p>// Arg0 - offset in bytes from zero-based _SB.PCI0.LPCB.EC0\n</p>
+<p>// Arg1 - size of buffer in bits\n</p>
+<p>{\n</p>
+<p>   ShiftRight(Arg1, 3, Arg1)\n</p>
+<p>   Name(TEMP, Buffer(Arg1) { })\n</p>
+<p>   Add(Arg0, Arg1, Arg1)\n</p>
+<p>   Store(0, Local0)\n</p>
+<p>   While (LLess(Arg0, Arg1))\n</p>
+<p>   {\n</p>
+<p>​       Store(RE1B(Arg0), Index(TEMP, Local0))\n</p>
+<p>​       Increment(Arg0)\n</p>
+<p>​       Increment(Local0)\n</p>
+<p>   }\n</p>
+<p>   Return(TEMP)\n</p>
+<p>}\n</p>
+<p>end;</p>
+<p>into method label WE1B parent_label _SB.PCI0.LPCB.EC0 remove_entry;</p>
+<p>into method label WECB parent_label _SB.PCI0.LPCB.EC0 remove_entry;</p>
+<p>into Device label EC0 insert</p>
+<p>begin</p>
+<p>Method (WE1B, 2, NotSerialized)\n</p>
+<p>{\n</p>
+<p>   OperationRegion(ERAM, EmbeddedControl, Arg0, 1)\n</p>
+<p>   Field(ERAM, ByteAcc, NoLock, Preserve) { BYTE, 8 }\n</p>
+<p>   Store(Arg1, BYTE)\n</p>
+<p>}\n</p>
+<p>Method (WECB, 3, Serialized)\n</p>
+<p>// Arg0 - offset in bytes from zero-based EC\n</p>
+<p>// Arg1 - size of buffer in bits\n</p>
+<p>// Arg2 - value to write\n</p>
+<p>{\n</p>
+<p>   ShiftRight(Arg1, 3, Arg1)\n</p>
+<p>   Name(TEMP, Buffer(Arg1) { })\n</p>
+<p>   Store(Arg2, TEMP)\n</p>
+<p>   Add(Arg0, Arg1, Arg1)\n</p>
+<p>   Store(0, Local0)\n</p>
+<p>   While (LLess(Arg0, Arg1))\n</p>
+<p>   {\n</p>
+<p>​       WE1B(Arg0, DerefOf(Index(TEMP, Local0)))\n</p>
+<p>​       Increment(Arg0)\n</p>
+<p>​       Increment(Local0)\n</p>
+<p>   }\n</p>
+<p>}\n</p>
+<p>end;</p>
+<p>```</p>
+<p>以上的这些东西是同用的处理方法，包括<strong>B1B2（16字节处理），B1B4（32字节处理），WECB和RECB（这两个是处理32字节以上的）</strong></p>
+<p># <strong>16位处理方法</strong></p>
+<p>接下来，我们来讲讲16位如何处理。</p>
+<p>比如我们在Field下找到的这个<strong><strong>16位的BADC</strong></strong>，我们需要将它拆分掉，拆成来<strong><strong>两个8字节</strong></strong>，这样就能被电池驱动处理了。</p>
+<p><strong><strong>读取操作：</strong></strong></p>
+<p>我们还是先来解释一下吧，<strong><strong>什么是读取什么是写入</strong></strong>？在DSDT中常见的是下面两种语句。</p>
+<p>第一种语句（老）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Store（BADC，ENC0）</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在这里，Store语句中，<strong><strong>BADC</strong></strong>是<strong><strong>读</strong></strong>的操作，而<strong><strong>ENC0</strong></strong>是<strong><strong>写</strong></strong>的操作，解释一下，就是将<strong><strong>BADC写入到ENC0</strong></strong>，所以你可几个口诀就是“<strong><strong>左读右写</strong></strong></p>
+<p>第二种语句（新）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ENC0 &#x3D; BADC</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在这里，就刚好相反了，这里没有了Store，但意思还是<strong><strong>将BADC写入到ENC0</strong></strong>，所以<strong><strong>BADC</strong></strong>还是<strong><strong>读</strong></strong>，<strong><strong>ENC0</strong></strong>还是<strong><strong>写</strong></strong>。</p>
+<p><strong><strong>写入操作：</strong></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Store（FB4，BADC）</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在这里，Store语句中，<strong><strong>FB4</strong></strong>是<strong><strong>读</strong></strong>的操作，而<strong><strong>BADC</strong></strong>是<strong><strong>写</strong></strong>的操作，解释一下，就是<strong><strong>将BADC写入到ENC0</strong></strong>，所以你可几个口诀就是“<strong><strong>左读右写</strong></strong>”</p>
+<p>那么其实很好理解了<strong><strong>BADC = FB4</strong></strong>这个就跟上面提到的反一下</p>
+<p>了解了这些那么你可以继续接下来的拆分工作了。</p>
+<p>Field（声明字段）下处理补丁：<code>into Device label EC0 code_regex BADC,\s+16, replace_matched begin DCA0,8,DCA1,8, end;</code></p>
+<p>我们先来理解一下这个，</p>
+<p>- <code>into</code>：<code>针对</code></p>
+<p>- <code>Device label</code>：<code>关于这个设备范围里</code></p>
+<p>- <code>EC0</code>:<code>设备的名称</code></p>
+<p>- <code>code_regex</code>：<code>匹配搜索</code></p>
+<p>- <code>BADC,\s+16</code>：<code>被搜索的代码，\s+16表示16字节</code></p>
+<p>- <code>replace_matched</code>：<code>匹配替换</code></p>
+<p>- <code>begin DCA0,8,DCA1,8, end</code>：<code>从什么什么开始，到什么什么结束，这里的意思就是，用于替换的是“DCA0,8,DCA1,8, ”</code></p>
+<p>那么整句话的意思就是，</p>
+<p>在<code>设备EC0的范围内搜索16字节的BADC，如果有，就替换为“DCA0,8,DCA1,8,”</code></p>
+<p>我们在来表示成一个处理结果：<code>BADC， 16，-----&gt;DCA0,8,DCA1,8,</code></p>
+<p>当然这只是在声明字段中进行拆分处理，我们还要在BADC<strong><strong>被调用的地方</strong></strong>进行处理。</p>
+<p>我们首先需要查找一下<strong><strong>BADC</strong></strong>在哪些地方被调用。（<strong><strong><em>重要提醒：没被调用的其实不需要拆分！意思是你根本不用去管它！</em></strong></strong>）</p>
+<p>被调用的字段（一般在Method下）那里，对字段进行拆分：</p>
+<p><strong><strong>读</strong></strong>的处理补丁：<code>into method label SMTF code_regex BADC replaceall_matched begin B1B2(DCA0,DCA1) end;</code></p>
+<p>解释：</p>
+<p>- <code>into method label SMTF</code>：<code>针对Method为SMTF的这个范围内</code></p>
+<p>- <code>code_regex</code>：<code>匹配（搜索）</code></p>
+<p>- <code>BADC</code>：<code>被搜索的字段</code></p>
+<p>- <code>replace_matched</code>：<code>替换匹配</code></p>
+<p>- <code>begin B1B2(DCA0,DCA1) end</code>：<code>这是被替换的内容</code></p>
+<p>那么总的意思就是，</p>
+<p>- <code>在method为SMTF这个范围里面，搜索“BADC,\s+16”, ，如果有，就把它替换为“DCA0,8,DCA1,8,” 。</code></p>
+<p>那么最后的处理结果是：</p>
+<p>未处理前：</p>
+<p>```Swift</p>
+<p>​            Method (SMTF, 1, NotSerialized)</p>
+<p>​            {</p>
+<p>​                If (LEqual (Arg0, Zero))</p>
+<p>​                {</p>
+<p>​                    Return (BADC)</p>
+<p>​                }</p>
+<p>​                If (LEqual (Arg0, One))</p>
+<p>​                {</p>
+<p>​                    Return (Zero)</p>
+<p>​                }</p>
+<p>​                Return (Zero)</p>
+<p>​            }</p>
+<p>```</p>
+<p>打了补丁之后：</p>
+<p>```Swift</p>
+<p>​            Method (SMTF, 1, NotSerialized)</p>
+<p>​            {</p>
+<p>​                If (LEqual (Arg0, Zero))</p>
+<p>​                {</p>
+<p>​                    Return (B1B2 (DCA0, DCA1))</p>
+<p>​                }</p>
+<p>​                If (LEqual (Arg0, One))</p>
+<p>​                {</p>
+<p>​                    Return (Zero)</p>
+<p>​                }</p>
+<p>​                Return (Zero)</p>
+<p>​            }</p>
+<p>```</p>
+<p>当然啦，这仅仅是BADC如果是<strong><strong>读取</strong></strong>的时候的处理，那要是碰到<strong><strong>写入</strong></strong>的时候，我们就要像下面这样处理，<strong><strong>不能使用B1B2的方法了</strong></strong></p>
+<p>比如：</p>
+<p><strong><strong>Store (Arg0, BADC)  （BADC是16位的情况）</strong></strong></p>
+<p>需要改为：</p>
+<p><strong><strong>Store (ShiftRight(Arg0,8),DCA1) （DCA1是16位拆分后的第二个）</strong></strong></p>
+<p><strong><strong>Store (Arg0,DCA0) （DCA0是16位拆分后的第一个）</strong></strong></p>
+<p>那么补丁，我们就可以这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">into method label SMRW code_regex Store\s\(Arg3,\sBADC\) replaceall_matched begin Store(ShiftRight(Arg3,8),DCA1)\nStore(Arg3, DCA0) end;**</span><br></pre></td></tr></table></figure>
+
+
+
+<p>其中这段文字中的\s代表的是一个空格，\n代表的是换行，也就是回车，主要的是在搜索那里，需要注意符号转义，在任何符号前都要加一个反斜杠转义，也就是加一个\</p>
+<p>那最后的处理结果是：</p>
+<p>未处理：</p>
+<p>```swift</p>
+<p>Store (Arg0, BADC)</p>
+<p>```</p>
+<p>打了补丁后：</p>
+<p>```swift</p>
+<p>Store (ShiftRight(Arg0,8),DCA1)</p>
+<p>Store (Arg0,DCA0)</p>
+<p>```</p>
+<p># <strong>32字节处理方法</strong></p>
+<p>32位字段的处理方法其实跟16位一样，用到的是B1B4，区别就是，16位拆除<strong><strong>2个</strong></strong>，32拆除<strong><strong>4个</strong></strong></p>
+<p>在Field里查找32位的，这里我们也是举一个例子，比如<strong><strong>B1CH</strong></strong></p>
+<p>补丁如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">into Device label EC0 code_regex B1CH,\s+16, replace_matched begin CH10,8,CH11,8,CH12,CH13 end;</span><br></pre></td></tr></table></figure>
+
+<p>处理结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B1CH,32,  ---—&gt;  BC0H,8,BC1H,8,BC2H,8,BC3H,8,</span><br></pre></td></tr></table></figure>
+
+<p>我们可以发现，这个跟16位的差不多，就是后面<strong><strong>多拆2个</strong></strong>，那就不用多废话解释了。</p>
+<p>我们直接讲在被调用的地方的处理（<strong><strong>32字节基本不会有写入操作，也从未出现过</strong></strong>）</p>
+<p>补丁如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">into method label _BIF code_regex B1CH replaceall_matched begin B1B4(CH10,CH11,CH12,CH13) end;</span><br></pre></td></tr></table></figure>
+
+<p>那这个也就不解释了，差不多的意思。其中<strong><strong>B1B4</strong></strong>是<strong><strong>32位</strong></strong>处理方法</p>
+<p>处理结果：</p>
+<p>未处理：</p>
+<p>```swift</p>
+<p>​            Method (_BIF, 0, NotSerialized)</p>
+<p>​            {</p>
+<p>​                Store (B1CH, IFCH)                                                  //未处理前</p>
+<p>​            }</p>
+<p>```</p>
+<p>打了补丁后：</p>
+<p>```swift</p>
+<p>​            Method (_BIF, 0, NotSerialized)</p>
+<p>​            {</p>
+<p>​                Store (B1B4 (BC0H, BC1H, BC2H, BC3H), IFCH)                  //把被调用B1CH两处拆分为4个字节</p>
+<p>​            }</p>
+<p>```</p>
+<p># <strong>偏移量计算</strong></p>
+<p>到了32位以上的字段处理，我们会使用到<strong><strong>RECB（读）</strong></strong>和<strong><strong>WECB（写）</strong></strong>两个处理方法</p>
+<p>我先给你看两个例子：</p>
+<p><strong><strong>RECB(0x98, 64)</strong></strong></p>
+<p><strong><strong>WECB (0x1C, 256, FB4)</strong></strong></p>
+<p>我们来解释一下它们的组成部分，<strong><strong>RECB(偏移量, 字段长度)</strong></strong>，<strong><strong>WECB(偏移量, 字段长度,未处理前的前参数 )</strong></strong>  </p>
+<p>字段长度很好理解，64位就是64，128位就是128，256位就是256</p>
+<p><strong><strong>WECB</strong></strong>中的<strong><strong>未处理前的前参数</strong></strong>，我们举个例子好理解一点</p>
+<p>比如：</p>
+<p><strong><strong>Store (FB4, SMD0)</strong></strong></p>
+<p><strong><strong>SMD0</strong></strong>是<strong><strong>256位的需要处理的字段</strong></strong>，在这里是<strong><strong>写入</strong></strong>，那么它的前参数，顾名思义就是前面那个<strong><strong>FB4</strong></strong></p>
+<p>那么其实，最主要的问题是<strong><strong>偏移量</strong></strong>了。</p>
+<p>举例1：</p>
+<p>```swift</p>
+<p>Offset (0x04), （基地址）</p>
+<p>CMCM,   8, //0x04</p>
+<p>CMD1,   8, //0x05</p>
+<p>CMD2,   8, //0x06</p>
+<p>CMD3,   8, //0x07</p>
+<p>Offset (0x18),</p>
+<p>Offset (0x19), （基地址）</p>
+<p>SMST,   8, //0x19</p>
+<p>MBMN,   80, //0x1A</p>
+<p>MBPN,   96, //0x24</p>
+<p>GPB1,   8, //0x30</p>
+<p>GPB2,   8, //0x31           </p>
+<p>GPB3,   8, //0x32        </p>
+<p>GPB4,   8, //0x33    </p>
+<p>```</p>
+<p>我们看这里的，<strong><strong>MBMN</strong></strong>是需要处理的<strong><strong>80位字段</strong></strong>，它的偏移量的计算就要涉及到它上面的<strong><strong>基地址</strong></strong>，我们看到了那个基地址是<strong><strong>0x19</strong></strong>，我们还可以发现它前面有个<strong><strong>8位的SMST</strong></strong>，我们将8除以8，得到1，再把0x19加上这个1，最后得到了<strong><strong>0x1A</strong></strong>，那么下面那个MBPN的偏移量怎么算呢，就是<strong><strong>将前面的都加起来除以8</strong></strong>，再加上<strong><strong>基地址</strong></strong>，就是8加上80得到88，除以8，等于11，转换为16进制就是B，0x19加上B，等于0x24.（<strong><strong>注意的是，在除以8后的数字，一定要转换为16进制，再加上基地址！</strong></strong>）</p>
+<p>举例二：</p>
+<p>```swift</p>
+<p>Offset (0x53),      //（基地址）     </p>
+<p>B0TP,   16,      // 从基地址起 ，为0x53   </p>
+<p>B0VL,   16,      //16，为2个字节；  计算：上一个的起始地址0x53+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x55</p>
+<p>B0CR,   16,      //16，为2个字节；  计算：上一个的起始地址0x55+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x57</p>
+<p>B0AC,   16,      //16，为2个字节；  计算：上一个的起始地址0x57+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x59</p>
+<p>B0ME,   16,      //16，为2个字节；  计算：上一个的起始地址0x59+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x5b</p>
+<p>B0RS,   16,      //16，为2个字节；  计算：上一个的起始地址0x5b+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x5d</p>
+<p>B0RC,   16,      //16，为2个字节；  计算：上一个的起始地址0x5d+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x5f</p>
+<p>B0FC,   16,      //16，为2个字节；  计算：上一个的起始地址0x5f+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x61</p>
+<p>B0MC,   16,     //16，为2个字节；  计算：上一个的起始地址0x61+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x63</p>
+<p>B0MV,   16,     //16，为2个字节；  计算：上一个的起始地址0x63+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x65</p>
+<p>B0ST,   16,      //16，为2个字节；  计算：上一个的起始地址0x65+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x67</p>
+<p>B0CC,   16,      //16，为2个字节；  计算：上一个的起始地址0x67+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x69</p>
+<p>B0DC,   16,      //16，为2个字节；  计算：上一个的起始地址0x69+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x6b</p>
+<p>B0DV,   16,      //16，为2个字节；  计算：上一个的起始地址0x6b+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x6d</p>
+<p>B0SI,   16,      //16，为2个字节；  计算：上一个的起始地址0x6d+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x6f</p>
+<p>B0SN,   32,     //32，为4个字节；  计算：上一个的起始地址0x6f+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x71      </p>
+<p>B0MN,   96,    //96，为12个字节  计算：上一个的起始地址0x71+0x4（上一个的32位占了4个字节，10转为16进制为0x4）值为0x75</p>
+<p>B0DN,   64,     // 64，为8个字节；计算：上一个的起始地址0x75+0xc（上一个的96位占了12个字节，10转为16进制为0xc）值为0x81</p>
+<p>B0CM,   48,    //  计算：上一个的起始地址0x81+0x8（64位占了8个字节，10转为16进制为0x8）值为0x89</p>
+<p>```</p>
+<p>这里我就不说明了，自己看右边的注释理解一下吧。</p>
+<p>举例3：</p>
+<p>```swift</p>
+<p>Offset (0x5D),     //（基地址）  </p>
+<p>ENIB,   16,     // 16，为2个字节；   从基地址起 ，为0x5D</p>
+<p>ENDD,   8,     //8，为1个字节；  计算：上一个的起始地址0x5D+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x5F</p>
+<p>SMPR,   8,     //8，为1个字节；  计算：上一个的起始地址0x5F+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x60</p>
+<p>SMST,   8,     //8，为1个字节；  计算：上一个的起始地址0x60+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x61</p>
+<p>SMAD,   8,   //8，为1个字节；  计算：上一个的起始地址0x61+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x62</p>
+<p>SMCM,   8,     //8，为1个字节；  计算：上一个的起始地址0x62+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x63</p>
+<p>SMD0,   256,    //256，为32个字节；  计算：上一个的起始地址0x63+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x64</p>
+<p>BCNT,   8,      //8，为1个字节；  计算：上一个的起始地址0x64+0x20（上一个的256位占了32个字节，10转为16进制为0x20）值为0x84</p>
+<p>SMAA,   24,      //8，为1个字节；  计算：上一个的起始地址0x84+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x85</p>
+<p>```</p>
+<p>举例4  最为简单：</p>
+<p>```swift</p>
+<p>​            Field (ERAM, ByteAcc, NoLock, Preserve)</p>
+<p>​                {</p>
+<p>​                    Offset (0x04),</p>
+<p>​                    FLD0,   64          // 64，为8个字节；   从基地址起 ，为0x04（偏移量）</p>
+<p>​                }</p>
+<p>​            Field (ERAM, ByteAcc, NoLock, Preserve)</p>
+<p>​                {</p>
+<p>​                    Offset (0x04),</p>
+<p>​                    FLD1,   128          // 128，为16个字节；   从基地址起 ，为0x04（偏移量）</p>
+<p>​                }</p>
+<p>​            Field (ERAM, ByteAcc, NoLock, Preserve)</p>
+<p>​                {</p>
+<p>​                    Offset (0x04),</p>
+<p>​                    FLD2,   192          // 192，为24个字节；   从基地址起 ，为0x04（偏移量）</p>
+<p>​                }</p>
+<p>​            Field (ERAM, ByteAcc, NoLock, Preserve)</p>
+<p>​                {</p>
+<p>​                    Offset (0x04),</p>
+<p>​                    FLD3,   256          // 256，为32个字节；   从基地址起 ，为0x04（偏移量）</p>
+<p>​                }</p>
+<p>```</p>
+<p>举例五 特殊：</p>
+<p>```swift</p>
+<p>OperationRegion (SMBX, EmbeddedControl, 0x18, 0x28)            //第三个值是起始地址</p>
+<p>Field (SMBX, ByteAcc, NoLock, Preserve)</p>
+<p>{</p>
+<p>​        PRTC,   8,      //8，为1个字节；  上面第三个值是起始地址0x18</p>
+<p>​        SSTS,   5,      //计算：上一个的起始地址0x18+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x19</p>
+<p>​            ,   1,</p>
+<p>​        ALFG,   1,</p>
+<p>​        CDFG,   1,      //上面 5+1+1+1才凑够8位（1字节）</p>
+<p>​        ADDR,   8,    //8，为1个字节；计算：上一个的起始地址0x19+0x1（上面 5+1+1+1才凑够8位占了1个字节，10转为16进制为0x1）值为0x19     0x1A</p>
+<p>​        CMDB,   8, //8，为1个字节；  计算：上一个的起始地址0x1A+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x1B   </p>
+<p>​        BDAT,   256, //256，为32个字节；计算：上一个的起始地址0x1B+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x1C</p>
+<p>​        BCNT,   8,</p>
+<p>​            ,   1,</p>
+<p>​        ALAD,   7,</p>
+<p>​        ALD0,   8,</p>
+<p>​        ALD1,   8</p>
+<p>}</p>
+<p>```</p>
+<p># <strong>32位以上字段的处理（包括64，128，256等）</strong></p>
+<p>在Field下，我们需要对其进行<strong><strong>重命名</strong></strong>使其失效。</p>
+<p>补丁如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">into Device label EC0 code_regex (SMD0,)\s+(256) replace_matched begin SMDX,%2,&#x2F;&#x2F;%1%2 end;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这里需要注意的是<strong><strong>要打括号</strong></strong>！，还有后面的<strong><strong>SMDX</strong></strong>是重命名后的结果，<strong><strong>%2,//%1%2</strong></strong>这个也是要加上的！</p>
+<p>接下来在被调用的地方进行处理：</p>
+<p><strong><strong><em>读取调用</em></strong></strong></p>
+<p><strong><strong>Store (SMD0, FB4)</strong></strong></p>
+<p>我们要用到RECB，补丁如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">into method label MHPF code_regex SMD0 replaceall_matched begin RECB(0x1C, 256) end;</span><br></pre></td></tr></table></figure>
+
+<p>处理结果为：<code>Store (SMD0, FB4) —&gt; Store (RECB (0x1C, 0x0100), FB4)</code></p>
+<p><strong><strong><em>写入调用</em></strong></strong></p>
+<p><strong><strong>Store (FB4, SMD0)</strong></strong></p>
+<p>我们要用到WECB，补丁如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">into method label MHPF code_regex Store\s\(FB4,\sSMD0\) replaceall_matched begin WECB(0x1C,256,FB4) end；</span><br></pre></td></tr></table></figure>
+
+
+
+<p>值得注意的是，我们这边是<strong><strong>将整个Store语句进行了替换</strong></strong>，这也是<strong><strong>WECB</strong></strong>处理的不同之处。</p>
+<p>处理结果：<code>Store (FB4, SMD0) —&gt; WECB (0x1C, 256, FB4)</code></p>
+<p># <strong>Mutex确认，最后检查</strong></p>
+<p>确保DSDT里的<strong><strong>Mutex</strong></strong>都是<strong><strong>0x00</strong></strong>，不然可能会出现电量显示0%的情况。</p>
+<p>在DSDT里搜索<strong><strong>Mutex</strong></strong>，如果有的不是0x00，你就自己手动改成0x00。</p>
+<p># <strong>补充</strong></p>
+<p>当电池有时能正常显示电量，有时不能会出现一个小叉，则可能是多个电池的位置导致的，如图有两个位置，分别为“BAT0”和“BAT1”，我们需要禁用掉“BAT1”这个位置，以达到正常读取电量</p>
+
+            
+        </article>
+    </div>
+    
+    <div class="nexmoe-post">
+        <a href="/2020/05/16/Hackintosh%E5%AE%89%E8%A3%85%E5%85%A8%E6%94%BB%E7%95%A5/">
+            
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
+                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="Hackintosh安装全攻略" class="lazyload">
+                    <h1>Hackintosh安装全攻略</h1>
+                </div>
+            
+        </a>
+
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+            <a><i class="nexmoefont icon-calendar-fill"></i>2020年05月16日</a>
+            <a><i class="nexmoefont icon-areachart"></i>2.7k 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 11 分钟</a>
+        </div>
+
+        <article>
+            
+                <p><a href="https://img.fghrsh.net/image/Xpgcv" target="_blank" rel="noopener"><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/05/08/5da10200a4e3148f16260962f51ce44a.jpg" alt="5da10200a4e3148f16260962f51ce44a.jpg" class="lazyload"></a></p>
+<p>以下内容基本摘自<strong><strong>Eternal Qiu</strong></strong>的博客，日后准备进行修改</p>
+<p>链接：<a href="https://blog.qiuxiangzhi.top/2019/07/15/macOS-Guide/" target="_blank" rel="noopener">https://blog.qiuxiangzhi.top/2019/07/15/macOS-Guide/</a></p>
+<p># <strong>前言</strong></p>
+<p>我打算写一个教程来引导小白入坑，不在本文介绍那些复杂需要折腾的驱动问题。</p>
+<p># <strong>警告</strong></p>
+<p>请注意，本贴只做技术与学习探讨，不做任何商业和违法用途。同时请各位在实践学习后，于<strong><strong>24小时内自行消除</strong></strong>。</p>
+<p>在非苹果设备上安装macOS操作系统需要承担一定责任，希望各位明确用途后，仔细思考。<strong><strong>作者不提倡</strong></strong>读者进行下面的操作，本贴<strong><strong>仅供技术参考</strong></strong>。</p>
+<p>可能涉及到的法律问题：<strong><strong>macOS1014</strong></strong>；</p>
+<p><strong><strong>如果您是非个人用户或用作商业用途，您应该观看上述材料中所提及问题，并不要接触实施下述操作。</strong></strong></p>
+<p># <strong>资源准备工作</strong></p>
+<p>\1. 一台电脑，最好是搭载Windows 7及以上的操作系统，<strong><strong>推荐Windows 10</strong></strong>；</p>
+<p>\2. 一个不少于4G的U盘，<strong><strong>8GB起步</strong></strong>；如果安装macOS10.15（Catalina）请使用<strong><strong>16G</strong></strong>的U盘。</p>
+<p>\3. 工具软件（<a href="http://www.diskgenius.cn/" target="_blank" rel="noopener">DiskGenius专业版</a>，<a href="https://www.balena.io/etcher/" target="_blank" rel="noopener">balenaEtcher官方版</a>，<a href="http://www.wepe.com.cn/download.html" target="_blank" rel="noopener">微PE官方版</a>）；</p>
+<p>\4. 原版镜像（这里提供的是<a href="https://mirrors.dtops.cc/iso/MacOS/daliansky_macos/" target="_blank" rel="noopener">黑果小兵的镜像</a>，侵权删）；</p>
+<p>\5. 解压工具（此处链接的是<a href="https://www.7-zip.org" target="_blank" rel="noopener">7-Zip</a>）；</p>
+<p>\6. <strong><strong>知道如何百度</strong></strong>；</p>
+<p>知道如何百度是<strong><strong>非常重要</strong></strong>的一件事情，因为里面涉及到一些概念，这些概念比较不那么专业，但确实也不是很常见，因此需要有一定的百度能力（主要还是有一些小白太懒了，常见诸如如何进BIOS都不愿意去百度了解）。</p>
+<p># <strong>电脑调试工作</strong></p>
+<p>\1. 下载或安装好上述软件，其中<strong><strong>DiskGenius专业版</strong></strong>最好是免安装版的。</p>
+<p>\2. 打开DiskGenius专业版，右键自己的<strong><strong>磁盘</strong></strong>（不是分区），查看是否是<strong><strong>GPT分区</strong></strong>，若不是，需要在PE下转换。</p>
+<p>\3. 双击微PE.exe，点击右下角生成.iso文件，解压该iso文件到你的（<strong><strong>确保它是Fat 32格式并最好转移其他文件</strong></strong>）U盘里。</p>
+<p>\4. 进入BIOS，找到<strong><strong>你的BIOS里面</strong></strong>的这几个选项，并将其设置成对应状态。主要有：<strong><strong>DVMT-Preallocted（&gt;64MB）,Security Boot（disabled），SATA Mode/磁盘模式（AHCI），UEFI启动（纯），CSM（关闭），启动顺序（U盘第一位）</strong></strong>，保存重启。</p>
+<p>\5. 进入<strong><strong>微PE</strong></strong>，找到自己下载的<strong><strong>DiskGenius专业版</strong></strong>，双击打开。若硬盘格式是MBR，则将该软件挪到U盘里面，再双击打开。右键有<strong><strong>操作系统</strong></strong>及<strong><strong>想安装macOS的磁盘</strong></strong>，将其<strong><strong>转换成GPT（GUID）格式</strong></strong>。</p>
+<p>\6. 查看将被安装macOS的磁盘，是否存在一个&gt;200MB的EFI分区。若没有，则可<strong><strong>删除所有已存在的MSR分区及EFI分区</strong></strong>，此时若磁盘最前部的空闲空间&gt;200MB，则可以<strong><strong>直接建立EFI（EFI Partition）分区</strong></strong>。若仍少于200MB，则右键磁盘此时的<strong><strong>第一分区</strong></strong>，选择调整磁盘大小，在<strong><strong>前部空间</strong></strong>分出200MB大小空闲空间，并新建EFI（EFI Partition）分区。</p>
+<p>\7. 检查好磁盘均是<strong><strong>GPT（GUID）格式</strong></strong>、（<strong><strong>Windows所在磁盘和macOS将安装的所在磁盘上</strong></strong>）存在&gt;200MB的EFI分区，确保好这两点之后，点击PE桌面上的Dism++，选择自己的<strong><strong>Windows操作系统</strong></strong>，选择引导修复，（一般）无脑下一步即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意事项：转换为GUID格式，会删除该硬盘的扩展分区</span><br></pre></td></tr></table></figure>
+
+
+
+<p>\8. 电脑准备工作完成。</p>
+<p># <strong>安装调试过程</strong></p>
+<p>\1. 打开<strong><strong>balenaEtcher</strong></strong>，插入U盘，按照提示操作，选择<strong><strong>下载好的镜像</strong></strong>进行烧录。</p>
+<p>\2. 烧录好后可以有两种选择，一步一步继续往下走或者<strong><strong>直接跳转到第6步</strong></strong>，（若下载的镜像为我推荐的则）两种方式都可以完成安装，推荐一步一步走。</p>
+<p>\3. 在<a href="https://github.com/daliansky/Hackintosh" target="_blank" rel="noopener">这里</a>找到你的机型或类似配置的EFI，下载备用。若找不到请<strong><strong>直接跳第6步操作</strong></strong>。</p>
+<p>\4. 打开DiskGenius软件，将<strong><strong>U盘EFI分区内的所有文件删除</strong></strong>，并<strong><strong>使用Ctrl+V的快捷键</strong></strong>方式将下载的EFI文件夹粘贴进去。注意，EFI文件夹下若还有一个EFI文件夹，存在嵌套情况，请直接将<strong><strong>最里层的EFI复制进U盘的EFI分区</strong></strong>。</p>
+<p>\5. 检查EFI/CLOVER/ACPI/Patched/，若存在DSDT文件，直接删除。</p>
+<p>\6. 重启，选择<strong><strong>U盘作为第一启动项</strong></strong>，选择<strong><strong>Boot macOS install from macOS Mojave installation（macOS图标那一项）</strong></strong>，如果你没有更换原有EFI，接着就是跑代码过程了。如果更换过了EFI，那么在移动到安装项之后，按下<strong><strong>空格键</strong></strong>，同样空格选择<strong><strong>-v</strong></strong>，再<strong><strong>ESC回到原有界面</strong></strong>安装即可。</p>
+<p>\7. 若启动不顺利，碰到直接重启，卡死在某一界面，我的建议是：安装时候进行录像，将<strong><strong>卡死</strong></strong>或者<strong><strong>导致重启</strong></strong>的代码截图出来，在群里寻求帮助。当然，我更加推荐前往<a href="http://bbs.pcbeta.com/forum.php?gid=86" target="_blank" rel="noopener">远景论坛</a>查贴或者直接<strong><strong>百度</strong></strong>卡死代码解决这些问题。</p>
+<p>\8. 若一切安装顺利，则它将进入安装界面。在安装界面选择<strong><strong>磁盘工具</strong></strong>，将预安装分区<strong><strong>抹除成HFS分区</strong></strong>，也即<strong><strong>日志式</strong></strong>，若你是<strong><strong>固态硬盘</strong></strong>，也可选择<strong><strong>apfs</strong></strong>。磁盘名字自己任意给定，白果磁盘名字为Macintosh HD，尽量避免这个名字。</p>
+<p>\9. 接下来就可以进行安装了，一路下一步，选择自己刚刚命名的磁盘安装，等待安装完成。</p>
+<p>\10. 安装完成会重启回到引导界面，此时选择<strong><strong>Boot macOS install From 【你自己起的磁盘名字】</strong></strong>，空格同样可以选择代码模式。进入第二次安装，此时不需要手动操作，等待安装完成重启即可。</p>
+<p>\11. 此时回到引导界面应是已经安装完成，选择<strong><strong>Boot macOS From 【你自己起的磁盘名字】</strong></strong>，进入设置界面，接下来等着你的就是macOS的全新体验了。</p>
+<p># <strong>macOS、Windows 双引导</strong></p>
+<p>在安装完成之后，要做的就是进行引导的设置。</p>
+<p>有两种设置引导的方式，此处推荐使用的是PE进行引导的建立，也介绍Windows下设置引导的方法介绍。</p>
+<p>\1. <strong><strong>Windows环境下完成引导的设置。</strong></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在Windows下设置引导需要借助软件完成，软件名称及官网下载[在这里](https:&#x2F;&#x2F;www.easyuefi.com&#x2F;index-us.html)。该软件我们需要的是企业版，普通版本没有添加引导的功能，注意甄别。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>下载完软件后，先打开DiskGenius，将<strong><strong>U盘里面的ESP（EFI）分区中Clover文件夹</strong></strong>整个复制到桌面。再<strong><strong>通过Ctrl+V</strong></strong>的方式，粘贴在<strong><strong>Windows启动磁盘的ESP分区中EFI文件夹</strong></strong>下。</p>
+<p>（<strong><strong>Windows、macOS在不同磁盘下时</strong></strong>）也可以复制整个EFI文件夹到macOS所在磁盘的ESP分区。</p>
+<p>新手小白建议前述操作。</p>
+<p>接下来打开easyUEFI，选择新建引导项，引导类型选择“<strong><strong>Linux或其他</strong></strong>”，名称只<strong><strong>能输入英文</strong></strong>，可随意填写。选择你所放引导的ESP分区，找到Clover文件夹下的<strong><strong>CLOVERX64.efi</strong></strong>文件，选中完成即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意事项：如果未看到CLOVER.efi文件（EasyUEFI下），请重启电脑即可看到</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>\2. <strong><strong>PE下完成引导的设置。</strong></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">进入PE，然后同样，打开DiskGenius，将**U盘里面的ESP（EFI）分区中Clover**文件夹整个复制到桌面。再**通过Ctrl+V**的方式，粘贴在**Windows启动磁盘的ESP分区中EFI文件夹**下。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（<strong><strong>Windows、macOS在不同磁盘下时</strong></strong>）也可以复制整个EFI文件夹到macOS所在磁盘的ESP分区。</p>
+<p>新手小白建议前述操作。</p>
+<p>此处的引导建立使用<strong><strong>Bootice</strong></strong>这款软件，选择引导，UEFI设置。引导文件同样选择<strong><strong>CLOVERX64.efi</strong></strong>，名称随意，选择粘贴了引导文件的分区。</p>
+<p># <strong>安装过程常见问题解答</strong></p>
+<p>\1. 抹除时出现“磁盘空间不足，无法完成操作”怎么办？</p>
+<p>``答：这是你在<strong>电脑调试阶段</strong>中，给ESP分区空间预留不足200MB，需要重新操作，将空间扩大`。</p>
+<p>\2. 怎么才知道我的磁盘是不是GPT格式呢？`</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">答：当你在DiskGenius专业版软件中，右键该磁盘时，若“转换到GUID格式”为**灰色不可选中**，则表示该磁盘格式为GPT。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>\3. 为什么我在安装的时候找不到我的硬盘？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">答：若为三星的PM981或者PM981a，或者其他的出名不可安装macOS（百度可以知道是否难以安装）的硬盘，建议小白放弃。愿意折腾的话可以查看这篇我的[**PM981安装教程**](http:&#x2F;&#x2F;bbs.pcbeta.com&#x2F;viewthread-1814806-1-1.html)（发布在远景），不保证在所有机型上稳定。</span><br><span class="line">若不是上述硬盘，则我建议更新clover版本，对小白最简单的方式是，更换镜像版本或者镜像源。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>\4. BIOS设置时找不到一模一样的选项怎么办？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">答：并不是所有的BIOS都有我所提到的选项名称，这很正常。你需要找到意思相近的名称项，设置好就可以。如有的BIOS将**Security Boot**叫做**Security&#x2F;安全启动**，名称变化很正常。**只有DVMT Pre-allocated项**，大部分笔记本BIOS会选择隐藏，可以不用纠结。其余选项都应存在你的BIOS中，并需要设置好。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>\5. 安装时，-v滚代码卡apfs_moudle_start怎么办（一般是10.15的问题）</p>
+<p>答：打补丁如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Comment                   Find*[HEX]      Replace[HEX]</span><br><span class="line">**change EC0 to EC   4543305f        45435f5f**</span><br><span class="line">change H_EC to EC     485f4543         45435f5f</span><br><span class="line">change ECDV to EC    45434456        45435f5f</span><br></pre></td></tr></table></figure>
+
+
+
+<p>一般只需选第一条加粗补丁即可</p>
+<p>\6. 安装10.15时，卡<strong><strong>VoodooPS2Controller</strong></strong>怎么办(一般是<strong><strong>10.15</strong></strong>的问题)</p>
+<p>到<strong><strong>EFI/CLOVER/kexts/others/</strong></strong>目录下，删除<strong><strong>VoodooPS2Controller.kexts</strong></strong></p>
+<p># <strong>其他</strong></p>
+<p>我希望各位小白，在明确步骤后，可以通过自己百度、找帖子之后解决掉大部分问题，之后才是找大神寻求帮助。</p>
+<p><strong><strong>我比较推荐以下方式问问题：</strong></strong></p>
+<p>\1. 这个我应该怎么做？Not 大神帮我搞定！</p>
+<p>\2. 这个在哪里有具体操作？Not 大神帮我搞定！</p>
+<p><strong><strong>帮完忙，比较喜欢这种回复：</strong></strong></p>
+<p>\1. 我知道了，谢谢你！Not 好/嗯/哦。</p>
+<p>如果希望别人帮你安装，自己不想动手不想研究的话，希望你还是左转淘宝或者别接触黑苹果以及玩黑果的人，白嫖可耻，时间宝贵。</p>
+<p># <strong>感谢</strong></p>
+<p>感谢<code>QQ群：706372078</code>里的群主Eternal Qiu</p>
+<p>本人QQ：<code>3467365604</code></p>
+
+            
+        </article>
+    </div>
+    
+    <div class="nexmoe-post">
         <a href="/2020/05/16/hello-world/">
             
                 <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
@@ -168,7 +1540,7 @@
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
 
 
-<script src="/js/app.js?v=1589637412740"></script>
+<script src="/js/app.js?v=1589638590157"></script>
   
 
 

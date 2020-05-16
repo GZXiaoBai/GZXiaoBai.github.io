@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  
+  <title>进阶：电池热补丁（Battery-Hotpatch）之路 - Hexo</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
+  <meta name="description" content="# 前言 在有了OpenCore的引导后，已经不在推荐使用DSDT了，况且，现在也是主要推广热补丁（HotPatch），热补丁具有比DSDT更好的灵活性，于是便开始写这篇文章了。 # 准备步骤 首先，我们需要下载我提供的电池热补丁的样本（SSDT-BATT.dsl)。同时，我还准备了联想X260的电池热补丁作为例子。 链接如下：百度云  密码:fn1v 然后，准备你的DSDT或者SSDT（存储有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进阶：电池热补丁（Battery-Hotpatch）之路">
+<meta property="og:url" content="http://yoursite.com/2020/05/16/%E8%BF%9B%E9%98%B6%EF%BC%9A%E7%94%B5%E6%B1%A0%E7%83%AD%E8%A1%A5%E4%B8%81%EF%BC%88Battery-Hotpatch%EF%BC%89%E4%B9%8B%E8%B7%AF/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="# 前言 在有了OpenCore的引导后，已经不在推荐使用DSDT了，况且，现在也是主要推广热补丁（HotPatch），热补丁具有比DSDT更好的灵活性，于是便开始写这篇文章了。 # 准备步骤 首先，我们需要下载我提供的电池热补丁的样本（SSDT-BATT.dsl)。同时，我还准备了联想X260的电池热补丁作为例子。 链接如下：百度云  密码:fn1v 然后，准备你的DSDT或者SSDT（存储有">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fp1.fghrsh.net/2020/05/08/bbfcbf8b80dbe7ca2a4aed83f8089e0d.png">
+<meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/e65fd584f0449f65f06dcab8da3027bc.png">
+<meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/9bc4f9b7ac2ad30173bf11d795d7898c.png">
+<meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/e15fd60ebcd7ceb6a922c9b7148a0c83.png">
+<meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/dbd31d6f597da35e49aa1a5edeab9af1.png">
+<meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/63be505b7792df708a4d5b51ca8892a4.png">
+<meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/623eacaa93ddd83f4c6e702f3386d33f.png">
+<meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/62971b7a3ea5acec10213463913ea58f.png">
+<meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/e6f18d2331d465d9513490e29845e1db.png">
+<meta property="article:published_time" content="2020-05-16T14:12:07.000Z">
+<meta property="article:modified_time" content="2020-05-16T14:12:27.912Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fp1.fghrsh.net/2020/05/08/bbfcbf8b80dbe7ca2a4aed83f8089e0d.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
+  
+  <!--<link rel="stylesheet" href="/css/style.css?v=1589638590186">-->
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="John Doe" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="John Doe">
+            <img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe" alt="John Doe">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>6</div>
+        <div><span>Tags</span>0</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Social</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+
+  
+  
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Archive</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2020 John Doe
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+          <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="进阶：电池热补丁（Battery-Hotpatch）之路" class="lazyload">
+          <h1>进阶：电池热补丁（Battery-Hotpatch）之路</h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年05月16日</a>
+    <a><i class="nexmoefont icon-areachart"></i>3.3k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 16 分钟</a>
+</div>
+
+  <div class="nexmoe-post-right">
+    
+  </div>
+
+  <article>
+    <p><a href="https://img.fghrsh.net/image/Xpbv4" target="_blank" rel="noopener"><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/05/08/bbfcbf8b80dbe7ca2a4aed83f8089e0d.png" alt="bbfcbf8b80dbe7ca2a4aed83f8089e0d.png" class="lazyload"></a></p>
+<p># <strong>前言</strong></p>
+<p>在有了OpenCore的引导后，已经<strong><strong>不在推荐使用DSDT</strong></strong>了，况且，现在也是主要推广<strong><strong>热补丁（HotPatch）</strong></strong>，热补丁具有比DSDT更好的<strong><strong>灵活性</strong></strong>，于是便开始写这篇文章了。</p>
+<p># <strong>准备步骤</strong></p>
+<p>首先，我们需要下载我提供的电池热补丁的样本（SSDT-BATT.dsl)。同时，我还准备了联想X260的电池热补丁作为例子。</p>
+<p>链接如下：<a href="https://pan.baidu.com/s/1E85uJJGzq5EXUpcTTE-CDQ" target="_blank" rel="noopener">百度云</a>  <strong><strong>密码:fn1v</strong></strong></p>
+<p>然后，准备你的DSDT或者SSDT（存储有EC缓冲区的，Embedded Controller Buffer）</p>
+<p>需要工具：<code>Hackintool，Maciasl，科学计算器（Mac自带）</code></p>
+<p>要求：最好有一定的电池的基础知识，详细看见我之前写的<a href="https://gzxiaobai.github.io/post/wei-xiao-bai-she-ji-de-dian-chi-jiao-cheng-dsdt/" target="_blank" rel="noopener">电池DSDT的教程</a></p>
+<p># <strong>初步动作</strong></p>
+<p>打开热补丁样本，我们来进行一些修改。（按照我自己的习惯来的）</p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/e65fd584f0449f65f06dcab8da3027bc.png" alt="e65fd584f0449f65f06dcab8da3027bc.png" class="lazyload"></p>
+<p>我们要修改的有三处：</p>
+<p>1.DefinitionBlock的修改，将这里的<strong><strong>ACDT</strong></strong>改为自己<strong><strong>DSDT开头DefinitionBlock里的第三项</strong></strong></p>
+<p>2.DefinitionBlock的修改，将最后的数值也改成自己DSDT里的</p>
+<p>3.External引用路径里的EC路径，改成自己DSDT里的实际路径</p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/9bc4f9b7ac2ad30173bf11d795d7898c.png" alt="9bc4f9b7ac2ad30173bf11d795d7898c.png" class="lazyload"></p>
+<p>这里我们有一处要修改：</p>
+<p>1.Scope路径下，改为自己DSDT里的实际路径</p>
+<p># <strong>16位和32位的处理</strong></p>
+<p>这里的处理，其实与DSDT里的差不多。</p>
+<p>我们先将Field复制到SSDT里</p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/e15fd60ebcd7ceb6a922c9b7148a0c83.png" alt="e15fd60ebcd7ceb6a922c9b7148a0c83.png" class="lazyload"></p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/dbd31d6f597da35e49aa1a5edeab9af1.png" alt="dbd31d6f597da35e49aa1a5edeab9af1.png" class="lazyload"></p>
+<p>像我这样复制下来，里面到内容不复制。</p>
+<p><strong><strong><em>注意⚠️：你不难发现，我这里有许多的Field，那是因为X260的DSDT里，就是像这样的分散的Field。因此，当你制作电池热补丁时，搜索EmbeddedControllerBuffer找到Field后，记得同时搜索Field的名称，比如，ECOR，看看有没有分散在其它地方的</em></strong></strong></p>
+<p>复制过来后，我们需要将Field进行<strong><strong>改名</strong></strong>，比如，ECOR，我改为了ECOX，这样就不会与原ACPI里的发生冲突。</p>
+<p>热补丁与DSDT的拆分不同，我们直接将需要拆分的，拆好放到SSDT中，我们创建的Field下。</p>
+<p>```swift</p>
+<p>​        OperationRegion (ECOX, EmbeddedControl, Zero, 0x0100)</p>
+<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
+<p>​        {</p>
+<p>​            Offset (0xA0), </p>
+<p>​            RCB0,   8, </p>
+<p>​            RCB1,   8, </p>
+<p>​            FCB0,   8, </p>
+<p>​            FCB1,   8, </p>
+<p>​            Offset (0xA8), </p>
+<p>​            ACB0,   8, </p>
+<p>​            ACB1,   8, </p>
+<p>​            VOB0,   8, </p>
+<p>​            VOB1,   8</p>
+<p>​        }</p>
+<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
+<p>​        {</p>
+<p>​            Offset (0xA0), </p>
+<p>​            BMB0,   8, </p>
+<p>​            BMB1,   8</p>
+<p>​        }</p>
+<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
+<p>​        {</p>
+<p>​            Offset (0xA0), </p>
+<p>​            DCB0,   8, </p>
+<p>​            DCB1,   8, </p>
+<p>​            DVB0,   8, </p>
+<p>​            DVB1,   8, </p>
+<p>​            Offset (0xAA), </p>
+<p>​            SNB0,   8, </p>
+<p>​            SNB1,   8</p>
+<p>​        }</p>
+<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
+<p>​        {</p>
+<p>​            Offset (0xA0), </p>
+<p>​            CHB0,   8, </p>
+<p>​            CHB1,   8, </p>
+<p>​            CHB2,   8, </p>
+<p>​            CHB3,   8</p>
+<p>​        }</p>
+<p>```</p>
+<p>最后的结果就如上所示，正确拆分，正确计算偏移量。（这些都包含在我DSDT的教程中）</p>
+<p>接着我们在DSDT中搜索需要被拆分的字节，找到所在的Method，记下路径，然后在SSDT里，添加这个路径。</p>
+<p>比如我们，发现GBIF这个Method里面有需要拆分的自己，观察所得，GBIF所在的路径为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_SB.PCI0.LPC.EC</span><br></pre></td></tr></table></figure>
+
+
+
+<p>那么我们就在SSDT中加上这个Scope：</p>
+<p>```swift</p>
+<p>​    Scope (_SB.PCI0.LPC.EC)</p>
+<p>​    {</p>
+<p>​    }</p>
+<p>```</p>
+<p>然后，我们将GBIF这一整个Method复制到这个路径下，在对字节进行拆分。（以此类推，其它Method也是这么处理）</p>
+<p>```swift</p>
+<p>​        Method (GBIF, 3, NotSerialized)</p>
+<p>​        {</p>
+<p>​            If (_OSI (“Darwin”))</p>
+<p>​            {</p>
+<p>​                Acquire (BATM, 0xFFFF)</p>
+<p>​                If (Arg2)</p>
+<p>​                {</p>
+<p>​                    Or (Arg0, One, HIID)</p>
+<p>​                    Store (B1B2 (BMB0, BMB1), Local7)</p>
+<p>​                    ShiftRight (Local7, 0x0F, Local7)</p>
+<p>​                    XOr (Local7, One, Index (Arg1, Zero))</p>
+<p>​                    Store (Arg0, HIID)</p>
+<p>​                    If (Local7)</p>
+<p>​                    {</p>
+<p>​                        Multiply (B1B2 (FCB0, FCB1), 0x0A, Local1)</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (B1B2 (FCB0, FCB1), Local1)</p>
+<p>​                    }</p>
+<p>​                    Store (Local1, Index (Arg1, 0x02))</p>
+<p>​                    Or (Arg0, 0x02, HIID)</p>
+<p>​                    If (Local7)</p>
+<p>​                    {</p>
+<p>​                        Multiply (B1B2 (DCB0, DCB1), 0x0A, Local0)</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (B1B2 (DCB0, DCB1), Local0)</p>
+<p>​                    }</p>
+<p>​                    Store (Local0, Index (Arg1, One))</p>
+<p>​                    Divide (Local1, 0x14, Local2, Index (Arg1, 0x05))</p>
+<p>​                    If (Local7)</p>
+<p>​                    {</p>
+<p>​                        Store (0xC8, Index (Arg1, 0x06))</p>
+<p>​                    }</p>
+<p>​                    ElseIf (B1B2 (DVB0, DVB1))</p>
+<p>​                    {</p>
+<p>​                        Divide (0x00030D40, B1B2 (DVB0, DVB1), Local2, Index (Arg1, 0x06))</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (Zero, Index (Arg1, 0x06))</p>
+<p>​                    }</p>
+<p>​                    Store (B1B2 (DVB0, DVB1), Index (Arg1, 0x04))</p>
+<p>​                    Store (B1B2 (SNB0, SNB1), Local0)</p>
+<p>​                    Name (SERN, Buffer (0x06)</p>
+<p>​                    {</p>
+<p>​                        “     “</p>
+<p>​                    })</p>
+<p>​                    Store (0x04, Local2)</p>
+<p>​                    While (Local0)</p>
+<p>​                    {</p>
+<p>​                        Divide (Local0, 0x0A, Local1, Local0)</p>
+<p>​                        Add (Local1, 0x30, Index (SERN, Local2))</p>
+<p>​                        Decrement (Local2)</p>
+<p>​                    }</p>
+<p>​                    Store (SERN, Index (Arg1, 0x0A))</p>
+<p>​                    Or (Arg0, 0x06, HIID)</p>
+<p>​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x09))</p>
+<p>​                    Or (Arg0, 0x04, HIID)</p>
+<p>​                    Name (BTYP, Buffer (0x05)</p>
+<p>​                    {</p>
+<p>​                         0x00, 0x00, 0x00, 0x00, 0x00                   </p>
+<p>​                    })</p>
+<p>​                    Store (B1B4 (CHB0, CHB1, CHB2, CHB3), BTYP)</p>
+<p>​                    Store (BTYP, Index (Arg1, 0x0B))</p>
+<p>​                    Or (Arg0, 0x05, HIID)</p>
+<p>​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x0C))</p>
+<p>​                }</p>
+<p>​                Else</p>
+<p>​                {</p>
+<p>​                    Store (0xFFFFFFFF, Index (Arg1, One))</p>
+<p>​                    Store (Zero, Index (Arg1, 0x05))</p>
+<p>​                    Store (Zero, Index (Arg1, 0x06))</p>
+<p>​                    Store (0xFFFFFFFF, Index (Arg1, 0x02))</p>
+<p>​                }</p>
+<p>​                Release (BATM)</p>
+<p>​                Return (Arg1)</p>
+<p>​            }</p>
+<p>​            Else</p>
+<p>​            {</p>
+<p>​                Return (XBIF (Arg0, Arg1, Arg2))</p>
+<p>​            }</p>
+<p>​        }</p>
+<p>​        Method (GBST, 4, NotSerialized)</p>
+<p>​        {</p>
+<p>​            If (_OSI (“Darwin”))</p>
+<p>​            {</p>
+<p>​                Acquire (BATM, 0xFFFF)</p>
+<p>​                If (And (Arg1, 0x20))</p>
+<p>​                {</p>
+<p>​                    Store (0x02, Local0)</p>
+<p>​                }</p>
+<p>​                ElseIf (And (Arg1, 0x40))</p>
+<p>​                {</p>
+<p>​                    Store (One, Local0)</p>
+<p>​                }</p>
+<p>​                Else</p>
+<p>​                {</p>
+<p>​                    Store (Zero, Local0)</p>
+<p>​                }</p>
+<p>​                If (And (Arg1, 0x07)){}</p>
+<p>​                Else</p>
+<p>​                {</p>
+<p>​                    Or (Local0, 0x04, Local0)</p>
+<p>​                }</p>
+<p>​                If (LEqual (And (Arg1, 0x07), 0x07))</p>
+<p>​                {</p>
+<p>​                    Store (0x04, Local0)</p>
+<p>​                    Store (Zero, Local1)</p>
+<p>​                    Store (Zero, Local2)</p>
+<p>​                    Store (Zero, Local3)</p>
+<p>​                }</p>
+<p>​                Else</p>
+<p>​                {</p>
+<p>​                    Store (Arg0, HIID)</p>
+<p>​                    Store (B1B2 (VOB0, VOB1), Local3)</p>
+<p>​                    If (Arg2)</p>
+<p>​                    {</p>
+<p>​                        Multiply (B1B2 (RCB0, RCB1), 0x0A, Local2)</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (B1B2 (RCB0, RCB1), Local2)</p>
+<p>​                    }</p>
+<p>​                    Store (B1B2 (ACB0, ACB1), Local1)</p>
+<p>​                    If (LGreaterEqual (Local1, 0x8000))</p>
+<p>​                    {</p>
+<p>​                        If (And (Local0, One))</p>
+<p>​                        {</p>
+<p>​                            Subtract (0x00010000, Local1, Local1)</p>
+<p>​                        }</p>
+<p>​                        Else</p>
+<p>​                        {</p>
+<p>​                            Store (Zero, Local1)</p>
+<p>​                        }</p>
+<p>​                    }</p>
+<p>​                    ElseIf (LNot (And (Local0, 0x02)))</p>
+<p>​                    {</p>
+<p>​                        Store (Zero, Local1)</p>
+<p>​                    }</p>
+<p>​                    If (Arg2)</p>
+<p>​                    {</p>
+<p>​                        Multiply (Local3, Local1, Local1)</p>
+<p>​                        Divide (Local1, 0x03E8, Local7, Local1)</p>
+<p>​                    }</p>
+<p>​                }</p>
+<p>​                Store (Local0, Index (Arg3, Zero))</p>
+<p>​                Store (Local1, Index (Arg3, One))</p>
+<p>​                Store (Local2, Index (Arg3, 0x02))</p>
+<p>​                Store (Local3, Index (Arg3, 0x03))</p>
+<p>​                Release (BATM)</p>
+<p>​                Return (Arg3)</p>
+<p>​            }</p>
+<p>​            Else</p>
+<p>​            {</p>
+<p>​                Return (XBST (Arg0, Arg1, Arg2, Arg3))</p>
+<p>​            }</p>
+<p>​        }</p>
+<p>```</p>
+<p>如上所示，即为最后的处理结果。</p>
+<p># <strong>32位以上字节的处理</strong></p>
+<p>步骤基本相同，也是搜索所需修改字节对应对Method，然后找到对应路径，添加到SSDT中。</p>
+<p><strong><strong><em>32位以上的，不需要Field下的更改，只需要改Method，进行RECB和WECB的处理</em></strong></strong></p>
+<p>详细见DSDT教程中。</p>
+<p>以下为完整处理结果（其实也在上文Method的GBIF，GBST中）（包含了全部）</p>
+<p>```swift</p>
+<p>​    Scope (_SB.PCI0.LPC.EC)</p>
+<p>​    {</p>
+<p>​        Method (RE1B, 1, NotSerialized)</p>
+<p>​        {</p>
+<p>​            OperationRegion (ERM2, EmbeddedControl, Arg0, One)</p>
+<p>​            Field (ERM2, ByteAcc, NoLock, Preserve)</p>
+<p>​            {</p>
+<p>​                BYTE,   8</p>
+<p>​            }</p>
+<p>​            Return (BYTE)</p>
+<p>​        }</p>
+<p>​        Method (RECB, 2, Serialized)</p>
+<p>​        {</p>
+<p>​            ShiftRight (Add (Arg1, 0x07), 0x03, Arg1)</p>
+<p>​            Name (TEMP, Buffer (Arg1){})</p>
+<p>​            Add (Arg1, Arg0, Arg1)</p>
+<p>​            Store (Zero, Local0)</p>
+<p>​            While (LLess (Arg0, Arg1))</p>
+<p>​            {</p>
+<p>​                Store (RE1B (Arg0), Index (TEMP, Local0))</p>
+<p>​                Increment (Arg0)</p>
+<p>​                Increment (Local0)</p>
+<p>​            }</p>
+<p>​            Return (TEMP)</p>
+<p>​        }</p>
+<p>​        OperationRegion (ECOX, EmbeddedControl, Zero, 0x0100)</p>
+<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
+<p>​        {</p>
+<p>​            Offset (0xA0), </p>
+<p>​            RCB0,   8, </p>
+<p>​            RCB1,   8, </p>
+<p>​            FCB0,   8, </p>
+<p>​            FCB1,   8, </p>
+<p>​            Offset (0xA8), </p>
+<p>​            ACB0,   8, </p>
+<p>​            ACB1,   8, </p>
+<p>​            VOB0,   8, </p>
+<p>​            VOB1,   8</p>
+<p>​        }</p>
+<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
+<p>​        {</p>
+<p>​            Offset (0xA0), </p>
+<p>​            BMB0,   8, </p>
+<p>​            BMB1,   8</p>
+<p>​        }</p>
+<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
+<p>​        {</p>
+<p>​            Offset (0xA0), </p>
+<p>​            DCB0,   8, </p>
+<p>​            DCB1,   8, </p>
+<p>​            DVB0,   8, </p>
+<p>​            DVB1,   8, </p>
+<p>​            Offset (0xAA), </p>
+<p>​            SNB0,   8, </p>
+<p>​            SNB1,   8</p>
+<p>​        }</p>
+<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
+<p>​        {</p>
+<p>​            Offset (0xA0), </p>
+<p>​            CHB0,   8, </p>
+<p>​            CHB1,   8, </p>
+<p>​            CHB2,   8, </p>
+<p>​            CHB3,   8</p>
+<p>​        }</p>
+<p>​        Method (GBIF, 3, NotSerialized)</p>
+<p>​        {</p>
+<p>​            If (_OSI (“Darwin”))</p>
+<p>​            {</p>
+<p>​                Acquire (BATM, 0xFFFF)</p>
+<p>​                If (Arg2)</p>
+<p>​                {</p>
+<p>​                    Or (Arg0, One, HIID)</p>
+<p>​                    Store (B1B2 (BMB0, BMB1), Local7)</p>
+<p>​                    ShiftRight (Local7, 0x0F, Local7)</p>
+<p>​                    XOr (Local7, One, Index (Arg1, Zero))</p>
+<p>​                    Store (Arg0, HIID)</p>
+<p>​                    If (Local7)</p>
+<p>​                    {</p>
+<p>​                        Multiply (B1B2 (FCB0, FCB1), 0x0A, Local1)</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (B1B2 (FCB0, FCB1), Local1)</p>
+<p>​                    }</p>
+<p>​                    Store (Local1, Index (Arg1, 0x02))</p>
+<p>​                    Or (Arg0, 0x02, HIID)</p>
+<p>​                    If (Local7)</p>
+<p>​                    {</p>
+<p>​                        Multiply (B1B2 (DCB0, DCB1), 0x0A, Local0)</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (B1B2 (DCB0, DCB1), Local0)</p>
+<p>​                    }</p>
+<p>​                    Store (Local0, Index (Arg1, One))</p>
+<p>​                    Divide (Local1, 0x14, Local2, Index (Arg1, 0x05))</p>
+<p>​                    If (Local7)</p>
+<p>​                    {</p>
+<p>​                        Store (0xC8, Index (Arg1, 0x06))</p>
+<p>​                    }</p>
+<p>​                    ElseIf (B1B2 (DVB0, DVB1))</p>
+<p>​                    {</p>
+<p>​                        Divide (0x00030D40, B1B2 (DVB0, DVB1), Local2, Index (Arg1, 0x06))</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (Zero, Index (Arg1, 0x06))</p>
+<p>​                    }</p>
+<p>​                    Store (B1B2 (DVB0, DVB1), Index (Arg1, 0x04))</p>
+<p>​                    Store (B1B2 (SNB0, SNB1), Local0)</p>
+<p>​                    Name (SERN, Buffer (0x06)</p>
+<p>​                    {</p>
+<p>​                        “     “</p>
+<p>​                    })</p>
+<p>​                    Store (0x04, Local2)</p>
+<p>​                    While (Local0)</p>
+<p>​                    {</p>
+<p>​                        Divide (Local0, 0x0A, Local1, Local0)</p>
+<p>​                        Add (Local1, 0x30, Index (SERN, Local2))</p>
+<p>​                        Decrement (Local2)</p>
+<p>​                    }</p>
+<p>​                    Store (SERN, Index (Arg1, 0x0A))</p>
+<p>​                    Or (Arg0, 0x06, HIID)</p>
+<p>​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x09))</p>
+<p>​                    Or (Arg0, 0x04, HIID)</p>
+<p>​                    Name (BTYP, Buffer (0x05)</p>
+<p>​                    {</p>
+<p>​                         0x00, 0x00, 0x00, 0x00, 0x00                   </p>
+<p>​                    })</p>
+<p>​                    Store (B1B4 (CHB0, CHB1, CHB2, CHB3), BTYP)</p>
+<p>​                    Store (BTYP, Index (Arg1, 0x0B))</p>
+<p>​                    Or (Arg0, 0x05, HIID)</p>
+<p>​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x0C))</p>
+<p>​                }</p>
+<p>​                Else</p>
+<p>​                {</p>
+<p>​                    Store (0xFFFFFFFF, Index (Arg1, One))</p>
+<p>​                    Store (Zero, Index (Arg1, 0x05))</p>
+<p>​                    Store (Zero, Index (Arg1, 0x06))</p>
+<p>​                    Store (0xFFFFFFFF, Index (Arg1, 0x02))</p>
+<p>​                }</p>
+<p>​                Release (BATM)</p>
+<p>​                Return (Arg1)</p>
+<p>​            }</p>
+<p>​            Else</p>
+<p>​            {</p>
+<p>​                Return (XBIF (Arg0, Arg1, Arg2))</p>
+<p>​            }</p>
+<p>​        }</p>
+<p>​        Method (GBST, 4, NotSerialized)</p>
+<p>​        {</p>
+<p>​            If (_OSI (“Darwin”))</p>
+<p>​            {</p>
+<p>​                Acquire (BATM, 0xFFFF)</p>
+<p>​                If (And (Arg1, 0x20))</p>
+<p>​                {</p>
+<p>​                    Store (0x02, Local0)</p>
+<p>​                }</p>
+<p>​                ElseIf (And (Arg1, 0x40))</p>
+<p>​                {</p>
+<p>​                    Store (One, Local0)</p>
+<p>​                }</p>
+<p>​                Else</p>
+<p>​                {</p>
+<p>​                    Store (Zero, Local0)</p>
+<p>​                }</p>
+<p>​                If (And (Arg1, 0x07)){}</p>
+<p>​                Else</p>
+<p>​                {</p>
+<p>​                    Or (Local0, 0x04, Local0)</p>
+<p>​                }</p>
+<p>​                If (LEqual (And (Arg1, 0x07), 0x07))</p>
+<p>​                {</p>
+<p>​                    Store (0x04, Local0)</p>
+<p>​                    Store (Zero, Local1)</p>
+<p>​                    Store (Zero, Local2)</p>
+<p>​                    Store (Zero, Local3)</p>
+<p>​                }</p>
+<p>​                Else</p>
+<p>​                {</p>
+<p>​                    Store (Arg0, HIID)</p>
+<p>​                    Store (B1B2 (VOB0, VOB1), Local3)</p>
+<p>​                    If (Arg2)</p>
+<p>​                    {</p>
+<p>​                        Multiply (B1B2 (RCB0, RCB1), 0x0A, Local2)</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (B1B2 (RCB0, RCB1), Local2)</p>
+<p>​                    }</p>
+<p>​                    Store (B1B2 (ACB0, ACB1), Local1)</p>
+<p>​                    If (LGreaterEqual (Local1, 0x8000))</p>
+<p>​                    {</p>
+<p>​                        If (And (Local0, One))</p>
+<p>​                        {</p>
+<p>​                            Subtract (0x00010000, Local1, Local1)</p>
+<p>​                        }</p>
+<p>​                        Else</p>
+<p>​                        {</p>
+<p>​                            Store (Zero, Local1)</p>
+<p>​                        }</p>
+<p>​                    }</p>
+<p>​                    ElseIf (LNot (And (Local0, 0x02)))</p>
+<p>​                    {</p>
+<p>​                        Store (Zero, Local1)</p>
+<p>​                    }</p>
+<p>​                    If (Arg2)</p>
+<p>​                    {</p>
+<p>​                        Multiply (Local3, Local1, Local1)</p>
+<p>​                        Divide (Local1, 0x03E8, Local7, Local1)</p>
+<p>​                    }</p>
+<p>​                }</p>
+<p>​                Store (Local0, Index (Arg3, Zero))</p>
+<p>​                Store (Local1, Index (Arg3, One))</p>
+<p>​                Store (Local2, Index (Arg3, 0x02))</p>
+<p>​                Store (Local3, Index (Arg3, 0x03))</p>
+<p>​                Release (BATM)</p>
+<p>​                Return (Arg3)</p>
+<p>​            }</p>
+<p>​            Else</p>
+<p>​            {</p>
+<p>​                Return (XBST (Arg0, Arg1, Arg2, Arg3))</p>
+<p>​            }</p>
+<p>​        }</p>
+<p>​    }</p>
+<p>```</p>
+<p>可以对照给出的X260的热补丁看看</p>
+<p># <strong>排错，补充引用声明</strong></p>
+<p>完成这些步骤后，点击编译会发现错误</p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/63be505b7792df708a4d5b51ca8892a4.png" alt="63be505b7792df708a4d5b51ca8892a4.png" class="lazyload"></p>
+<p>这些都是因为没有被定义，因此我们需要进行引用，来排除这些错误。</p>
+<p>以BATM为例，在DSDT中进行搜索，找到它被定义的路径和类型，写成External</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">External (_SB.PCI0.LPC.EC_BATM, MutexObj)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>前者为路径，后者为类型</p>
+<p>更多详见如下：</p>
+<p>以下摘自iStar的博客：</p>
+<p>Device：原始 ACPI 定义示例</p>
+<p>```swift</p>
+<p>Scope (_SB.PCI0.LPCB)</p>
+<p>{</p>
+<p>​    Device (H_EC)</p>
+<p>​    {</p>
+<p>```</p>
+<p>补丁中添加的代码示例</p>
+<p>```swift</p>
+<p>External (<em>SB</em>.PCI0.LPCB.H_EC, DeviceObj)</p>
+<p>```</p>
+<p>Method：原始 ACPI 定义示例</p>
+<p>```swift</p>
+<p>Method (_STA, 0, NotSerialized)  /* _STA: Status */</p>
+<p>```</p>
+<p>补丁中添加的代码示例</p>
+<p>```swift</p>
+<p>External (<em>SB</em>.BAT0._STA, MethodObj)</p>
+<p>```</p>
+<p>Mutex：原始 ACPI 定义示例</p>
+<p>```swift</p>
+<p>Mutex (BATM, 0x07)</p>
+<p>```</p>
+<p>补丁中添加的代码示例</p>
+<p>```swift</p>
+<p>External (<em>SB</em>.PCI0.LPCB.H_EC.BATM, MutexObj)</p>
+<p>```</p>
+<p>FieldUnit：原始 ACPI 定义示例</p>
+<p>```swift</p>
+<p>Field(…)</p>
+<p>{</p>
+<p>…</p>
+<p>BCNT,   8,</p>
+<p>…</p>
+<p>}</p>
+<p>```</p>
+<p>补丁中添加的代码示例</p>
+<p>```swift</p>
+<p>External (<em>SB</em>.PCI0.LPCB.H_EC.BCNT, FieldUnitObj)</p>
+<p>```</p>
+<p>Integer：原始 ACPI 定义示例</p>
+<p>```swift</p>
+<p>Name (ECA2, Zero)</p>
+<p>```</p>
+<p>补丁中添加的代码示例</p>
+<p>```swift</p>
+<p>External (<em>SB</em>.PCI0.LPCB.H_EC.ECA2, IntObj)</p>
+<p>```</p>
+<p>Package：原始 ACPI 定义示例</p>
+<p>```swift</p>
+<p>Name (PBIF, Package (0x0D)</p>
+<p>{</p>
+<p>​    One,</p>
+<p>​    0xFFFFFFFF,</p>
+<p>​    0xFFFFFFFF,</p>
+<p>​    One,</p>
+<p>​    0xFFFFFFFF,</p>
+<p>​    0xFA,</p>
+<p>​    0x96,</p>
+<p>​    0x0A,</p>
+<p>​    0x19,</p>
+<p>​    “BAT0”,</p>
+<p>​    “ “,</p>
+<p>​    “ “,</p>
+<p>​    “ “</p>
+<p>})</p>
+<p>```</p>
+<p>补丁中添加的代码示例</p>
+<p>```swift</p>
+<p>External (<em>SB</em>.BAT0.PBIF, PkgObj)</p>
+<p>```</p>
+<p># <strong>添加if判断语句</strong></p>
+<p>为了让自己修改的Method不会影响Windows系统，我们需要添加if判断语句，明确它的内容作用在哪个系统。</p>
+<p>如，在GBIF这个Method的第一个括号下加入<strong><strong>If (_OSI (“Darwin”))</strong></strong></p>
+<p>```swift</p>
+<p>​        Method (GBIF, 3, NotSerialized)</p>
+<p>​        {</p>
+<p>​            If (_OSI (“Darwin”))</p>
+<p>​            {</p>
+<p>​                Acquire (BATM, 0xFFFF)</p>
+<p>​                If (Arg2)</p>
+<p>​       …..</p>
+<p>```</p>
+<p>然后，我们去到这个Method的尾部，看看这个Method，最后有没有返回（Return）</p>
+<p>很显然这个GBIF有的，就是<strong><strong>Return (Arg1)</strong></strong></p>
+<p>对于有返回语句的，我们需要在Else下加上Return，没有则不需要。</p>
+<p>Else部分自己加在Method末尾。</p>
+<p>最终结果如下：</p>
+<p>```swift</p>
+<p>​        Method (GBIF, 3, NotSerialized)</p>
+<p>​        {</p>
+<p>​            If (_OSI (“Darwin”))</p>
+<p>​            {</p>
+<p>​                Acquire (BATM, 0xFFFF)</p>
+<p>​                If (Arg2)</p>
+<p>​                {</p>
+<p>​                    Or (Arg0, One, HIID)</p>
+<p>​                    Store (B1B2 (BMB0, BMB1), Local7)</p>
+<p>​                    ShiftRight (Local7, 0x0F, Local7)</p>
+<p>​                    XOr (Local7, One, Index (Arg1, Zero))</p>
+<p>​                    Store (Arg0, HIID)</p>
+<p>​                    If (Local7)</p>
+<p>​                    {</p>
+<p>​                        Multiply (B1B2 (FCB0, FCB1), 0x0A, Local1)</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (B1B2 (FCB0, FCB1), Local1)</p>
+<p>​                    }</p>
+<p>​                    Store (Local1, Index (Arg1, 0x02))</p>
+<p>​                    Or (Arg0, 0x02, HIID)</p>
+<p>​                    If (Local7)</p>
+<p>​                    {</p>
+<p>​                        Multiply (B1B2 (DCB0, DCB1), 0x0A, Local0)</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (B1B2 (DCB0, DCB1), Local0)</p>
+<p>​                    }</p>
+<p>​                    Store (Local0, Index (Arg1, One))</p>
+<p>​                    Divide (Local1, 0x14, Local2, Index (Arg1, 0x05))</p>
+<p>​                    If (Local7)</p>
+<p>​                    {</p>
+<p>​                        Store (0xC8, Index (Arg1, 0x06))</p>
+<p>​                    }</p>
+<p>​                    ElseIf (B1B2 (DVB0, DVB1))</p>
+<p>​                    {</p>
+<p>​                        Divide (0x00030D40, B1B2 (DVB0, DVB1), Local2, Index (Arg1, 0x06))</p>
+<p>​                    }</p>
+<p>​                    Else</p>
+<p>​                    {</p>
+<p>​                        Store (Zero, Index (Arg1, 0x06))</p>
+<p>​                    }</p>
+<p>​                    Store (B1B2 (DVB0, DVB1), Index (Arg1, 0x04))</p>
+<p>​                    Store (B1B2 (SNB0, SNB1), Local0)</p>
+<p>​                    Name (SERN, Buffer (0x06)</p>
+<p>​                    {</p>
+<p>​                        “     “</p>
+<p>​                    })</p>
+<p>​                    Store (0x04, Local2)</p>
+<p>​                    While (Local0)</p>
+<p>​                    {</p>
+<p>​                        Divide (Local0, 0x0A, Local1, Local0)</p>
+<p>​                        Add (Local1, 0x30, Index (SERN, Local2))</p>
+<p>​                        Decrement (Local2)</p>
+<p>​                    }</p>
+<p>​                    Store (SERN, Index (Arg1, 0x0A))</p>
+<p>​                    Or (Arg0, 0x06, HIID)</p>
+<p>​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x09))</p>
+<p>​                    Or (Arg0, 0x04, HIID)</p>
+<p>​                    Name (BTYP, Buffer (0x05)</p>
+<p>​                    {</p>
+<p>​                         0x00, 0x00, 0x00, 0x00, 0x00                   </p>
+<p>​                    })</p>
+<p>​                    Store (B1B4 (CHB0, CHB1, CHB2, CHB3), BTYP)</p>
+<p>​                    Store (BTYP, Index (Arg1, 0x0B))</p>
+<p>​                    Or (Arg0, 0x05, HIID)</p>
+<p>​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x0C))</p>
+<p>​                }</p>
+<p>​                Else</p>
+<p>​                {</p>
+<p>​                    Store (0xFFFFFFFF, Index (Arg1, One))</p>
+<p>​                    Store (Zero, Index (Arg1, 0x05))</p>
+<p>​                    Store (Zero, Index (Arg1, 0x06))</p>
+<p>​                    Store (0xFFFFFFFF, Index (Arg1, 0x02))</p>
+<p>​                }</p>
+<p>​                Release (BATM)</p>
+<p>​                Return (Arg1)</p>
+<p>​            }</p>
+<p>​            Else</p>
+<p>​            {</p>
+<p>​                Return (XBIF (Arg0, Arg1, Arg2))</p>
+<p>​            }</p>
+<p>​        }</p>
+<p>```</p>
+<p>我们发现，我将GBIF在Else中重命名为了XBIF，这需要与后面config里添加重命名对应。</p>
+<p>那么，你们可能会有疑问，这个Arg0这些是这么来的？</p>
+<p>这个需要观察：</p>
+<p>```swift</p>
+<p>Method (GBIF, 3, NotSerialized)</p>
+<p>```</p>
+<p>就是中间这个数字得来的，3的话就是在XBIF后面的括号里填写，Arg0， Arg1， Arg2。</p>
+<p>是多少，你就从Arg0开始往后一个个按顺序加。0就不填，留空。</p>
+<p>添加完了这些后，你再编译，发现报错了，然后一样，补充引用声明。</p>
+<p>如，</p>
+<p>```swift</p>
+<p>External (_SB.PCI0.LPC.EC.XBIF, MethodObj)</p>
+<p>```</p>
+<p>这样就可以了。</p>
+<p># <strong>重命名与Mutex检查</strong></p>
+<p>最后，我们来进行重命名和Mutex检查</p>
+<p>比如GBIF，我们来重命名为XBIF，这样就不会与ACPI中的GBIF冲突了</p>
+<p>规则如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Comment：BAT GBIF to XBIF</span><br></pre></td></tr></table></figure>
+
+<p>利用Hackintool，将GBIF转换为16进制为：47424946</p>
+<p>我们再补上两位，这两位就需要看Method了</p>
+<p>```swift</p>
+<p>Method (GBIF, 3, NotSerialized)</p>
+<p>```</p>
+<p>NotSerialized代表0，Serialized代表8</p>
+<p>我们将其相加，中间的数字+N或S</p>
+<p>GBIF就是：3+0=3，3转换为16进制就是3</p>
+<p>那么最后的两位就是03</p>
+<p>XBIF的16进制为：58424946</p>
+<p>完整的如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Comment：BAT GBIF to XBIF</span><br><span class="line">Find：47424946 03</span><br><span class="line">Replace：58424946 03</span><br></pre></td></tr></table></figure>
+
+
+
+<p>GBST的就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Method (GBST, 4, NotSerialized)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Comment：BAT GBST to XBST</span><br><span class="line">Find：47425354 04</span><br><span class="line">Replace：58425354 04</span><br></pre></td></tr></table></figure>
+
+
+
+<p>把这些重命名加到Config里。</p>
+<p>你需要检查Mutex，确保他们全部为0 在当前使用的DSDT文件里搜索Mutex，看出现的几个变量是否为0，目前所知道的绝大多数机器的ACPI Mutex都是默认置0的，但是对于一些联想机器，它们往往有几个Mutex初始值并不是0，这里我们利用ACPI二进制更名的方法实现置0</p>
+<p>以Mutex (BATM, 0x07)为例，先转换BATM为十六进制代码，得到 42 41 54 4D</p>
+<p>在前后加上完整定义的十六进制代码，01代表Mutex，07则代表默认值，最终得到 01 42 41 54 4D 07</p>
+<p>我们的目的是使Mutex对象置0，所以config的更名应填</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Comment Set Mutex BATM, 0x07 to 0x0</span><br><span class="line">Find 01 42 41 54 4D 07</span><br><span class="line">Repalce 01 42 41 54 4D 00</span><br></pre></td></tr></table></figure>
+
+<p>其它Mutex对象按照同样的方法处理即可</p>
+<p>这样下来你的电池热补丁就基本制作完毕了，对于双电池系统的电池（实际只有一块电池的），我们需要禁用其中一个。</p>
+<p># <strong>双电池系统，屏蔽其中一个</strong></p>
+<p>比如，你的DSDT中有BAT0或BAT1两个电池设备，但你实际只在用其中一个。那么，你先看看另一个是否开启，如果另一个也是开启的，你需要屏蔽它。</p>
+<p>参考我给的<strong><strong>SSDT-BAT0-Disable-X260.aml</strong></strong></p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/623eacaa93ddd83f4c6e702f3386d33f.png" alt="623eacaa93ddd83f4c6e702f3386d33f.png" class="lazyload"></p>
+<p>将DefinitionBlock框出来的位置，改成自己的，同时修改External和Scope为自己所要屏蔽的电池设备的路径。</p>
+<p>然后保存即可。</p>
+<p>然后我们要对所屏蔽电池设备下的_STA进行更名：</p>
+<p><strong><strong>CLOVER</strong></strong>：处理比较简单，将所需屏蔽的电池设备，转换为16进制，比如BAT1（42415430）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Comment：BAT _STA to XSTA in BAT1</span><br><span class="line">Find：5F535441</span><br><span class="line">Replace：58535441</span><br><span class="line">TgtBridge：42415431</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong><strong>OC</strong></strong>：OpenCore因为没有TgtBridge，因此处理比较麻烦</p>
+<p>1.选择使用skip，count：Skip为跳过，就看你所要更改的_STA上有几个一样的_STA就跳过几个，count是替换次数，填1次即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Comment：BAT _STA to XSTA in BAT1</span><br><span class="line">Find：5F535441</span><br><span class="line">Replace：58535441</span><br><span class="line">Skip:（填跳过的次数）</span><br><span class="line">Count：1</span><br></pre></td></tr></table></figure>
+
+
+
+<p>到这里，你已经做好一个电池热补丁和屏蔽补丁了，然后再加上ACPIBatteryManager.kext或者SMCBatteryManager.kext，不出问题，你就可以看到你可爱的电池图标了！</p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/62971b7a3ea5acec10213463913ea58f.png" alt="62971b7a3ea5acec10213463913ea58f.png" class="lazyload"></p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/e6f18d2331d465d9513490e29845e1db.png" alt="e6f18d2331d465d9513490e29845e1db.png" class="lazyload"></p>
+
+  </article>
+
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+  <div class="nexmoe-post-copyright">
+    <strong>Author：</strong>John Doe<br>
+    <strong>Link：</strong><a href="http://yoursite.com/2020/05/16/%E8%BF%9B%E9%98%B6%EF%BC%9A%E7%94%B5%E6%B1%A0%E7%83%AD%E8%A1%A5%E4%B8%81%EF%BC%88Battery-Hotpatch%EF%BC%89%E4%B9%8B%E8%B7%AF/" title="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;05&#x2F;16&#x2F;%E8%BF%9B%E9%98%B6%EF%BC%9A%E7%94%B5%E6%B1%A0%E7%83%AD%E8%A1%A5%E4%B8%81%EF%BC%88Battery-Hotpatch%EF%BC%89%E4%B9%8B%E8%B7%AF&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;05&#x2F;16&#x2F;%E8%BF%9B%E9%98%B6%EF%BC%9A%E7%94%B5%E6%B1%A0%E7%83%AD%E8%A1%A5%E4%B8%81%EF%BC%88Battery-Hotpatch%EF%BC%89%E4%B9%8B%E8%B7%AF&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+    
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script >hljs.initHighlightingOnLoad();</script>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+<script src="/js/app.js?v=1589638590188"></script>
+  
+
+
+
+
+
+</body>
+
+</html>

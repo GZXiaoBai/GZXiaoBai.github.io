@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  
+  <title>为小白设计的电池教程（DSDT） - Hexo</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
+  <meta name="description" content="​                                 为小白设计的电池教程（DSDT） ​                                       编写者：G.Z.小白 这个教程会尽量写的简单，只要你认真，你绝对看得懂！ 此教程整理，修改，借鉴于：http:&#x2F;&#x2F;bbs.pcbeta.com&#x2F;viewthread-1751487-1-1.html 对其进行了完善">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为小白设计的电池教程（DSDT）">
+<meta property="og:url" content="http://yoursite.com/2020/05/16/%E4%B8%BA%E5%B0%8F%E7%99%BD%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%94%B5%E6%B1%A0%E6%95%99%E7%A8%8B%EF%BC%88DSDT%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="​                                 为小白设计的电池教程（DSDT） ​                                       编写者：G.Z.小白 这个教程会尽量写的简单，只要你认真，你绝对看得懂！ 此教程整理，修改，借鉴于：http:&#x2F;&#x2F;bbs.pcbeta.com&#x2F;viewthread-1751487-1-1.html 对其进行了完善">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fp1.fghrsh.net/2020/05/08/f489ad3bacd013bab00a468e61af80f9.png">
+<meta property="og:image" content="http://fp1.fghrsh.net/2020/04/08/b456b320c3ef57b623dab19f40c4013b.png">
+<meta property="article:published_time" content="2020-05-16T14:10:18.000Z">
+<meta property="article:modified_time" content="2020-05-16T14:10:36.521Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fp1.fghrsh.net/2020/05/08/f489ad3bacd013bab00a468e61af80f9.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
+  
+  <!--<link rel="stylesheet" href="/css/style.css?v=1589638590193">-->
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="John Doe" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="John Doe">
+            <img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe" alt="John Doe">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>6</div>
+        <div><span>Tags</span>0</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Social</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+
+  
+  
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Archive</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2020 John Doe
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+          <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="为小白设计的电池教程（DSDT）" class="lazyload">
+          <h1>为小白设计的电池教程（DSDT）</h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年05月16日</a>
+    <a><i class="nexmoefont icon-areachart"></i>4.2k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 19 分钟</a>
+</div>
+
+  <div class="nexmoe-post-right">
+    
+  </div>
+
+  <article>
+    <p> <img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/05/08/f489ad3bacd013bab00a468e61af80f9.png" alt="f489ad3bacd013bab00a468e61af80f9.png" class="lazyload"></p>
+<p>​                                 为小白设计的电池教程（DSDT）</p>
+<p>​                                       编写者：G.Z.小白</p>
+<p><strong><strong>这个教程会尽量写的简单，只要你认真，你绝对看得懂！</strong></strong></p>
+<p>此教程整理，修改，借鉴于：<a href="http://bbs.pcbeta.com/viewthread-1751487-1-1.html" target="_blank" rel="noopener">http://bbs.pcbeta.com/viewthread-1751487-1-1.html</a></p>
+<p>对其进行了完善，以及一些有问题的地方进行了修改。</p>
+<p># <strong>初步了解</strong></p>
+<p>实现原理 : 由于苹果无法使用ACPI EC中超过8位的寄存器（<strong><strong>又叫EC缓冲区，Embedded Controller Buffer</strong></strong>），我们需要利用Hotpatch的原理更名涉及到EC的Method使其失效并在新建的SSDT补丁中重新定义它们，使macOS能够通过SMC电池驱动正确识别电池EC信息。</p>
+<p>好了，我觉得你应该得有个<strong><strong>可以用的DSDT</strong></strong>吧，如果没有请去提取自己的DSDT并反编译，排好错。具体见群文件的教程。</p>
+<p>首先打开我们的DSDT，搜索（Command + F）<strong><strong>Embeddedcontrol</strong></strong></p>
+<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/08/b456b320c3ef57b623dab19f40c4013b.png" alt="b456b320c3ef57b623dab19f40c4013b.png" class="lazyload"></p>
+<p>OperationRegion名称，此为<strong><strong>EC操作区</strong></strong>的名称，一般名称为<strong><strong>ERAM、ECF2、ECF3、ECOR</strong></strong>等，并且有的机器可能不止一个</p>
+<p>好了现在，我们找到了这里，仔细观察，发现它在EC0控制器下，具体路径是_SB.PCI0.LPCB.EC0。当然每个人的可能不一样，最后的EC0，还可能是ECDV、EC、H_EC。</p>
+<p>这里我们主要关注Field里的东西，就是那一堆四个字母的东西。在这一堆东西中，我们只要注意<strong><strong>8位以上</strong></strong>的就行（就是右边的数字）。因为电池驱动无法处理8位以上的字节，所以就需要我们手动来处理来。</p>
+<p>我们需要用到的工具：<strong><strong>计算器（Mac自带）</strong></strong>，<strong><strong>Maciasl</strong></strong>，<strong><strong>新建一个txt文件</strong></strong>。</p>
+<p>打开txt文件，我们先把一下代码复制进去（我会把这个做成样例放在<strong><strong>群文件</strong></strong>）</p>
+<p>处理方法补丁如下</p>
+<p>```Swift</p>
+<p># created by GZxioabai</p>
+<p># add method B1B2 </p>
+<p>into method label B1B2 remove_entry;</p>
+<p>into definitionblock code_regex . insert</p>
+<p>begin</p>
+<p>Method (B1B2, 2, NotSerialized)\n</p>
+<p>{\n</p>
+<p>Return(Or(Arg0, ShiftLeft(Arg1, 8)))\n</p>
+<p>}\n</p>
+<p>end;</p>
+<p> # add method B1B4</p>
+<p>into method label B1B4 remove_entry;</p>
+<p>into definitionblock code_regex . insert</p>
+<p>begin</p>
+<p>Method (B1B4, 4, NotSerialized)\n</p>
+<p>{\n</p>
+<p>   Store(Arg3, Local0)\n</p>
+<p>   Or(Arg2, ShiftLeft(Local0, 8), Local0)\n</p>
+<p>   Or(Arg1, ShiftLeft(Local0, 8), Local0)\n</p>
+<p>   Or(Arg0, ShiftLeft(Local0, 8), Local0)\n</p>
+<p>   Return(Local0)\n</p>
+<p>}\n</p>
+<p>end;</p>
+<p># add utility methods to read/write buffers from/to _SB.PCI0.LPCB.EC0</p>
+<p>into method label RE1B parent_label _SB.PCI0.LPCB.EC0 remove_entry;</p>
+<p>into method label RECB parent_label _SB.PCI0.LPCB.EC0 remove_entry;</p>
+<p>into Device label EC0 insert</p>
+<p>begin</p>
+<p>Method (RE1B, 1, NotSerialized)\n</p>
+<p>{\n</p>
+<p>   OperationRegion(ERAM, EmbeddedControl, Arg0, 1)\n</p>
+<p>   Field(ERAM, ByteAcc, NoLock, Preserve) { BYTE, 8 }\n</p>
+<p>   Return(BYTE)\n</p>
+<p>}\n</p>
+<p>Method (RECB, 2, Serialized)\n</p>
+<p>// Arg0 - offset in bytes from zero-based _SB.PCI0.LPCB.EC0\n</p>
+<p>// Arg1 - size of buffer in bits\n</p>
+<p>{\n</p>
+<p>   ShiftRight(Arg1, 3, Arg1)\n</p>
+<p>   Name(TEMP, Buffer(Arg1) { })\n</p>
+<p>   Add(Arg0, Arg1, Arg1)\n</p>
+<p>   Store(0, Local0)\n</p>
+<p>   While (LLess(Arg0, Arg1))\n</p>
+<p>   {\n</p>
+<p>​       Store(RE1B(Arg0), Index(TEMP, Local0))\n</p>
+<p>​       Increment(Arg0)\n</p>
+<p>​       Increment(Local0)\n</p>
+<p>   }\n</p>
+<p>   Return(TEMP)\n</p>
+<p>}\n</p>
+<p>end;</p>
+<p>into method label WE1B parent_label _SB.PCI0.LPCB.EC0 remove_entry;</p>
+<p>into method label WECB parent_label _SB.PCI0.LPCB.EC0 remove_entry;</p>
+<p>into Device label EC0 insert</p>
+<p>begin</p>
+<p>Method (WE1B, 2, NotSerialized)\n</p>
+<p>{\n</p>
+<p>   OperationRegion(ERAM, EmbeddedControl, Arg0, 1)\n</p>
+<p>   Field(ERAM, ByteAcc, NoLock, Preserve) { BYTE, 8 }\n</p>
+<p>   Store(Arg1, BYTE)\n</p>
+<p>}\n</p>
+<p>Method (WECB, 3, Serialized)\n</p>
+<p>// Arg0 - offset in bytes from zero-based EC\n</p>
+<p>// Arg1 - size of buffer in bits\n</p>
+<p>// Arg2 - value to write\n</p>
+<p>{\n</p>
+<p>   ShiftRight(Arg1, 3, Arg1)\n</p>
+<p>   Name(TEMP, Buffer(Arg1) { })\n</p>
+<p>   Store(Arg2, TEMP)\n</p>
+<p>   Add(Arg0, Arg1, Arg1)\n</p>
+<p>   Store(0, Local0)\n</p>
+<p>   While (LLess(Arg0, Arg1))\n</p>
+<p>   {\n</p>
+<p>​       WE1B(Arg0, DerefOf(Index(TEMP, Local0)))\n</p>
+<p>​       Increment(Arg0)\n</p>
+<p>​       Increment(Local0)\n</p>
+<p>   }\n</p>
+<p>}\n</p>
+<p>end;</p>
+<p>```</p>
+<p>以上的这些东西是同用的处理方法，包括<strong>B1B2（16字节处理），B1B4（32字节处理），WECB和RECB（这两个是处理32字节以上的）</strong></p>
+<p># <strong>16位处理方法</strong></p>
+<p>接下来，我们来讲讲16位如何处理。</p>
+<p>比如我们在Field下找到的这个<strong><strong>16位的BADC</strong></strong>，我们需要将它拆分掉，拆成来<strong><strong>两个8字节</strong></strong>，这样就能被电池驱动处理了。</p>
+<p><strong><strong>读取操作：</strong></strong></p>
+<p>我们还是先来解释一下吧，<strong><strong>什么是读取什么是写入</strong></strong>？在DSDT中常见的是下面两种语句。</p>
+<p>第一种语句（老）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Store（BADC，ENC0）</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在这里，Store语句中，<strong><strong>BADC</strong></strong>是<strong><strong>读</strong></strong>的操作，而<strong><strong>ENC0</strong></strong>是<strong><strong>写</strong></strong>的操作，解释一下，就是将<strong><strong>BADC写入到ENC0</strong></strong>，所以你可几个口诀就是“<strong><strong>左读右写</strong></strong></p>
+<p>第二种语句（新）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ENC0 &#x3D; BADC</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在这里，就刚好相反了，这里没有了Store，但意思还是<strong><strong>将BADC写入到ENC0</strong></strong>，所以<strong><strong>BADC</strong></strong>还是<strong><strong>读</strong></strong>，<strong><strong>ENC0</strong></strong>还是<strong><strong>写</strong></strong>。</p>
+<p><strong><strong>写入操作：</strong></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Store（FB4，BADC）</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在这里，Store语句中，<strong><strong>FB4</strong></strong>是<strong><strong>读</strong></strong>的操作，而<strong><strong>BADC</strong></strong>是<strong><strong>写</strong></strong>的操作，解释一下，就是<strong><strong>将BADC写入到ENC0</strong></strong>，所以你可几个口诀就是“<strong><strong>左读右写</strong></strong>”</p>
+<p>那么其实很好理解了<strong><strong>BADC = FB4</strong></strong>这个就跟上面提到的反一下</p>
+<p>了解了这些那么你可以继续接下来的拆分工作了。</p>
+<p>Field（声明字段）下处理补丁：<code>into Device label EC0 code_regex BADC,\s+16, replace_matched begin DCA0,8,DCA1,8, end;</code></p>
+<p>我们先来理解一下这个，</p>
+<p>- <code>into</code>：<code>针对</code></p>
+<p>- <code>Device label</code>：<code>关于这个设备范围里</code></p>
+<p>- <code>EC0</code>:<code>设备的名称</code></p>
+<p>- <code>code_regex</code>：<code>匹配搜索</code></p>
+<p>- <code>BADC,\s+16</code>：<code>被搜索的代码，\s+16表示16字节</code></p>
+<p>- <code>replace_matched</code>：<code>匹配替换</code></p>
+<p>- <code>begin DCA0,8,DCA1,8, end</code>：<code>从什么什么开始，到什么什么结束，这里的意思就是，用于替换的是“DCA0,8,DCA1,8, ”</code></p>
+<p>那么整句话的意思就是，</p>
+<p>在<code>设备EC0的范围内搜索16字节的BADC，如果有，就替换为“DCA0,8,DCA1,8,”</code></p>
+<p>我们在来表示成一个处理结果：<code>BADC， 16，-----&gt;DCA0,8,DCA1,8,</code></p>
+<p>当然这只是在声明字段中进行拆分处理，我们还要在BADC<strong><strong>被调用的地方</strong></strong>进行处理。</p>
+<p>我们首先需要查找一下<strong><strong>BADC</strong></strong>在哪些地方被调用。（<strong><strong><em>重要提醒：没被调用的其实不需要拆分！意思是你根本不用去管它！</em></strong></strong>）</p>
+<p>被调用的字段（一般在Method下）那里，对字段进行拆分：</p>
+<p><strong><strong>读</strong></strong>的处理补丁：<code>into method label SMTF code_regex BADC replaceall_matched begin B1B2(DCA0,DCA1) end;</code></p>
+<p>解释：</p>
+<p>- <code>into method label SMTF</code>：<code>针对Method为SMTF的这个范围内</code></p>
+<p>- <code>code_regex</code>：<code>匹配（搜索）</code></p>
+<p>- <code>BADC</code>：<code>被搜索的字段</code></p>
+<p>- <code>replace_matched</code>：<code>替换匹配</code></p>
+<p>- <code>begin B1B2(DCA0,DCA1) end</code>：<code>这是被替换的内容</code></p>
+<p>那么总的意思就是，</p>
+<p>- <code>在method为SMTF这个范围里面，搜索“BADC,\s+16”, ，如果有，就把它替换为“DCA0,8,DCA1,8,” 。</code></p>
+<p>那么最后的处理结果是：</p>
+<p>未处理前：</p>
+<p>```Swift</p>
+<p>​            Method (SMTF, 1, NotSerialized)</p>
+<p>​            {</p>
+<p>​                If (LEqual (Arg0, Zero))</p>
+<p>​                {</p>
+<p>​                    Return (BADC)</p>
+<p>​                }</p>
+<p>​                If (LEqual (Arg0, One))</p>
+<p>​                {</p>
+<p>​                    Return (Zero)</p>
+<p>​                }</p>
+<p>​                Return (Zero)</p>
+<p>​            }</p>
+<p>```</p>
+<p>打了补丁之后：</p>
+<p>```Swift</p>
+<p>​            Method (SMTF, 1, NotSerialized)</p>
+<p>​            {</p>
+<p>​                If (LEqual (Arg0, Zero))</p>
+<p>​                {</p>
+<p>​                    Return (B1B2 (DCA0, DCA1))</p>
+<p>​                }</p>
+<p>​                If (LEqual (Arg0, One))</p>
+<p>​                {</p>
+<p>​                    Return (Zero)</p>
+<p>​                }</p>
+<p>​                Return (Zero)</p>
+<p>​            }</p>
+<p>```</p>
+<p>当然啦，这仅仅是BADC如果是<strong><strong>读取</strong></strong>的时候的处理，那要是碰到<strong><strong>写入</strong></strong>的时候，我们就要像下面这样处理，<strong><strong>不能使用B1B2的方法了</strong></strong></p>
+<p>比如：</p>
+<p><strong><strong>Store (Arg0, BADC)  （BADC是16位的情况）</strong></strong></p>
+<p>需要改为：</p>
+<p><strong><strong>Store (ShiftRight(Arg0,8),DCA1) （DCA1是16位拆分后的第二个）</strong></strong></p>
+<p><strong><strong>Store (Arg0,DCA0) （DCA0是16位拆分后的第一个）</strong></strong></p>
+<p>那么补丁，我们就可以这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">into method label SMRW code_regex Store\s\(Arg3,\sBADC\) replaceall_matched begin Store(ShiftRight(Arg3,8),DCA1)\nStore(Arg3, DCA0) end;**</span><br></pre></td></tr></table></figure>
+
+
+
+<p>其中这段文字中的\s代表的是一个空格，\n代表的是换行，也就是回车，主要的是在搜索那里，需要注意符号转义，在任何符号前都要加一个反斜杠转义，也就是加一个\</p>
+<p>那最后的处理结果是：</p>
+<p>未处理：</p>
+<p>```swift</p>
+<p>Store (Arg0, BADC)</p>
+<p>```</p>
+<p>打了补丁后：</p>
+<p>```swift</p>
+<p>Store (ShiftRight(Arg0,8),DCA1)</p>
+<p>Store (Arg0,DCA0)</p>
+<p>```</p>
+<p># <strong>32字节处理方法</strong></p>
+<p>32位字段的处理方法其实跟16位一样，用到的是B1B4，区别就是，16位拆除<strong><strong>2个</strong></strong>，32拆除<strong><strong>4个</strong></strong></p>
+<p>在Field里查找32位的，这里我们也是举一个例子，比如<strong><strong>B1CH</strong></strong></p>
+<p>补丁如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">into Device label EC0 code_regex B1CH,\s+16, replace_matched begin CH10,8,CH11,8,CH12,CH13 end;</span><br></pre></td></tr></table></figure>
+
+<p>处理结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B1CH,32,  ---—&gt;  BC0H,8,BC1H,8,BC2H,8,BC3H,8,</span><br></pre></td></tr></table></figure>
+
+<p>我们可以发现，这个跟16位的差不多，就是后面<strong><strong>多拆2个</strong></strong>，那就不用多废话解释了。</p>
+<p>我们直接讲在被调用的地方的处理（<strong><strong>32字节基本不会有写入操作，也从未出现过</strong></strong>）</p>
+<p>补丁如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">into method label _BIF code_regex B1CH replaceall_matched begin B1B4(CH10,CH11,CH12,CH13) end;</span><br></pre></td></tr></table></figure>
+
+<p>那这个也就不解释了，差不多的意思。其中<strong><strong>B1B4</strong></strong>是<strong><strong>32位</strong></strong>处理方法</p>
+<p>处理结果：</p>
+<p>未处理：</p>
+<p>```swift</p>
+<p>​            Method (_BIF, 0, NotSerialized)</p>
+<p>​            {</p>
+<p>​                Store (B1CH, IFCH)                                                  //未处理前</p>
+<p>​            }</p>
+<p>```</p>
+<p>打了补丁后：</p>
+<p>```swift</p>
+<p>​            Method (_BIF, 0, NotSerialized)</p>
+<p>​            {</p>
+<p>​                Store (B1B4 (BC0H, BC1H, BC2H, BC3H), IFCH)                  //把被调用B1CH两处拆分为4个字节</p>
+<p>​            }</p>
+<p>```</p>
+<p># <strong>偏移量计算</strong></p>
+<p>到了32位以上的字段处理，我们会使用到<strong><strong>RECB（读）</strong></strong>和<strong><strong>WECB（写）</strong></strong>两个处理方法</p>
+<p>我先给你看两个例子：</p>
+<p><strong><strong>RECB(0x98, 64)</strong></strong></p>
+<p><strong><strong>WECB (0x1C, 256, FB4)</strong></strong></p>
+<p>我们来解释一下它们的组成部分，<strong><strong>RECB(偏移量, 字段长度)</strong></strong>，<strong><strong>WECB(偏移量, 字段长度,未处理前的前参数 )</strong></strong>  </p>
+<p>字段长度很好理解，64位就是64，128位就是128，256位就是256</p>
+<p><strong><strong>WECB</strong></strong>中的<strong><strong>未处理前的前参数</strong></strong>，我们举个例子好理解一点</p>
+<p>比如：</p>
+<p><strong><strong>Store (FB4, SMD0)</strong></strong></p>
+<p><strong><strong>SMD0</strong></strong>是<strong><strong>256位的需要处理的字段</strong></strong>，在这里是<strong><strong>写入</strong></strong>，那么它的前参数，顾名思义就是前面那个<strong><strong>FB4</strong></strong></p>
+<p>那么其实，最主要的问题是<strong><strong>偏移量</strong></strong>了。</p>
+<p>举例1：</p>
+<p>```swift</p>
+<p>Offset (0x04), （基地址）</p>
+<p>CMCM,   8, //0x04</p>
+<p>CMD1,   8, //0x05</p>
+<p>CMD2,   8, //0x06</p>
+<p>CMD3,   8, //0x07</p>
+<p>Offset (0x18),</p>
+<p>Offset (0x19), （基地址）</p>
+<p>SMST,   8, //0x19</p>
+<p>MBMN,   80, //0x1A</p>
+<p>MBPN,   96, //0x24</p>
+<p>GPB1,   8, //0x30</p>
+<p>GPB2,   8, //0x31           </p>
+<p>GPB3,   8, //0x32        </p>
+<p>GPB4,   8, //0x33    </p>
+<p>```</p>
+<p>我们看这里的，<strong><strong>MBMN</strong></strong>是需要处理的<strong><strong>80位字段</strong></strong>，它的偏移量的计算就要涉及到它上面的<strong><strong>基地址</strong></strong>，我们看到了那个基地址是<strong><strong>0x19</strong></strong>，我们还可以发现它前面有个<strong><strong>8位的SMST</strong></strong>，我们将8除以8，得到1，再把0x19加上这个1，最后得到了<strong><strong>0x1A</strong></strong>，那么下面那个MBPN的偏移量怎么算呢，就是<strong><strong>将前面的都加起来除以8</strong></strong>，再加上<strong><strong>基地址</strong></strong>，就是8加上80得到88，除以8，等于11，转换为16进制就是B，0x19加上B，等于0x24.（<strong><strong>注意的是，在除以8后的数字，一定要转换为16进制，再加上基地址！</strong></strong>）</p>
+<p>举例二：</p>
+<p>```swift</p>
+<p>Offset (0x53),      //（基地址）     </p>
+<p>B0TP,   16,      // 从基地址起 ，为0x53   </p>
+<p>B0VL,   16,      //16，为2个字节；  计算：上一个的起始地址0x53+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x55</p>
+<p>B0CR,   16,      //16，为2个字节；  计算：上一个的起始地址0x55+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x57</p>
+<p>B0AC,   16,      //16，为2个字节；  计算：上一个的起始地址0x57+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x59</p>
+<p>B0ME,   16,      //16，为2个字节；  计算：上一个的起始地址0x59+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x5b</p>
+<p>B0RS,   16,      //16，为2个字节；  计算：上一个的起始地址0x5b+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x5d</p>
+<p>B0RC,   16,      //16，为2个字节；  计算：上一个的起始地址0x5d+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x5f</p>
+<p>B0FC,   16,      //16，为2个字节；  计算：上一个的起始地址0x5f+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x61</p>
+<p>B0MC,   16,     //16，为2个字节；  计算：上一个的起始地址0x61+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x63</p>
+<p>B0MV,   16,     //16，为2个字节；  计算：上一个的起始地址0x63+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x65</p>
+<p>B0ST,   16,      //16，为2个字节；  计算：上一个的起始地址0x65+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x67</p>
+<p>B0CC,   16,      //16，为2个字节；  计算：上一个的起始地址0x67+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x69</p>
+<p>B0DC,   16,      //16，为2个字节；  计算：上一个的起始地址0x69+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x6b</p>
+<p>B0DV,   16,      //16，为2个字节；  计算：上一个的起始地址0x6b+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x6d</p>
+<p>B0SI,   16,      //16，为2个字节；  计算：上一个的起始地址0x6d+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x6f</p>
+<p>B0SN,   32,     //32，为4个字节；  计算：上一个的起始地址0x6f+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x71      </p>
+<p>B0MN,   96,    //96，为12个字节  计算：上一个的起始地址0x71+0x4（上一个的32位占了4个字节，10转为16进制为0x4）值为0x75</p>
+<p>B0DN,   64,     // 64，为8个字节；计算：上一个的起始地址0x75+0xc（上一个的96位占了12个字节，10转为16进制为0xc）值为0x81</p>
+<p>B0CM,   48,    //  计算：上一个的起始地址0x81+0x8（64位占了8个字节，10转为16进制为0x8）值为0x89</p>
+<p>```</p>
+<p>这里我就不说明了，自己看右边的注释理解一下吧。</p>
+<p>举例3：</p>
+<p>```swift</p>
+<p>Offset (0x5D),     //（基地址）  </p>
+<p>ENIB,   16,     // 16，为2个字节；   从基地址起 ，为0x5D</p>
+<p>ENDD,   8,     //8，为1个字节；  计算：上一个的起始地址0x5D+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x5F</p>
+<p>SMPR,   8,     //8，为1个字节；  计算：上一个的起始地址0x5F+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x60</p>
+<p>SMST,   8,     //8，为1个字节；  计算：上一个的起始地址0x60+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x61</p>
+<p>SMAD,   8,   //8，为1个字节；  计算：上一个的起始地址0x61+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x62</p>
+<p>SMCM,   8,     //8，为1个字节；  计算：上一个的起始地址0x62+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x63</p>
+<p>SMD0,   256,    //256，为32个字节；  计算：上一个的起始地址0x63+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x64</p>
+<p>BCNT,   8,      //8，为1个字节；  计算：上一个的起始地址0x64+0x20（上一个的256位占了32个字节，10转为16进制为0x20）值为0x84</p>
+<p>SMAA,   24,      //8，为1个字节；  计算：上一个的起始地址0x84+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x85</p>
+<p>```</p>
+<p>举例4  最为简单：</p>
+<p>```swift</p>
+<p>​            Field (ERAM, ByteAcc, NoLock, Preserve)</p>
+<p>​                {</p>
+<p>​                    Offset (0x04),</p>
+<p>​                    FLD0,   64          // 64，为8个字节；   从基地址起 ，为0x04（偏移量）</p>
+<p>​                }</p>
+<p>​            Field (ERAM, ByteAcc, NoLock, Preserve)</p>
+<p>​                {</p>
+<p>​                    Offset (0x04),</p>
+<p>​                    FLD1,   128          // 128，为16个字节；   从基地址起 ，为0x04（偏移量）</p>
+<p>​                }</p>
+<p>​            Field (ERAM, ByteAcc, NoLock, Preserve)</p>
+<p>​                {</p>
+<p>​                    Offset (0x04),</p>
+<p>​                    FLD2,   192          // 192，为24个字节；   从基地址起 ，为0x04（偏移量）</p>
+<p>​                }</p>
+<p>​            Field (ERAM, ByteAcc, NoLock, Preserve)</p>
+<p>​                {</p>
+<p>​                    Offset (0x04),</p>
+<p>​                    FLD3,   256          // 256，为32个字节；   从基地址起 ，为0x04（偏移量）</p>
+<p>​                }</p>
+<p>```</p>
+<p>举例五 特殊：</p>
+<p>```swift</p>
+<p>OperationRegion (SMBX, EmbeddedControl, 0x18, 0x28)            //第三个值是起始地址</p>
+<p>Field (SMBX, ByteAcc, NoLock, Preserve)</p>
+<p>{</p>
+<p>​        PRTC,   8,      //8，为1个字节；  上面第三个值是起始地址0x18</p>
+<p>​        SSTS,   5,      //计算：上一个的起始地址0x18+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x19</p>
+<p>​            ,   1,</p>
+<p>​        ALFG,   1,</p>
+<p>​        CDFG,   1,      //上面 5+1+1+1才凑够8位（1字节）</p>
+<p>​        ADDR,   8,    //8，为1个字节；计算：上一个的起始地址0x19+0x1（上面 5+1+1+1才凑够8位占了1个字节，10转为16进制为0x1）值为0x19     0x1A</p>
+<p>​        CMDB,   8, //8，为1个字节；  计算：上一个的起始地址0x1A+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x1B   </p>
+<p>​        BDAT,   256, //256，为32个字节；计算：上一个的起始地址0x1B+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x1C</p>
+<p>​        BCNT,   8,</p>
+<p>​            ,   1,</p>
+<p>​        ALAD,   7,</p>
+<p>​        ALD0,   8,</p>
+<p>​        ALD1,   8</p>
+<p>}</p>
+<p>```</p>
+<p># <strong>32位以上字段的处理（包括64，128，256等）</strong></p>
+<p>在Field下，我们需要对其进行<strong><strong>重命名</strong></strong>使其失效。</p>
+<p>补丁如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">into Device label EC0 code_regex (SMD0,)\s+(256) replace_matched begin SMDX,%2,&#x2F;&#x2F;%1%2 end;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这里需要注意的是<strong><strong>要打括号</strong></strong>！，还有后面的<strong><strong>SMDX</strong></strong>是重命名后的结果，<strong><strong>%2,//%1%2</strong></strong>这个也是要加上的！</p>
+<p>接下来在被调用的地方进行处理：</p>
+<p><strong><strong><em>读取调用</em></strong></strong></p>
+<p><strong><strong>Store (SMD0, FB4)</strong></strong></p>
+<p>我们要用到RECB，补丁如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">into method label MHPF code_regex SMD0 replaceall_matched begin RECB(0x1C, 256) end;</span><br></pre></td></tr></table></figure>
+
+<p>处理结果为：<code>Store (SMD0, FB4) —&gt; Store (RECB (0x1C, 0x0100), FB4)</code></p>
+<p><strong><strong><em>写入调用</em></strong></strong></p>
+<p><strong><strong>Store (FB4, SMD0)</strong></strong></p>
+<p>我们要用到WECB，补丁如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">into method label MHPF code_regex Store\s\(FB4,\sSMD0\) replaceall_matched begin WECB(0x1C,256,FB4) end；</span><br></pre></td></tr></table></figure>
+
+
+
+<p>值得注意的是，我们这边是<strong><strong>将整个Store语句进行了替换</strong></strong>，这也是<strong><strong>WECB</strong></strong>处理的不同之处。</p>
+<p>处理结果：<code>Store (FB4, SMD0) —&gt; WECB (0x1C, 256, FB4)</code></p>
+<p># <strong>Mutex确认，最后检查</strong></p>
+<p>确保DSDT里的<strong><strong>Mutex</strong></strong>都是<strong><strong>0x00</strong></strong>，不然可能会出现电量显示0%的情况。</p>
+<p>在DSDT里搜索<strong><strong>Mutex</strong></strong>，如果有的不是0x00，你就自己手动改成0x00。</p>
+<p># <strong>补充</strong></p>
+<p>当电池有时能正常显示电量，有时不能会出现一个小叉，则可能是多个电池的位置导致的，如图有两个位置，分别为“BAT0”和“BAT1”，我们需要禁用掉“BAT1”这个位置，以达到正常读取电量</p>
+
+  </article>
+
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+  <div class="nexmoe-post-copyright">
+    <strong>Author：</strong>John Doe<br>
+    <strong>Link：</strong><a href="http://yoursite.com/2020/05/16/%E4%B8%BA%E5%B0%8F%E7%99%BD%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%94%B5%E6%B1%A0%E6%95%99%E7%A8%8B%EF%BC%88DSDT%EF%BC%89/" title="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;05&#x2F;16&#x2F;%E4%B8%BA%E5%B0%8F%E7%99%BD%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%94%B5%E6%B1%A0%E6%95%99%E7%A8%8B%EF%BC%88DSDT%EF%BC%89&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;05&#x2F;16&#x2F;%E4%B8%BA%E5%B0%8F%E7%99%BD%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%94%B5%E6%B1%A0%E6%95%99%E7%A8%8B%EF%BC%88DSDT%EF%BC%89&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+    
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script >hljs.initHighlightingOnLoad();</script>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+<script src="/js/app.js?v=1589638590194"></script>
+  
+
+
+
+
+
+</body>
+
+</html>
