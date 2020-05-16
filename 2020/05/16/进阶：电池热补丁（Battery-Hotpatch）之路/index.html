@@ -1,241 +1,32 @@
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-  
-  <title>进阶：电池热补丁（Battery-Hotpatch）之路 - Hexo</title>
-  <meta charset="UTF-8">
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-  
-  
-
-  <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
-  <meta name="description" content="## 前言 在有了OpenCore的引导后，已经不在推荐使用DSDT了，况且，现在也是主要推广热补丁（HotPatch），热补丁具有比DSDT更好的灵活性，于是便开始写这篇文章了。 ## 准备步骤 首先，我们需要下载我提供的电池热补丁的样本（SSDT-BATT.dsl)。同时，我还准备了联想X260的电池热补丁作为例子。 链接如下：百度云  密码:fn1v 然后，准备你的DSDT或者SSDT（存">
-<meta property="og:type" content="article">
-<meta property="og:title" content="进阶：电池热补丁（Battery-Hotpatch）之路">
-<meta property="og:url" content="http://yoursite.com/2020/05/16/%E8%BF%9B%E9%98%B6%EF%BC%9A%E7%94%B5%E6%B1%A0%E7%83%AD%E8%A1%A5%E4%B8%81%EF%BC%88Battery-Hotpatch%EF%BC%89%E4%B9%8B%E8%B7%AF/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="## 前言 在有了OpenCore的引导后，已经不在推荐使用DSDT了，况且，现在也是主要推广热补丁（HotPatch），热补丁具有比DSDT更好的灵活性，于是便开始写这篇文章了。 ## 准备步骤 首先，我们需要下载我提供的电池热补丁的样本（SSDT-BATT.dsl)。同时，我还准备了联想X260的电池热补丁作为例子。 链接如下：百度云  密码:fn1v 然后，准备你的DSDT或者SSDT（存">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://fp1.fghrsh.net/2020/05/08/bbfcbf8b80dbe7ca2a4aed83f8089e0d.png">
-<meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/e65fd584f0449f65f06dcab8da3027bc.png">
-<meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/9bc4f9b7ac2ad30173bf11d795d7898c.png">
-<meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/e15fd60ebcd7ceb6a922c9b7148a0c83.png">
-<meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/dbd31d6f597da35e49aa1a5edeab9af1.png">
-<meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/63be505b7792df708a4d5b51ca8892a4.png">
-<meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/623eacaa93ddd83f4c6e702f3386d33f.png">
-<meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/62971b7a3ea5acec10213463913ea58f.png">
-<meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/e6f18d2331d465d9513490e29845e1db.png">
-<meta property="article:published_time" content="2020-05-16T14:12:07.000Z">
-<meta property="article:modified_time" content="2020-05-16T14:38:05.278Z">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://fp1.fghrsh.net/2020/05/08/bbfcbf8b80dbe7ca2a4aed83f8089e0d.png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
-  
-  <!--<link rel="stylesheet" href="/css/style.css?v=1589639942439">-->
-<meta name="generator" content="Hexo 4.2.1"></head>
-
-<body class="mdui-drawer-body-left">
-  
-  <div id="nexmoe-background">
-    <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg)"></div>
-    <div class="mdui-appbar mdui-shadow-0">
-      <div class="mdui-toolbar">
-        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
-        <div class="mdui-toolbar-spacer"></div>
-        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
-        <a href="/" title="John Doe" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe"></a>
-       </div>
-    </div>
-  </div>
-  <div id="nexmoe-header">
-      <div class="nexmoe-drawer mdui-drawer" id="drawer">
-    <div class="nexmoe-avatar mdui-ripple">
-        <a href="/" title="John Doe">
-            <img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe" alt="John Doe">
-        </a>
-    </div>
-    <div class="nexmoe-count">
-        <div><span>Articles</span>6</div>
-        <div><span>Tags</span>0</div>
-        <div><span>Categories</span>0</div>
-    </div>
-    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
-            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
-            <div class="mdui-list-item-content">
-                回到首页
-            </div>
-        </a>
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives" title="文章归档">
-            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
-            <div class="mdui-list-item-content">
-                文章归档
-            </div>
-        </a>
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
-            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
-            <div class="mdui-list-item-content">
-                关于博客
-            </div>
-        </a>
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
-            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
-            <div class="mdui-list-item-content">
-                我的朋友
-            </div>
-        </a>
-        
-    </div>
-    <aside id="nexmoe-sidebar">
-  
-  <div class="nexmoe-widget-wrap">
-    <div class="nexmoe-widget nexmoe-search">
-        <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
-            <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
-        </form>
-    </div>
-</div>
-  
-  <div class="nexmoe-widget-wrap">
-    <h3 class="nexmoe-widget-title">Social</h3>
-    <div class="nexmoe-widget nexmoe-social">
-        <a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
-            <i class="nexmoefont icon-bilibili"></i>
-        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
-            <i class="nexmoefont icon-github"></i>
-        </a>
-    </div>
-</div>
-  
-  
-
-  
-  
-  
-  
-  <div class="nexmoe-widget-wrap">
-    <h3 class="nexmoe-widget-title">Archive</h3>
-    <div class="nexmoe-widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
-    </div>
-  </div>
-
-
-  
-</aside>
-    <div class="nexmoe-copyright">
-        &copy; 2020 John Doe
-        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
-    </div>
-</div><!-- .nexmoe-drawer -->
-  </div>
-  <div id="nexmoe-content">
-    <div class="nexmoe-primary">
-        <div class="nexmoe-post">
-  
-      <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
-          <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="进阶：电池热补丁（Battery-Hotpatch）之路" class="lazyload">
-          <h1>进阶：电池热补丁（Battery-Hotpatch）之路</h1>
-      </div>
-  
-  
-  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
-    <a><i class="nexmoefont icon-calendar-fill"></i>2020年05月16日</a>
-    <a><i class="nexmoefont icon-areachart"></i>3.3k 字</a>
-    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 16 分钟</a>
-</div>
-
-  <div class="nexmoe-post-right">
-    
-      <div class="nexmoe-fixed">
-        <div class="nexmoe-valign">
-            <div class="nexmoe-toc">
-                
-            </div>
-        </div>
-      </div>
-    
-  </div>
-
-  <article>
-    <p><a href="https://img.fghrsh.net/image/Xpbv4" target="_blank" rel="noopener"><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/05/08/bbfcbf8b80dbe7ca2a4aed83f8089e0d.png" alt="bbfcbf8b80dbe7ca2a4aed83f8089e0d.png" class="lazyload"></a></p>
-<p>## <strong>前言</strong></p>
-<p>在有了OpenCore的引导后，已经<strong><strong>不在推荐使用DSDT</strong></strong>了，况且，现在也是主要推广<strong><strong>热补丁（HotPatch）</strong></strong>，热补丁具有比DSDT更好的<strong><strong>灵活性</strong></strong>，于是便开始写这篇文章了。</p>
-<p>## <strong>准备步骤</strong></p>
-<p>首先，我们需要下载我提供的电池热补丁的样本（SSDT-BATT.dsl)。同时，我还准备了联想X260的电池热补丁作为例子。</p>
-<p>链接如下：<a href="https://pan.baidu.com/s/1E85uJJGzq5EXUpcTTE-CDQ" target="_blank" rel="noopener">百度云</a>  <strong><strong>密码:fn1v</strong></strong></p>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="generator" content="Hexo 4.2.1"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>进阶：电池热补丁（Battery-Hotpatch）之路 - Hexo</title><meta description="前言在有了OpenCore的引导后，已经不在推荐使用DSDT了，况且，现在也是主要推广热补丁（HotPatch），热补丁具有比DSDT更好的灵活性，于是便开始写这篇文章了。 准备步骤首先，我们需要下载我提供的电池热补丁的样本（SSDT-BATT.dsl)。同时，我还准备了联想X260的电池热补丁作为例子。 链接如下：百度云  密码:fn1v 然后，准备你的DSDT或者SSDT（存储有EC缓冲区的"><meta property="og:type" content="blog"><meta property="og:title" content="进阶：电池热补丁（Battery-Hotpatch）之路"><meta property="og:url" content="http://yoursite.com/2020/05/16/%E8%BF%9B%E9%98%B6%EF%BC%9A%E7%94%B5%E6%B1%A0%E7%83%AD%E8%A1%A5%E4%B8%81%EF%BC%88Battery-Hotpatch%EF%BC%89%E4%B9%8B%E8%B7%AF/"><meta property="og:site_name" content="Hexo"><meta property="og:description" content="前言在有了OpenCore的引导后，已经不在推荐使用DSDT了，况且，现在也是主要推广热补丁（HotPatch），热补丁具有比DSDT更好的灵活性，于是便开始写这篇文章了。 准备步骤首先，我们需要下载我提供的电池热补丁的样本（SSDT-BATT.dsl)。同时，我还准备了联想X260的电池热补丁作为例子。 链接如下：百度云  密码:fn1v 然后，准备你的DSDT或者SSDT（存储有EC缓冲区的"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://fp1.fghrsh.net/2020/05/08/bbfcbf8b80dbe7ca2a4aed83f8089e0d.png"><meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/e65fd584f0449f65f06dcab8da3027bc.png"><meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/9bc4f9b7ac2ad30173bf11d795d7898c.png"><meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/e15fd60ebcd7ceb6a922c9b7148a0c83.png"><meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/dbd31d6f597da35e49aa1a5edeab9af1.png"><meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/63be505b7792df708a4d5b51ca8892a4.png"><meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/623eacaa93ddd83f4c6e702f3386d33f.png"><meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/62971b7a3ea5acec10213463913ea58f.png"><meta property="og:image" content="http://fp1.fghrsh.net/2020/04/09/e6f18d2331d465d9513490e29845e1db.png"><meta property="article:published_time" content="2020-05-16T14:12:07.000Z"><meta property="article:modified_time" content="2020-05-16T14:57:19.193Z"><meta property="article:author" content="John Doe"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="http://fp1.fghrsh.net/2020/05/08/bbfcbf8b80dbe7ca2a4aed83f8089e0d.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://yoursite.com/2020/05/16/%E8%BF%9B%E9%98%B6%EF%BC%9A%E7%94%B5%E6%B1%A0%E7%83%AD%E8%A1%A5%E4%B8%81%EF%BC%88Battery-Hotpatch%EF%BC%89%E4%B9%8B%E8%B7%AF/"},"headline":"Hexo","image":["http://fp1.fghrsh.net/2020/05/08/bbfcbf8b80dbe7ca2a4aed83f8089e0d.png","http://fp1.fghrsh.net/2020/04/09/e65fd584f0449f65f06dcab8da3027bc.png","http://fp1.fghrsh.net/2020/04/09/9bc4f9b7ac2ad30173bf11d795d7898c.png","http://fp1.fghrsh.net/2020/04/09/e15fd60ebcd7ceb6a922c9b7148a0c83.png","http://fp1.fghrsh.net/2020/04/09/dbd31d6f597da35e49aa1a5edeab9af1.png","http://fp1.fghrsh.net/2020/04/09/63be505b7792df708a4d5b51ca8892a4.png","http://fp1.fghrsh.net/2020/04/09/623eacaa93ddd83f4c6e702f3386d33f.png","http://fp1.fghrsh.net/2020/04/09/62971b7a3ea5acec10213463913ea58f.png","http://fp1.fghrsh.net/2020/04/09/e6f18d2331d465d9513490e29845e1db.png"],"datePublished":"2020-05-16T14:12:07.000Z","dateModified":"2020-05-16T14:57:19.193Z","author":{"@type":"Person","name":"John Doe"},"description":"前言在有了OpenCore的引导后，已经不在推荐使用DSDT了，况且，现在也是主要推广热补丁（HotPatch），热补丁具有比DSDT更好的灵活性，于是便开始写这篇文章了。 准备步骤首先，我们需要下载我提供的电池热补丁的样本（SSDT-BATT.dsl)。同时，我还准备了联想X260的电池热补丁作为例子。 链接如下：百度云  密码:fn1v 然后，准备你的DSDT或者SSDT（存储有EC缓冲区的"}</script><link rel="canonical" href="http://yoursite.com/2020/05/16/%E8%BF%9B%E9%98%B6%EF%BC%9A%E7%94%B5%E6%B1%A0%E7%83%AD%E8%A1%A5%E4%B8%81%EF%BC%88Battery-Hotpatch%EF%BC%89%E4%B9%8B%E8%B7%AF/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hexo" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><time class="level-item" dateTime="2020-05-16T14:12:07.000Z" title="2020-05-16T14:12:07.000Z">2020-05-16</time><span class="level-item">29 minutes read (About 4301 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">进阶：电池热补丁（Battery-Hotpatch）之路</h1><div class="content"><p><a href="https://img.fghrsh.net/image/Xpbv4"><img src="http://fp1.fghrsh.net/2020/05/08/bbfcbf8b80dbe7ca2a4aed83f8089e0d.png" alt="bbfcbf8b80dbe7ca2a4aed83f8089e0d.png"></a></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h1><p>在有了OpenCore的引导后，已经<strong><strong>不在推荐使用DSDT</strong></strong>了，况且，现在也是主要推广<strong><strong>热补丁（HotPatch）</strong></strong>，热补丁具有比DSDT更好的<strong><strong>灵活性</strong></strong>，于是便开始写这篇文章了。</p>
+<h1 id="准备步骤"><a href="#准备步骤" class="headerlink" title="准备步骤"></a><strong>准备步骤</strong></h1><p>首先，我们需要下载我提供的电池热补丁的样本（SSDT-BATT.dsl)。同时，我还准备了联想X260的电池热补丁作为例子。</p>
+<p>链接如下：<a href="https://pan.baidu.com/s/1E85uJJGzq5EXUpcTTE-CDQ">百度云</a>  <strong><strong>密码:fn1v</strong></strong></p>
 <p>然后，准备你的DSDT或者SSDT（存储有EC缓冲区的，Embedded Controller Buffer）</p>
 <p>需要工具：<code>Hackintool，Maciasl，科学计算器（Mac自带）</code></p>
-<p>要求：最好有一定的电池的基础知识，详细看见我之前写的<a href="https://gzxiaobai.github.io/post/wei-xiao-bai-she-ji-de-dian-chi-jiao-cheng-dsdt/" target="_blank" rel="noopener">电池DSDT的教程</a></p>
-<p>## <strong>初步动作</strong></p>
-<p>打开热补丁样本，我们来进行一些修改。（按照我自己的习惯来的）</p>
-<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/e65fd584f0449f65f06dcab8da3027bc.png" alt="e65fd584f0449f65f06dcab8da3027bc.png" class="lazyload"></p>
+<p>要求：最好有一定的电池的基础知识，详细看见我之前写的<a href="https://gzxiaobai.github.io/post/wei-xiao-bai-she-ji-de-dian-chi-jiao-cheng-dsdt/">电池DSDT的教程</a></p>
+<h1 id="初步动作"><a href="#初步动作" class="headerlink" title="初步动作"></a><strong>初步动作</strong></h1><p>打开热补丁样本，我们来进行一些修改。（按照我自己的习惯来的）</p>
+<p><img src="http://fp1.fghrsh.net/2020/04/09/e65fd584f0449f65f06dcab8da3027bc.png" alt="e65fd584f0449f65f06dcab8da3027bc.png"></p>
 <p>我们要修改的有三处：</p>
 <p>1.DefinitionBlock的修改，将这里的<strong><strong>ACDT</strong></strong>改为自己<strong><strong>DSDT开头DefinitionBlock里的第三项</strong></strong></p>
 <p>2.DefinitionBlock的修改，将最后的数值也改成自己DSDT里的</p>
 <p>3.External引用路径里的EC路径，改成自己DSDT里的实际路径</p>
-<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/9bc4f9b7ac2ad30173bf11d795d7898c.png" alt="9bc4f9b7ac2ad30173bf11d795d7898c.png" class="lazyload"></p>
+<p><img src="http://fp1.fghrsh.net/2020/04/09/9bc4f9b7ac2ad30173bf11d795d7898c.png" alt="9bc4f9b7ac2ad30173bf11d795d7898c.png"></p>
 <p>这里我们有一处要修改：</p>
 <p>1.Scope路径下，改为自己DSDT里的实际路径</p>
-<p>## <strong>16位和32位的处理</strong></p>
-<p>这里的处理，其实与DSDT里的差不多。</p>
+<h1 id="16位和32位的处理"><a href="#16位和32位的处理" class="headerlink" title="16位和32位的处理"></a><strong>16位和32位的处理</strong></h1><p>这里的处理，其实与DSDT里的差不多。</p>
 <p>我们先将Field复制到SSDT里</p>
-<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/e15fd60ebcd7ceb6a922c9b7148a0c83.png" alt="e15fd60ebcd7ceb6a922c9b7148a0c83.png" class="lazyload"></p>
-<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/dbd31d6f597da35e49aa1a5edeab9af1.png" alt="dbd31d6f597da35e49aa1a5edeab9af1.png" class="lazyload"></p>
+<p><img src="http://fp1.fghrsh.net/2020/04/09/e15fd60ebcd7ceb6a922c9b7148a0c83.png" alt="e15fd60ebcd7ceb6a922c9b7148a0c83.png"></p>
+<p><img src="http://fp1.fghrsh.net/2020/04/09/dbd31d6f597da35e49aa1a5edeab9af1.png" alt="dbd31d6f597da35e49aa1a5edeab9af1.png"></p>
 <p>像我这样复制下来，里面到内容不复制。</p>
 <p><strong><strong><em>注意⚠️：你不难发现，我这里有许多的Field，那是因为X260的DSDT里，就是像这样的分散的Field。因此，当你制作电池热补丁时，搜索EmbeddedControllerBuffer找到Field后，记得同时搜索Field的名称，比如，ECOR，看看有没有分散在其它地方的</em></strong></strong></p>
 <p>复制过来后，我们需要将Field进行<strong><strong>改名</strong></strong>，比如，ECOR，我改为了ECOX，这样就不会与原ACPI里的发生冲突。</p>
 <p>热补丁与DSDT的拆分不同，我们直接将需要拆分的，拆好放到SSDT中，我们创建的Field下。</p>
-<p>```</p>
-<p>​        OperationRegion (ECOX, EmbeddedControl, Zero, 0x0100)</p>
-<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
-<p>​        {</p>
-<p>​            Offset (0xA0), </p>
-<p>​            RCB0,   8, </p>
-<p>​            RCB1,   8, </p>
-<p>​            FCB0,   8, </p>
-<p>​            FCB1,   8, </p>
-<p>​            Offset (0xA8), </p>
-<p>​            ACB0,   8, </p>
-<p>​            ACB1,   8, </p>
-<p>​            VOB0,   8, </p>
-<p>​            VOB1,   8</p>
-<p>​        }</p>
-<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
-<p>​        {</p>
-<p>​            Offset (0xA0), </p>
-<p>​            BMB0,   8, </p>
-<p>​            BMB1,   8</p>
-<p>​        }</p>
-<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
-<p>​        {</p>
-<p>​            Offset (0xA0), </p>
-<p>​            DCB0,   8, </p>
-<p>​            DCB1,   8, </p>
-<p>​            DVB0,   8, </p>
-<p>​            DVB1,   8, </p>
-<p>​            Offset (0xAA), </p>
-<p>​            SNB0,   8, </p>
-<p>​            SNB1,   8</p>
-<p>​        }</p>
-<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
-<p>​        {</p>
-<p>​            Offset (0xA0), </p>
-<p>​            CHB0,   8, </p>
-<p>​            CHB1,   8, </p>
-<p>​            CHB2,   8, </p>
-<p>​            CHB3,   8</p>
-<p>​        }</p>
-<p>```</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">        OperationRegion (ECOX, EmbeddedControl, Zero, 0x0100)</span><br><span class="line"></span><br><span class="line">​        Field (ECOX, ByteAcc, NoLock, Preserve)</span><br><span class="line"></span><br><span class="line">​        &#123;</span><br><span class="line"></span><br><span class="line">​            Offset (0xA0), </span><br><span class="line"></span><br><span class="line">​            RCB0,   8, </span><br><span class="line"></span><br><span class="line">​            RCB1,   8, </span><br><span class="line"></span><br><span class="line">​            FCB0,   8, </span><br><span class="line"></span><br><span class="line">​            FCB1,   8, </span><br><span class="line"></span><br><span class="line">​            Offset (0xA8), </span><br><span class="line"></span><br><span class="line">​            ACB0,   8, </span><br><span class="line"></span><br><span class="line">​            ACB1,   8, </span><br><span class="line"></span><br><span class="line">​            VOB0,   8, </span><br><span class="line"></span><br><span class="line">​            VOB1,   8</span><br><span class="line"></span><br><span class="line">​        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​        Field (ECOX, ByteAcc, NoLock, Preserve)</span><br><span class="line"></span><br><span class="line">​        &#123;</span><br><span class="line"></span><br><span class="line">​            Offset (0xA0), </span><br><span class="line"></span><br><span class="line">​            BMB0,   8, </span><br><span class="line"></span><br><span class="line">​            BMB1,   8</span><br><span class="line"></span><br><span class="line">​        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​        Field (ECOX, ByteAcc, NoLock, Preserve)</span><br><span class="line"></span><br><span class="line">​        &#123;</span><br><span class="line"></span><br><span class="line">​            Offset (0xA0), </span><br><span class="line"></span><br><span class="line">​            DCB0,   8, </span><br><span class="line"></span><br><span class="line">​            DCB1,   8, </span><br><span class="line"></span><br><span class="line">​            DVB0,   8, </span><br><span class="line"></span><br><span class="line">​            DVB1,   8, </span><br><span class="line"></span><br><span class="line">​            Offset (0xAA), </span><br><span class="line"></span><br><span class="line">​            SNB0,   8, </span><br><span class="line"></span><br><span class="line">​            SNB1,   8</span><br><span class="line"></span><br><span class="line">​        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​        Field (ECOX, ByteAcc, NoLock, Preserve)</span><br><span class="line"></span><br><span class="line">​        &#123;</span><br><span class="line"></span><br><span class="line">​            Offset (0xA0), </span><br><span class="line"></span><br><span class="line">​            CHB0,   8, </span><br><span class="line"></span><br><span class="line">​            CHB1,   8, </span><br><span class="line"></span><br><span class="line">​            CHB2,   8, </span><br><span class="line"></span><br><span class="line">​            CHB3,   8</span><br><span class="line"></span><br><span class="line">​        &#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <p>最后的结果就如上所示，正确拆分，正确计算偏移量。（这些都包含在我DSDT的教程中）</p>
 <p>接着我们在DSDT中搜索需要被拆分的字节，找到所在的Method，记下路径，然后在SSDT里，添加这个路径。</p>
 <p>比如我们，发现GBIF这个Method里面有需要拆分的自己，观察所得，GBIF所在的路径为：</p>
@@ -244,412 +35,27 @@
 
 
 <p>那么我们就在SSDT中加上这个Scope：</p>
-<p>```</p>
-<p>​    Scope (_SB.PCI0.LPC.EC)</p>
-<p>​    {</p>
-<p>​    }</p>
-<p>```</p>
-<p>然后，我们将GBIF这一整个Method复制到这个路径下，在对字节进行拆分。（以此类推，其它Method也是这么处理）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    Scope (\_SB.PCI0.LPC.EC)</span><br><span class="line"></span><br><span class="line">​    &#123;</span><br><span class="line"></span><br><span class="line">​    &#125;</span><br></pre></td></tr></table></figure>
 
-<p>​        Method (GBIF, 3, NotSerialized)</p>
-<p>​        {</p>
-<p>​            If (_OSI (“Darwin”))</p>
-<p>​            {</p>
-<p>​                Acquire (BATM, 0xFFFF)</p>
-<p>​                If (Arg2)</p>
-<p>​                {</p>
-<p>​                    Or (Arg0, One, HIID)</p>
-<p>​                    Store (B1B2 (BMB0, BMB1), Local7)</p>
-<p>​                    ShiftRight (Local7, 0x0F, Local7)</p>
-<p>​                    XOr (Local7, One, Index (Arg1, Zero))</p>
-<p>​                    Store (Arg0, HIID)</p>
-<p>​                    If (Local7)</p>
-<p>​                    {</p>
-<p>​                        Multiply (B1B2 (FCB0, FCB1), 0x0A, Local1)</p>
-<p>​                    }</p>
-<p>​                    Else</p>
-<p>​                    {</p>
-<p>​                        Store (B1B2 (FCB0, FCB1), Local1)</p>
-<p>​                    }</p>
-<p>​                    Store (Local1, Index (Arg1, 0x02))</p>
-<p>​                    Or (Arg0, 0x02, HIID)</p>
-<p>​                    If (Local7)</p>
-<p>​                    {</p>
-<p>​                        Multiply (B1B2 (DCB0, DCB1), 0x0A, Local0)</p>
-<p>​                    }</p>
-<p>​                    Else</p>
-<p>​                    {</p>
-<p>​                        Store (B1B2 (DCB0, DCB1), Local0)</p>
-<p>​                    }</p>
-<p>​                    Store (Local0, Index (Arg1, One))</p>
-<p>​                    Divide (Local1, 0x14, Local2, Index (Arg1, 0x05))</p>
-<p>​                    If (Local7)</p>
-<p>​                    {</p>
-<p>​                        Store (0xC8, Index (Arg1, 0x06))</p>
-<p>​                    }</p>
-<p>​                    ElseIf (B1B2 (DVB0, DVB1))</p>
-<p>​                    {</p>
-<p>​                        Divide (0x00030D40, B1B2 (DVB0, DVB1), Local2, Index (Arg1, 0x06))</p>
-<p>​                    }</p>
-<p>​                    Else</p>
-<p>​                    {</p>
-<p>​                        Store (Zero, Index (Arg1, 0x06))</p>
-<p>​                    }</p>
-<p>​                    Store (B1B2 (DVB0, DVB1), Index (Arg1, 0x04))</p>
-<p>​                    Store (B1B2 (SNB0, SNB1), Local0)</p>
-<p>​                    Name (SERN, Buffer (0x06)</p>
-<p>​                    {</p>
-<p>​                        “     “</p>
-<p>​                    })</p>
-<p>​                    Store (0x04, Local2)</p>
-<p>​                    While (Local0)</p>
-<p>​                    {</p>
-<p>​                        Divide (Local0, 0x0A, Local1, Local0)</p>
-<p>​                        Add (Local1, 0x30, Index (SERN, Local2))</p>
-<p>​                        Decrement (Local2)</p>
-<p>​                    }</p>
-<p>​                    Store (SERN, Index (Arg1, 0x0A))</p>
-<p>​                    Or (Arg0, 0x06, HIID)</p>
-<p>​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x09))</p>
-<p>​                    Or (Arg0, 0x04, HIID)</p>
-<p>​                    Name (BTYP, Buffer (0x05)</p>
-<p>​                    {</p>
-<p>​                         0x00, 0x00, 0x00, 0x00, 0x00                   </p>
-<p>​                    })</p>
-<p>​                    Store (B1B4 (CHB0, CHB1, CHB2, CHB3), BTYP)</p>
-<p>​                    Store (BTYP, Index (Arg1, 0x0B))</p>
-<p>​                    Or (Arg0, 0x05, HIID)</p>
-<p>​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x0C))</p>
-<p>​                }</p>
-<p>​                Else</p>
-<p>​                {</p>
-<p>​                    Store (0xFFFFFFFF, Index (Arg1, One))</p>
-<p>​                    Store (Zero, Index (Arg1, 0x05))</p>
-<p>​                    Store (Zero, Index (Arg1, 0x06))</p>
-<p>​                    Store (0xFFFFFFFF, Index (Arg1, 0x02))</p>
-<p>​                }</p>
-<p>​                Release (BATM)</p>
-<p>​                Return (Arg1)</p>
-<p>​            }</p>
-<p>​            Else</p>
-<p>​            {</p>
-<p>​                Return (XBIF (Arg0, Arg1, Arg2))</p>
-<p>​            }</p>
-<p>​        }</p>
-<p>​        Method (GBST, 4, NotSerialized)</p>
-<p>​        {</p>
-<p>​            If (_OSI (“Darwin”))</p>
-<p>​            {</p>
-<p>​                Acquire (BATM, 0xFFFF)</p>
-<p>​                If (And (Arg1, 0x20))</p>
-<p>​                {</p>
-<p>​                    Store (0x02, Local0)</p>
-<p>​                }</p>
-<p>​                ElseIf (And (Arg1, 0x40))</p>
-<p>​                {</p>
-<p>​                    Store (One, Local0)</p>
-<p>​                }</p>
-<p>​                Else</p>
-<p>​                {</p>
-<p>​                    Store (Zero, Local0)</p>
-<p>​                }</p>
-<p>​                If (And (Arg1, 0x07)){}</p>
-<p>​                Else</p>
-<p>​                {</p>
-<p>​                    Or (Local0, 0x04, Local0)</p>
-<p>​                }</p>
-<p>​                If (LEqual (And (Arg1, 0x07), 0x07))</p>
-<p>​                {</p>
-<p>​                    Store (0x04, Local0)</p>
-<p>​                    Store (Zero, Local1)</p>
-<p>​                    Store (Zero, Local2)</p>
-<p>​                    Store (Zero, Local3)</p>
-<p>​                }</p>
-<p>​                Else</p>
-<p>​                {</p>
-<p>​                    Store (Arg0, HIID)</p>
-<p>​                    Store (B1B2 (VOB0, VOB1), Local3)</p>
-<p>​                    If (Arg2)</p>
-<p>​                    {</p>
-<p>​                        Multiply (B1B2 (RCB0, RCB1), 0x0A, Local2)</p>
-<p>​                    }</p>
-<p>​                    Else</p>
-<p>​                    {</p>
-<p>​                        Store (B1B2 (RCB0, RCB1), Local2)</p>
-<p>​                    }</p>
-<p>​                    Store (B1B2 (ACB0, ACB1), Local1)</p>
-<p>​                    If (LGreaterEqual (Local1, 0x8000))</p>
-<p>​                    {</p>
-<p>​                        If (And (Local0, One))</p>
-<p>​                        {</p>
-<p>​                            Subtract (0x00010000, Local1, Local1)</p>
-<p>​                        }</p>
-<p>​                        Else</p>
-<p>​                        {</p>
-<p>​                            Store (Zero, Local1)</p>
-<p>​                        }</p>
-<p>​                    }</p>
-<p>​                    ElseIf (LNot (And (Local0, 0x02)))</p>
-<p>​                    {</p>
-<p>​                        Store (Zero, Local1)</p>
-<p>​                    }</p>
-<p>​                    If (Arg2)</p>
-<p>​                    {</p>
-<p>​                        Multiply (Local3, Local1, Local1)</p>
-<p>​                        Divide (Local1, 0x03E8, Local7, Local1)</p>
-<p>​                    }</p>
-<p>​                }</p>
-<p>​                Store (Local0, Index (Arg3, Zero))</p>
-<p>​                Store (Local1, Index (Arg3, One))</p>
-<p>​                Store (Local2, Index (Arg3, 0x02))</p>
-<p>​                Store (Local3, Index (Arg3, 0x03))</p>
-<p>​                Release (BATM)</p>
-<p>​                Return (Arg3)</p>
-<p>​            }</p>
-<p>​            Else</p>
-<p>​            {</p>
-<p>​                Return (XBST (Arg0, Arg1, Arg2, Arg3))</p>
-<p>​            }</p>
-<p>​        }</p>
-<p>```</p>
+
+
+<p>然后，我们将GBIF这一整个Method复制到这个路径下，在对字节进行拆分。（以此类推，其它Method也是这么处理）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br></pre></td><td class="code"><pre><span class="line">        Method (GBIF, 3, NotSerialized)</span><br><span class="line"></span><br><span class="line">​        &#123;</span><br><span class="line"></span><br><span class="line">​            If (_OSI (&quot;Darwin&quot;))</span><br><span class="line"></span><br><span class="line">​            &#123;</span><br><span class="line"></span><br><span class="line">​                Acquire (BATM, 0xFFFF)</span><br><span class="line"></span><br><span class="line">​                If (Arg2)</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Or (Arg0, One, HIID)</span><br><span class="line"></span><br><span class="line">​                    Store (B1B2 (BMB0, BMB1), Local7)</span><br><span class="line"></span><br><span class="line">​                    ShiftRight (Local7, 0x0F, Local7)</span><br><span class="line"></span><br><span class="line">​                    XOr (Local7, One, Index (Arg1, Zero))</span><br><span class="line"></span><br><span class="line">​                    Store (Arg0, HIID)</span><br><span class="line"></span><br><span class="line">​                    If (Local7)</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Multiply (B1B2 (FCB0, FCB1), 0x0A, Local1)</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line">​                    Else</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Store (B1B2 (FCB0, FCB1), Local1)</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                    Store (Local1, Index (Arg1, 0x02))</span><br><span class="line"></span><br><span class="line">​                    Or (Arg0, 0x02, HIID)</span><br><span class="line"></span><br><span class="line">​                    If (Local7)</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Multiply (B1B2 (DCB0, DCB1), 0x0A, Local0)</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line">​                    Else</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Store (B1B2 (DCB0, DCB1), Local0)</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                    Store (Local0, Index (Arg1, One))</span><br><span class="line"></span><br><span class="line">​                    Divide (Local1, 0x14, Local2, Index (Arg1, 0x05))</span><br><span class="line"></span><br><span class="line">​                    If (Local7)</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Store (0xC8, Index (Arg1, 0x06))</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line">​                    ElseIf (B1B2 (DVB0, DVB1))</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Divide (0x00030D40, B1B2 (DVB0, DVB1), Local2, Index (Arg1, 0x06))</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line">​                    Else</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Store (Zero, Index (Arg1, 0x06))</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                    Store (B1B2 (DVB0, DVB1), Index (Arg1, 0x04))</span><br><span class="line"></span><br><span class="line">​                    Store (B1B2 (SNB0, SNB1), Local0)</span><br><span class="line"></span><br><span class="line">​                    Name (SERN, Buffer (0x06)</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        &quot;     &quot;</span><br><span class="line"></span><br><span class="line">​                    &#125;)</span><br><span class="line"></span><br><span class="line">​                    Store (0x04, Local2)</span><br><span class="line"></span><br><span class="line">​                    While (Local0)</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Divide (Local0, 0x0A, Local1, Local0)</span><br><span class="line"></span><br><span class="line">​                        Add (Local1, 0x30, Index (SERN, Local2))</span><br><span class="line"></span><br><span class="line">​                        Decrement (Local2)</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                    Store (SERN, Index (Arg1, 0x0A))</span><br><span class="line"></span><br><span class="line">​                    Or (Arg0, 0x06, HIID)</span><br><span class="line"></span><br><span class="line">​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x09))</span><br><span class="line"></span><br><span class="line">​                    Or (Arg0, 0x04, HIID)</span><br><span class="line"></span><br><span class="line">​                    Name (BTYP, Buffer (0x05)</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                         0x00, 0x00, 0x00, 0x00, 0x00                   </span><br><span class="line"></span><br><span class="line">​                    &#125;)</span><br><span class="line"></span><br><span class="line">​                    Store (B1B4 (CHB0, CHB1, CHB2, CHB3), BTYP)</span><br><span class="line"></span><br><span class="line">​                    Store (BTYP, Index (Arg1, 0x0B))</span><br><span class="line"></span><br><span class="line">​                    Or (Arg0, 0x05, HIID)</span><br><span class="line"></span><br><span class="line">​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x0C))</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line">​                Else</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Store (0xFFFFFFFF, Index (Arg1, One))</span><br><span class="line"></span><br><span class="line">​                    Store (Zero, Index (Arg1, 0x05))</span><br><span class="line"></span><br><span class="line">​                    Store (Zero, Index (Arg1, 0x06))</span><br><span class="line"></span><br><span class="line">​                    Store (0xFFFFFFFF, Index (Arg1, 0x02))</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                Release (BATM)</span><br><span class="line"></span><br><span class="line">​                Return (Arg1)</span><br><span class="line"></span><br><span class="line">​            &#125;</span><br><span class="line"></span><br><span class="line">​            Else</span><br><span class="line"></span><br><span class="line">​            &#123;</span><br><span class="line"></span><br><span class="line">​                Return (XBIF (Arg0, Arg1, Arg2))</span><br><span class="line"></span><br><span class="line">​            &#125;</span><br><span class="line"></span><br><span class="line">​        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​        Method (GBST, 4, NotSerialized)</span><br><span class="line"></span><br><span class="line">​        &#123;</span><br><span class="line"></span><br><span class="line">​            If (_OSI (&quot;Darwin&quot;))</span><br><span class="line"></span><br><span class="line">​            &#123;</span><br><span class="line"></span><br><span class="line">​                Acquire (BATM, 0xFFFF)</span><br><span class="line"></span><br><span class="line">​                If (And (Arg1, 0x20))</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Store (0x02, Local0)</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line">​                ElseIf (And (Arg1, 0x40))</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Store (One, Local0)</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line">​                Else</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Store (Zero, Local0)</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                If (And (Arg1, 0x07))&#123;&#125;</span><br><span class="line"></span><br><span class="line">​                Else</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Or (Local0, 0x04, Local0)</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                If (LEqual (And (Arg1, 0x07), 0x07))</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Store (0x04, Local0)</span><br><span class="line"></span><br><span class="line">​                    Store (Zero, Local1)</span><br><span class="line"></span><br><span class="line">​                    Store (Zero, Local2)</span><br><span class="line"></span><br><span class="line">​                    Store (Zero, Local3)</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line">​                Else</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Store (Arg0, HIID)</span><br><span class="line"></span><br><span class="line">​                    Store (B1B2 (VOB0, VOB1), Local3)</span><br><span class="line"></span><br><span class="line">​                    If (Arg2)</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Multiply (B1B2 (RCB0, RCB1), 0x0A, Local2)</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line">​                    Else</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Store (B1B2 (RCB0, RCB1), Local2)</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                    Store (B1B2 (ACB0, ACB1), Local1)</span><br><span class="line"></span><br><span class="line">​                    If (LGreaterEqual (Local1, 0x8000))</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        If (And (Local0, One))</span><br><span class="line"></span><br><span class="line">​                        &#123;</span><br><span class="line"></span><br><span class="line">​                            Subtract (0x00010000, Local1, Local1)</span><br><span class="line"></span><br><span class="line">​                        &#125;</span><br><span class="line"></span><br><span class="line">​                        Else</span><br><span class="line"></span><br><span class="line">​                        &#123;</span><br><span class="line"></span><br><span class="line">​                            Store (Zero, Local1)</span><br><span class="line"></span><br><span class="line">​                        &#125;</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line">​                    ElseIf (LNot (And (Local0, 0x02)))</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Store (Zero, Local1)</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                    If (Arg2)</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Multiply (Local3, Local1, Local1)</span><br><span class="line"></span><br><span class="line">​                        Divide (Local1, 0x03E8, Local7, Local1)</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                Store (Local0, Index (Arg3, Zero))</span><br><span class="line"></span><br><span class="line">​                Store (Local1, Index (Arg3, One))</span><br><span class="line"></span><br><span class="line">​                Store (Local2, Index (Arg3, 0x02))</span><br><span class="line"></span><br><span class="line">​                Store (Local3, Index (Arg3, 0x03))</span><br><span class="line"></span><br><span class="line">​                Release (BATM)</span><br><span class="line"></span><br><span class="line">​                Return (Arg3)</span><br><span class="line"></span><br><span class="line">​            &#125;</span><br><span class="line"></span><br><span class="line">​            Else</span><br><span class="line"></span><br><span class="line">​            &#123;</span><br><span class="line"></span><br><span class="line">​                Return (XBST (Arg0, Arg1, Arg2, Arg3))</span><br><span class="line"></span><br><span class="line">​            &#125;</span><br><span class="line"></span><br><span class="line">​        &#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <p>如上所示，即为最后的处理结果。</p>
-<p>## <strong>32位以上字节的处理</strong></p>
-<p>步骤基本相同，也是搜索所需修改字节对应对Method，然后找到对应路径，添加到SSDT中。</p>
+<h1 id="32位以上字节的处理"><a href="#32位以上字节的处理" class="headerlink" title="32位以上字节的处理"></a><strong>32位以上字节的处理</strong></h1><p>步骤基本相同，也是搜索所需修改字节对应对Method，然后找到对应路径，添加到SSDT中。</p>
 <p><strong><strong><em>32位以上的，不需要Field下的更改，只需要改Method，进行RECB和WECB的处理</em></strong></strong></p>
 <p>详细见DSDT教程中。</p>
 <p>以下为完整处理结果（其实也在上文Method的GBIF，GBST中）（包含了全部）</p>
-<p>```</p>
-<p>​    Scope (_SB.PCI0.LPC.EC)</p>
-<p>​    {</p>
-<p>​        Method (RE1B, 1, NotSerialized)</p>
-<p>​        {</p>
-<p>​            OperationRegion (ERM2, EmbeddedControl, Arg0, One)</p>
-<p>​            Field (ERM2, ByteAcc, NoLock, Preserve)</p>
-<p>​            {</p>
-<p>​                BYTE,   8</p>
-<p>​            }</p>
-<p>​            Return (BYTE)</p>
-<p>​        }</p>
-<p>​        Method (RECB, 2, Serialized)</p>
-<p>​        {</p>
-<p>​            ShiftRight (Add (Arg1, 0x07), 0x03, Arg1)</p>
-<p>​            Name (TEMP, Buffer (Arg1){})</p>
-<p>​            Add (Arg1, Arg0, Arg1)</p>
-<p>​            Store (Zero, Local0)</p>
-<p>​            While (LLess (Arg0, Arg1))</p>
-<p>​            {</p>
-<p>​                Store (RE1B (Arg0), Index (TEMP, Local0))</p>
-<p>​                Increment (Arg0)</p>
-<p>​                Increment (Local0)</p>
-<p>​            }</p>
-<p>​            Return (TEMP)</p>
-<p>​        }</p>
-<p>​        OperationRegion (ECOX, EmbeddedControl, Zero, 0x0100)</p>
-<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
-<p>​        {</p>
-<p>​            Offset (0xA0), </p>
-<p>​            RCB0,   8, </p>
-<p>​            RCB1,   8, </p>
-<p>​            FCB0,   8, </p>
-<p>​            FCB1,   8, </p>
-<p>​            Offset (0xA8), </p>
-<p>​            ACB0,   8, </p>
-<p>​            ACB1,   8, </p>
-<p>​            VOB0,   8, </p>
-<p>​            VOB1,   8</p>
-<p>​        }</p>
-<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
-<p>​        {</p>
-<p>​            Offset (0xA0), </p>
-<p>​            BMB0,   8, </p>
-<p>​            BMB1,   8</p>
-<p>​        }</p>
-<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
-<p>​        {</p>
-<p>​            Offset (0xA0), </p>
-<p>​            DCB0,   8, </p>
-<p>​            DCB1,   8, </p>
-<p>​            DVB0,   8, </p>
-<p>​            DVB1,   8, </p>
-<p>​            Offset (0xAA), </p>
-<p>​            SNB0,   8, </p>
-<p>​            SNB1,   8</p>
-<p>​        }</p>
-<p>​        Field (ECOX, ByteAcc, NoLock, Preserve)</p>
-<p>​        {</p>
-<p>​            Offset (0xA0), </p>
-<p>​            CHB0,   8, </p>
-<p>​            CHB1,   8, </p>
-<p>​            CHB2,   8, </p>
-<p>​            CHB3,   8</p>
-<p>​        }</p>
-<p>​        Method (GBIF, 3, NotSerialized)</p>
-<p>​        {</p>
-<p>​            If (_OSI (“Darwin”))</p>
-<p>​            {</p>
-<p>​                Acquire (BATM, 0xFFFF)</p>
-<p>​                If (Arg2)</p>
-<p>​                {</p>
-<p>​                    Or (Arg0, One, HIID)</p>
-<p>​                    Store (B1B2 (BMB0, BMB1), Local7)</p>
-<p>​                    ShiftRight (Local7, 0x0F, Local7)</p>
-<p>​                    XOr (Local7, One, Index (Arg1, Zero))</p>
-<p>​                    Store (Arg0, HIID)</p>
-<p>​                    If (Local7)</p>
-<p>​                    {</p>
-<p>​                        Multiply (B1B2 (FCB0, FCB1), 0x0A, Local1)</p>
-<p>​                    }</p>
-<p>​                    Else</p>
-<p>​                    {</p>
-<p>​                        Store (B1B2 (FCB0, FCB1), Local1)</p>
-<p>​                    }</p>
-<p>​                    Store (Local1, Index (Arg1, 0x02))</p>
-<p>​                    Or (Arg0, 0x02, HIID)</p>
-<p>​                    If (Local7)</p>
-<p>​                    {</p>
-<p>​                        Multiply (B1B2 (DCB0, DCB1), 0x0A, Local0)</p>
-<p>​                    }</p>
-<p>​                    Else</p>
-<p>​                    {</p>
-<p>​                        Store (B1B2 (DCB0, DCB1), Local0)</p>
-<p>​                    }</p>
-<p>​                    Store (Local0, Index (Arg1, One))</p>
-<p>​                    Divide (Local1, 0x14, Local2, Index (Arg1, 0x05))</p>
-<p>​                    If (Local7)</p>
-<p>​                    {</p>
-<p>​                        Store (0xC8, Index (Arg1, 0x06))</p>
-<p>​                    }</p>
-<p>​                    ElseIf (B1B2 (DVB0, DVB1))</p>
-<p>​                    {</p>
-<p>​                        Divide (0x00030D40, B1B2 (DVB0, DVB1), Local2, Index (Arg1, 0x06))</p>
-<p>​                    }</p>
-<p>​                    Else</p>
-<p>​                    {</p>
-<p>​                        Store (Zero, Index (Arg1, 0x06))</p>
-<p>​                    }</p>
-<p>​                    Store (B1B2 (DVB0, DVB1), Index (Arg1, 0x04))</p>
-<p>​                    Store (B1B2 (SNB0, SNB1), Local0)</p>
-<p>​                    Name (SERN, Buffer (0x06)</p>
-<p>​                    {</p>
-<p>​                        “     “</p>
-<p>​                    })</p>
-<p>​                    Store (0x04, Local2)</p>
-<p>​                    While (Local0)</p>
-<p>​                    {</p>
-<p>​                        Divide (Local0, 0x0A, Local1, Local0)</p>
-<p>​                        Add (Local1, 0x30, Index (SERN, Local2))</p>
-<p>​                        Decrement (Local2)</p>
-<p>​                    }</p>
-<p>​                    Store (SERN, Index (Arg1, 0x0A))</p>
-<p>​                    Or (Arg0, 0x06, HIID)</p>
-<p>​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x09))</p>
-<p>​                    Or (Arg0, 0x04, HIID)</p>
-<p>​                    Name (BTYP, Buffer (0x05)</p>
-<p>​                    {</p>
-<p>​                         0x00, 0x00, 0x00, 0x00, 0x00                   </p>
-<p>​                    })</p>
-<p>​                    Store (B1B4 (CHB0, CHB1, CHB2, CHB3), BTYP)</p>
-<p>​                    Store (BTYP, Index (Arg1, 0x0B))</p>
-<p>​                    Or (Arg0, 0x05, HIID)</p>
-<p>​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x0C))</p>
-<p>​                }</p>
-<p>​                Else</p>
-<p>​                {</p>
-<p>​                    Store (0xFFFFFFFF, Index (Arg1, One))</p>
-<p>​                    Store (Zero, Index (Arg1, 0x05))</p>
-<p>​                    Store (Zero, Index (Arg1, 0x06))</p>
-<p>​                    Store (0xFFFFFFFF, Index (Arg1, 0x02))</p>
-<p>​                }</p>
-<p>​                Release (BATM)</p>
-<p>​                Return (Arg1)</p>
-<p>​            }</p>
-<p>​            Else</p>
-<p>​            {</p>
-<p>​                Return (XBIF (Arg0, Arg1, Arg2))</p>
-<p>​            }</p>
-<p>​        }</p>
-<p>​        Method (GBST, 4, NotSerialized)</p>
-<p>​        {</p>
-<p>​            If (_OSI (“Darwin”))</p>
-<p>​            {</p>
-<p>​                Acquire (BATM, 0xFFFF)</p>
-<p>​                If (And (Arg1, 0x20))</p>
-<p>​                {</p>
-<p>​                    Store (0x02, Local0)</p>
-<p>​                }</p>
-<p>​                ElseIf (And (Arg1, 0x40))</p>
-<p>​                {</p>
-<p>​                    Store (One, Local0)</p>
-<p>​                }</p>
-<p>​                Else</p>
-<p>​                {</p>
-<p>​                    Store (Zero, Local0)</p>
-<p>​                }</p>
-<p>​                If (And (Arg1, 0x07)){}</p>
-<p>​                Else</p>
-<p>​                {</p>
-<p>​                    Or (Local0, 0x04, Local0)</p>
-<p>​                }</p>
-<p>​                If (LEqual (And (Arg1, 0x07), 0x07))</p>
-<p>​                {</p>
-<p>​                    Store (0x04, Local0)</p>
-<p>​                    Store (Zero, Local1)</p>
-<p>​                    Store (Zero, Local2)</p>
-<p>​                    Store (Zero, Local3)</p>
-<p>​                }</p>
-<p>​                Else</p>
-<p>​                {</p>
-<p>​                    Store (Arg0, HIID)</p>
-<p>​                    Store (B1B2 (VOB0, VOB1), Local3)</p>
-<p>​                    If (Arg2)</p>
-<p>​                    {</p>
-<p>​                        Multiply (B1B2 (RCB0, RCB1), 0x0A, Local2)</p>
-<p>​                    }</p>
-<p>​                    Else</p>
-<p>​                    {</p>
-<p>​                        Store (B1B2 (RCB0, RCB1), Local2)</p>
-<p>​                    }</p>
-<p>​                    Store (B1B2 (ACB0, ACB1), Local1)</p>
-<p>​                    If (LGreaterEqual (Local1, 0x8000))</p>
-<p>​                    {</p>
-<p>​                        If (And (Local0, One))</p>
-<p>​                        {</p>
-<p>​                            Subtract (0x00010000, Local1, Local1)</p>
-<p>​                        }</p>
-<p>​                        Else</p>
-<p>​                        {</p>
-<p>​                            Store (Zero, Local1)</p>
-<p>​                        }</p>
-<p>​                    }</p>
-<p>​                    ElseIf (LNot (And (Local0, 0x02)))</p>
-<p>​                    {</p>
-<p>​                        Store (Zero, Local1)</p>
-<p>​                    }</p>
-<p>​                    If (Arg2)</p>
-<p>​                    {</p>
-<p>​                        Multiply (Local3, Local1, Local1)</p>
-<p>​                        Divide (Local1, 0x03E8, Local7, Local1)</p>
-<p>​                    }</p>
-<p>​                }</p>
-<p>​                Store (Local0, Index (Arg3, Zero))</p>
-<p>​                Store (Local1, Index (Arg3, One))</p>
-<p>​                Store (Local2, Index (Arg3, 0x02))</p>
-<p>​                Store (Local3, Index (Arg3, 0x03))</p>
-<p>​                Release (BATM)</p>
-<p>​                Return (Arg3)</p>
-<p>​            }</p>
-<p>​            Else</p>
-<p>​            {</p>
-<p>​                Return (XBST (Arg0, Arg1, Arg2, Arg3))</p>
-<p>​            }</p>
-<p>​        }</p>
-<p>​    }</p>
-<p>```</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br></pre></td><td class="code"><pre><span class="line">    Scope (\_SB.PCI0.LPC.EC)</span><br><span class="line"></span><br><span class="line">​    &#123;</span><br><span class="line"></span><br><span class="line">​        Method (RE1B, 1, NotSerialized)</span><br><span class="line"></span><br><span class="line">​        &#123;</span><br><span class="line"></span><br><span class="line">​            OperationRegion (ERM2, EmbeddedControl, Arg0, One)</span><br><span class="line"></span><br><span class="line">​            Field (ERM2, ByteAcc, NoLock, Preserve)</span><br><span class="line"></span><br><span class="line">​            &#123;</span><br><span class="line"></span><br><span class="line">​                BYTE,   8</span><br><span class="line"></span><br><span class="line">​            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​            Return (BYTE)</span><br><span class="line"></span><br><span class="line">​        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​        Method (RECB, 2, Serialized)</span><br><span class="line"></span><br><span class="line">​        &#123;</span><br><span class="line"></span><br><span class="line">​            ShiftRight (Add (Arg1, 0x07), 0x03, Arg1)</span><br><span class="line"></span><br><span class="line">​            Name (TEMP, Buffer (Arg1)&#123;&#125;)</span><br><span class="line"></span><br><span class="line">​            Add (Arg1, Arg0, Arg1)</span><br><span class="line"></span><br><span class="line">​            Store (Zero, Local0)</span><br><span class="line"></span><br><span class="line">​            While (LLess (Arg0, Arg1))</span><br><span class="line"></span><br><span class="line">​            &#123;</span><br><span class="line"></span><br><span class="line">​                Store (RE1B (Arg0), Index (TEMP, Local0))</span><br><span class="line"></span><br><span class="line">​                Increment (Arg0)</span><br><span class="line"></span><br><span class="line">​                Increment (Local0)</span><br><span class="line"></span><br><span class="line">​            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​            Return (TEMP)</span><br><span class="line"></span><br><span class="line">​        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​        OperationRegion (ECOX, EmbeddedControl, Zero, 0x0100)</span><br><span class="line"></span><br><span class="line">​        Field (ECOX, ByteAcc, NoLock, Preserve)</span><br><span class="line"></span><br><span class="line">​        &#123;</span><br><span class="line"></span><br><span class="line">​            Offset (0xA0), </span><br><span class="line"></span><br><span class="line">​            RCB0,   8, </span><br><span class="line"></span><br><span class="line">​            RCB1,   8, </span><br><span class="line"></span><br><span class="line">​            FCB0,   8, </span><br><span class="line"></span><br><span class="line">​            FCB1,   8, </span><br><span class="line"></span><br><span class="line">​            Offset (0xA8), </span><br><span class="line"></span><br><span class="line">​            ACB0,   8, </span><br><span class="line"></span><br><span class="line">​            ACB1,   8, </span><br><span class="line"></span><br><span class="line">​            VOB0,   8, </span><br><span class="line"></span><br><span class="line">​            VOB1,   8</span><br><span class="line"></span><br><span class="line">​        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​        Field (ECOX, ByteAcc, NoLock, Preserve)</span><br><span class="line"></span><br><span class="line">​        &#123;</span><br><span class="line"></span><br><span class="line">​            Offset (0xA0), </span><br><span class="line"></span><br><span class="line">​            BMB0,   8, </span><br><span class="line"></span><br><span class="line">​            BMB1,   8</span><br><span class="line"></span><br><span class="line">​        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​        Field (ECOX, ByteAcc, NoLock, Preserve)</span><br><span class="line"></span><br><span class="line">​        &#123;</span><br><span class="line"></span><br><span class="line">​            Offset (0xA0), </span><br><span class="line"></span><br><span class="line">​            DCB0,   8, </span><br><span class="line"></span><br><span class="line">​            DCB1,   8, </span><br><span class="line"></span><br><span class="line">​            DVB0,   8, </span><br><span class="line"></span><br><span class="line">​            DVB1,   8, </span><br><span class="line"></span><br><span class="line">​            Offset (0xAA), </span><br><span class="line"></span><br><span class="line">​            SNB0,   8, </span><br><span class="line"></span><br><span class="line">​            SNB1,   8</span><br><span class="line"></span><br><span class="line">​        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​        Field (ECOX, ByteAcc, NoLock, Preserve)</span><br><span class="line"></span><br><span class="line">​        &#123;</span><br><span class="line"></span><br><span class="line">​            Offset (0xA0), </span><br><span class="line"></span><br><span class="line">​            CHB0,   8, </span><br><span class="line"></span><br><span class="line">​            CHB1,   8, </span><br><span class="line"></span><br><span class="line">​            CHB2,   8, </span><br><span class="line"></span><br><span class="line">​            CHB3,   8</span><br><span class="line"></span><br><span class="line">​        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​        Method (GBIF, 3, NotSerialized)</span><br><span class="line"></span><br><span class="line">​        &#123;</span><br><span class="line"></span><br><span class="line">​            If (_OSI (&quot;Darwin&quot;))</span><br><span class="line"></span><br><span class="line">​            &#123;</span><br><span class="line"></span><br><span class="line">​                Acquire (BATM, 0xFFFF)</span><br><span class="line"></span><br><span class="line">​                If (Arg2)</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Or (Arg0, One, HIID)</span><br><span class="line"></span><br><span class="line">​                    Store (B1B2 (BMB0, BMB1), Local7)</span><br><span class="line"></span><br><span class="line">​                    ShiftRight (Local7, 0x0F, Local7)</span><br><span class="line"></span><br><span class="line">​                    XOr (Local7, One, Index (Arg1, Zero))</span><br><span class="line"></span><br><span class="line">​                    Store (Arg0, HIID)</span><br><span class="line"></span><br><span class="line">​                    If (Local7)</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Multiply (B1B2 (FCB0, FCB1), 0x0A, Local1)</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line">​                    Else</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Store (B1B2 (FCB0, FCB1), Local1)</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                    Store (Local1, Index (Arg1, 0x02))</span><br><span class="line"></span><br><span class="line">​                    Or (Arg0, 0x02, HIID)</span><br><span class="line"></span><br><span class="line">​                    If (Local7)</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Multiply (B1B2 (DCB0, DCB1), 0x0A, Local0)</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line">​                    Else</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Store (B1B2 (DCB0, DCB1), Local0)</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                    Store (Local0, Index (Arg1, One))</span><br><span class="line"></span><br><span class="line">​                    Divide (Local1, 0x14, Local2, Index (Arg1, 0x05))</span><br><span class="line"></span><br><span class="line">​                    If (Local7)</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Store (0xC8, Index (Arg1, 0x06))</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line">​                    ElseIf (B1B2 (DVB0, DVB1))</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Divide (0x00030D40, B1B2 (DVB0, DVB1), Local2, Index (Arg1, 0x06))</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line">​                    Else</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Store (Zero, Index (Arg1, 0x06))</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                    Store (B1B2 (DVB0, DVB1), Index (Arg1, 0x04))</span><br><span class="line"></span><br><span class="line">​                    Store (B1B2 (SNB0, SNB1), Local0)</span><br><span class="line"></span><br><span class="line">​                    Name (SERN, Buffer (0x06)</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        &quot;     &quot;</span><br><span class="line"></span><br><span class="line">​                    &#125;)</span><br><span class="line"></span><br><span class="line">​                    Store (0x04, Local2)</span><br><span class="line"></span><br><span class="line">​                    While (Local0)</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Divide (Local0, 0x0A, Local1, Local0)</span><br><span class="line"></span><br><span class="line">​                        Add (Local1, 0x30, Index (SERN, Local2))</span><br><span class="line"></span><br><span class="line">​                        Decrement (Local2)</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                    Store (SERN, Index (Arg1, 0x0A))</span><br><span class="line"></span><br><span class="line">​                    Or (Arg0, 0x06, HIID)</span><br><span class="line"></span><br><span class="line">​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x09))</span><br><span class="line"></span><br><span class="line">​                    Or (Arg0, 0x04, HIID)</span><br><span class="line"></span><br><span class="line">​                    Name (BTYP, Buffer (0x05)</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                         0x00, 0x00, 0x00, 0x00, 0x00                   </span><br><span class="line"></span><br><span class="line">​                    &#125;)</span><br><span class="line"></span><br><span class="line">​                    Store (B1B4 (CHB0, CHB1, CHB2, CHB3), BTYP)</span><br><span class="line"></span><br><span class="line">​                    Store (BTYP, Index (Arg1, 0x0B))</span><br><span class="line"></span><br><span class="line">​                    Or (Arg0, 0x05, HIID)</span><br><span class="line"></span><br><span class="line">​                    Store (RECB (0xA0, 0x80), Index (Arg1, 0x0C))</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line">​                Else</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Store (0xFFFFFFFF, Index (Arg1, One))</span><br><span class="line"></span><br><span class="line">​                    Store (Zero, Index (Arg1, 0x05))</span><br><span class="line"></span><br><span class="line">​                    Store (Zero, Index (Arg1, 0x06))</span><br><span class="line"></span><br><span class="line">​                    Store (0xFFFFFFFF, Index (Arg1, 0x02))</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                Release (BATM)</span><br><span class="line"></span><br><span class="line">​                Return (Arg1)</span><br><span class="line"></span><br><span class="line">​            &#125;</span><br><span class="line"></span><br><span class="line">​            Else</span><br><span class="line"></span><br><span class="line">​            &#123;</span><br><span class="line"></span><br><span class="line">​                Return (XBIF (Arg0, Arg1, Arg2))</span><br><span class="line"></span><br><span class="line">​            &#125;</span><br><span class="line"></span><br><span class="line">​        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​        Method (GBST, 4, NotSerialized)</span><br><span class="line"></span><br><span class="line">​        &#123;</span><br><span class="line"></span><br><span class="line">​            If (_OSI (&quot;Darwin&quot;))</span><br><span class="line"></span><br><span class="line">​            &#123;</span><br><span class="line"></span><br><span class="line">​                Acquire (BATM, 0xFFFF)</span><br><span class="line"></span><br><span class="line">​                If (And (Arg1, 0x20))</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Store (0x02, Local0)</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line">​                ElseIf (And (Arg1, 0x40))</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Store (One, Local0)</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line">​                Else</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Store (Zero, Local0)</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                If (And (Arg1, 0x07))&#123;&#125;</span><br><span class="line"></span><br><span class="line">​                Else</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Or (Local0, 0x04, Local0)</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                If (LEqual (And (Arg1, 0x07), 0x07))</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Store (0x04, Local0)</span><br><span class="line"></span><br><span class="line">​                    Store (Zero, Local1)</span><br><span class="line"></span><br><span class="line">​                    Store (Zero, Local2)</span><br><span class="line"></span><br><span class="line">​                    Store (Zero, Local3)</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line">​                Else</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Store (Arg0, HIID)</span><br><span class="line"></span><br><span class="line">​                    Store (B1B2 (VOB0, VOB1), Local3)</span><br><span class="line"></span><br><span class="line">​                    If (Arg2)</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Multiply (B1B2 (RCB0, RCB1), 0x0A, Local2)</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line">​                    Else</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Store (B1B2 (RCB0, RCB1), Local2)</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                    Store (B1B2 (ACB0, ACB1), Local1)</span><br><span class="line"></span><br><span class="line">​                    If (LGreaterEqual (Local1, 0x8000))</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        If (And (Local0, One))</span><br><span class="line"></span><br><span class="line">​                        &#123;</span><br><span class="line"></span><br><span class="line">​                            Subtract (0x00010000, Local1, Local1)</span><br><span class="line"></span><br><span class="line">​                        &#125;</span><br><span class="line"></span><br><span class="line">​                        Else</span><br><span class="line"></span><br><span class="line">​                        &#123;</span><br><span class="line"></span><br><span class="line">​                            Store (Zero, Local1)</span><br><span class="line"></span><br><span class="line">​                        &#125;</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line">​                    ElseIf (LNot (And (Local0, 0x02)))</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Store (Zero, Local1)</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                    If (Arg2)</span><br><span class="line"></span><br><span class="line">​                    &#123;</span><br><span class="line"></span><br><span class="line">​                        Multiply (Local3, Local1, Local1)</span><br><span class="line"></span><br><span class="line">​                        Divide (Local1, 0x03E8, Local7, Local1)</span><br><span class="line"></span><br><span class="line">​                    &#125;</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                Store (Local0, Index (Arg3, Zero))</span><br><span class="line"></span><br><span class="line">​                Store (Local1, Index (Arg3, One))</span><br><span class="line"></span><br><span class="line">​                Store (Local2, Index (Arg3, 0x02))</span><br><span class="line"></span><br><span class="line">​                Store (Local3, Index (Arg3, 0x03))</span><br><span class="line"></span><br><span class="line">​                Release (BATM)</span><br><span class="line"></span><br><span class="line">​                Return (Arg3)</span><br><span class="line"></span><br><span class="line">​            &#125;</span><br><span class="line"></span><br><span class="line">​            Else</span><br><span class="line"></span><br><span class="line">​            &#123;</span><br><span class="line"></span><br><span class="line">​                Return (XBST (Arg0, Arg1, Arg2, Arg3))</span><br><span class="line"></span><br><span class="line">​            &#125;</span><br><span class="line"></span><br><span class="line">​        &#125;</span><br><span class="line"></span><br><span class="line">​    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <p>可以对照给出的X260的热补丁看看</p>
-<p>## <strong>排错，补充引用声明</strong></p>
-<p>完成这些步骤后，点击编译会发现错误</p>
-<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/63be505b7792df708a4d5b51ca8892a4.png" alt="63be505b7792df708a4d5b51ca8892a4.png" class="lazyload"></p>
+<h1 id="排错，补充引用声明"><a href="#排错，补充引用声明" class="headerlink" title="排错，补充引用声明"></a><strong>排错，补充引用声明</strong></h1><p>完成这些步骤后，点击编译会发现错误</p>
+<p><img src="http://fp1.fghrsh.net/2020/04/09/63be505b7792df708a4d5b51ca8892a4.png" alt="63be505b7792df708a4d5b51ca8892a4.png"></p>
 <p>这些都是因为没有被定义，因此我们需要进行引用，来排除这些错误。</p>
 <p>以BATM为例，在DSDT中进行搜索，找到它被定义的路径和类型，写成External</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">External (_SB.PCI0.LPC.EC_BATM, MutexObj)</span><br></pre></td></tr></table></figure>
@@ -660,23 +66,19 @@
 <p>更多详见如下：</p>
 <p>以下摘自iStar的博客：</p>
 <p>Device：原始 ACPI 定义示例</p>
-<p>```swift</p>
-<p>Scope (_SB.PCI0.LPCB)</p>
-<p>{</p>
-<p>​    Device (H_EC)</p>
-<p>​    {</p>
-<p>```</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Scope (_SB.PCI0.LPCB)</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">​    Device (H_EC)</span><br><span class="line"></span><br><span class="line">​    &#123;</span><br></pre></td></tr></table></figure>
+
+
+
 <p>补丁中添加的代码示例</p>
-<p>```</p>
-<p>External (<em>SB</em>.PCI0.LPCB.H_EC, DeviceObj)</p>
-<p>```</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">External (_SB_.PCI0.LPCB.H_EC, DeviceObj)</span><br></pre></td></tr></table></figure>
+
 <p>Method：原始 ACPI 定义示例</p>
-<p>```</p>
-<p>Method (_STA, 0, NotSerialized)  /* _STA: Status */</p>
-<p>```</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Method (_STA, 0, NotSerialized)  &#x2F;* _STA: Status *&#x2F;</span><br></pre></td></tr></table></figure>
+
 <p>补丁中添加的代码示例</p>
-<p>```</p>
-<p>External (<em>SB</em>.BAT0._STA, MethodObj)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">External (_SB_.BAT0._STA, MethodObj)</span><br></pre></td></tr></table></figure>
+
 <p>```</p>
 <p>Mutex：原始 ACPI 定义示例</p>
 <p>```</p>
@@ -890,7 +292,7 @@
 <p>## <strong>双电池系统，屏蔽其中一个</strong></p>
 <p>比如，你的DSDT中有BAT0或BAT1两个电池设备，但你实际只在用其中一个。那么，你先看看另一个是否开启，如果另一个也是开启的，你需要屏蔽它。</p>
 <p>参考我给的<strong><strong>SSDT-BAT0-Disable-X260.aml</strong></strong></p>
-<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/623eacaa93ddd83f4c6e702f3386d33f.png" alt="623eacaa93ddd83f4c6e702f3386d33f.png" class="lazyload"></p>
+<p><img src="http://fp1.fghrsh.net/2020/04/09/623eacaa93ddd83f4c6e702f3386d33f.png" alt="623eacaa93ddd83f4c6e702f3386d33f.png"></p>
 <p>将DefinitionBlock框出来的位置，改成自己的，同时修改External和Scope为自己所要屏蔽的电池设备的路径。</p>
 <p>然后保存即可。</p>
 <p>然后我们要对所屏蔽电池设备下的_STA进行更名：</p>
@@ -906,63 +308,29 @@
 
 
 <p>到这里，你已经做好一个电池热补丁和屏蔽补丁了，然后再加上ACPIBatteryManager.kext或者SMCBatteryManager.kext，不出问题，你就可以看到你可爱的电池图标了！</p>
-<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/62971b7a3ea5acec10213463913ea58f.png" alt="62971b7a3ea5acec10213463913ea58f.png" class="lazyload"></p>
-<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/09/e6f18d2331d465d9513490e29845e1db.png" alt="e6f18d2331d465d9513490e29845e1db.png" class="lazyload"></p>
-
-  </article>
-
-  <div class="nexmoe-post-meta nexmoe-rainbow">
-    
-    
-</div>
-
-  <div class="nexmoe-post-footer">
-    
-      
-  <div class="nexmoe-post-copyright">
-    <strong>Author：</strong>John Doe<br>
-    <strong>Link：</strong><a href="http://yoursite.com/2020/05/16/%E8%BF%9B%E9%98%B6%EF%BC%9A%E7%94%B5%E6%B1%A0%E7%83%AD%E8%A1%A5%E4%B8%81%EF%BC%88Battery-Hotpatch%EF%BC%89%E4%B9%8B%E8%B7%AF/" title="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;05&#x2F;16&#x2F;%E8%BF%9B%E9%98%B6%EF%BC%9A%E7%94%B5%E6%B1%A0%E7%83%AD%E8%A1%A5%E4%B8%81%EF%BC%88Battery-Hotpatch%EF%BC%89%E4%B9%8B%E8%B7%AF&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;05&#x2F;16&#x2F;%E8%BF%9B%E9%98%B6%EF%BC%9A%E7%94%B5%E6%B1%A0%E7%83%AD%E8%A1%A5%E4%B8%81%EF%BC%88Battery-Hotpatch%EF%BC%89%E4%B9%8B%E8%B7%AF&#x2F;</a><br>
-    
-      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
-    
-  </div>
-
-
-    
-    <section class="nexmoe-comment">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
-<div id="gitalk"></div>
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-    var gitalk = new Gitalk({
-        clientID: '80b2453b6d5f37ad6225',
-        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
-        id: window.location.pathname,
-        repo: 'nexmoe.github.io',
-        owner: 'nexmoe',
-        admin: 'nexmoe'
-    })
-    gitalk.render('gitalk')
-</script>
-</section>
-  </div>
-</div>
-    </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
-<script >hljs.initHighlightingOnLoad();</script>
-
-
-    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
-
-
-<script src="/js/app.js?v=1589639942440"></script>
-  
-
-
-
-
-
-</body>
-
-</html>
+<p><img src="http://fp1.fghrsh.net/2020/04/09/62971b7a3ea5acec10213463913ea58f.png" alt="62971b7a3ea5acec10213463913ea58f.png"></p>
+<p><img src="http://fp1.fghrsh.net/2020/04/09/e6f18d2331d465d9513490e29845e1db.png" alt="e6f18d2331d465d9513490e29845e1db.png"></p>
+</div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button is-info donate"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" style="background-color:rgba(255,128,62,.87);border-color:transparent;color:white;" target="_blank" rel="noopener"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button is-danger donate" href="/" target="_blank" rel="noopener"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button is-success donate"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2020/05/16/%E5%A6%82%E4%BD%95%E7%AE%80%E5%8D%95%E7%9A%84%E7%BC%96%E8%AF%91OpenCore/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">如何简单的编译OpenCore</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/05/16/%E4%B8%BA%E5%B0%8F%E7%99%BD%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%94%B5%E6%B1%A0%E6%95%99%E7%A8%8B%EF%BC%88DSDT%EF%BC%89/"><span class="level-item">为小白设计的电池教程（DSDT）</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="" src="/img/avatar.png" alt="Your name"></figure><p class="title is-size-4 is-block line-height-inherit">Your name</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Your location</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">6</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">0</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ppoffice" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/ppoffice"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Links</h3><ul class="menu-list"><li><a class="level is-mobile is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><!--!--><div class="card widget"><div class="card-content"><h3 class="menu-label">Recent</h3><article class="media"><div class="media-content size-small"><p><time dateTime="2020-05-16T14:14:36.000Z">2020-05-16</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/16/%E7%94%A8%E7%83%AD%E8%A1%A5%E4%B8%81%E4%BF%AE%E7%90%86%E4%BD%A0%E7%9A%84%E8%A7%A6%E6%91%B8%E6%9D%BF%EF%BC%88TouchPad-Hotpatch%EF%BC%89/">用热补丁修理你的触摸板（TouchPad-Hotpatch）(正在施工)</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-05-16T14:12:45.000Z">2020-05-16</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/16/%E5%A6%82%E4%BD%95%E7%AE%80%E5%8D%95%E7%9A%84%E7%BC%96%E8%AF%91OpenCore/">如何简单的编译OpenCore</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-05-16T14:12:07.000Z">2020-05-16</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/16/%E8%BF%9B%E9%98%B6%EF%BC%9A%E7%94%B5%E6%B1%A0%E7%83%AD%E8%A1%A5%E4%B8%81%EF%BC%88Battery-Hotpatch%EF%BC%89%E4%B9%8B%E8%B7%AF/">进阶：电池热补丁（Battery-Hotpatch）之路</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-05-16T14:10:18.000Z">2020-05-16</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/16/%E4%B8%BA%E5%B0%8F%E7%99%BD%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%94%B5%E6%B1%A0%E6%95%99%E7%A8%8B%EF%BC%88DSDT%EF%BC%89/">为小白设计的电池教程（DSDT）</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-05-16T14:09:02.000Z">2020-05-16</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/16/Hackintosh%E5%AE%89%E8%A3%85%E5%85%A8%E6%94%BB%E7%95%A5/">Hackintosh安装全攻略</a></p><p class="is-uppercase"></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/archives/2020/05/"><span class="level-start"><span class="level-item">May 2020</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></div></div></div><!--!--><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Subscribe to Updates</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button is-primary" type="submit" value="Subscribe"></div></div></form></div></div></div><div class="card widget"><div class="card-content"><div class="notification is-danger">You need to set <code>client_id</code> and <code>slot_id</code> to show this AD unit. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Hexo" height="28"></a><p class="size-small"><span>&copy; 2020 John Doe</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            site: {
+                url: 'http://yoursite.com',
+                external_link: {"enable":true,"exclude":[]}
+            },
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to Top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

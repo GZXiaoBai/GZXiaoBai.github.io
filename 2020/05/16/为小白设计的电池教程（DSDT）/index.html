@@ -1,266 +1,26 @@
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-  
-  <title>为小白设计的电池教程（DSDT） - Hexo</title>
-  <meta charset="UTF-8">
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-  
-  
-
-  <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
-  <meta name="description" content="​                                 为小白设计的电池教程（DSDT） ​                                       编写者：G.Z.小白 这个教程会尽量写的简单，只要你认真，你绝对看得懂！ 此教程整理，修改，借鉴于：http:&#x2F;&#x2F;bbs.pcbeta.com&#x2F;viewthread-1751487-1-1.html 对其进行了完善">
-<meta property="og:type" content="article">
-<meta property="og:title" content="为小白设计的电池教程（DSDT）">
-<meta property="og:url" content="http://yoursite.com/2020/05/16/%E4%B8%BA%E5%B0%8F%E7%99%BD%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%94%B5%E6%B1%A0%E6%95%99%E7%A8%8B%EF%BC%88DSDT%EF%BC%89/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="​                                 为小白设计的电池教程（DSDT） ​                                       编写者：G.Z.小白 这个教程会尽量写的简单，只要你认真，你绝对看得懂！ 此教程整理，修改，借鉴于：http:&#x2F;&#x2F;bbs.pcbeta.com&#x2F;viewthread-1751487-1-1.html 对其进行了完善">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://fp1.fghrsh.net/2020/05/08/f489ad3bacd013bab00a468e61af80f9.png">
-<meta property="og:image" content="http://fp1.fghrsh.net/2020/04/08/b456b320c3ef57b623dab19f40c4013b.png">
-<meta property="article:published_time" content="2020-05-16T14:10:18.000Z">
-<meta property="article:modified_time" content="2020-05-16T14:36:07.835Z">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://fp1.fghrsh.net/2020/05/08/f489ad3bacd013bab00a468e61af80f9.png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
-  
-  <!--<link rel="stylesheet" href="/css/style.css?v=1589639942442">-->
-<meta name="generator" content="Hexo 4.2.1"></head>
-
-<body class="mdui-drawer-body-left">
-  
-  <div id="nexmoe-background">
-    <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg)"></div>
-    <div class="mdui-appbar mdui-shadow-0">
-      <div class="mdui-toolbar">
-        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
-        <div class="mdui-toolbar-spacer"></div>
-        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
-        <a href="/" title="John Doe" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe"></a>
-       </div>
-    </div>
-  </div>
-  <div id="nexmoe-header">
-      <div class="nexmoe-drawer mdui-drawer" id="drawer">
-    <div class="nexmoe-avatar mdui-ripple">
-        <a href="/" title="John Doe">
-            <img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe" alt="John Doe">
-        </a>
-    </div>
-    <div class="nexmoe-count">
-        <div><span>Articles</span>6</div>
-        <div><span>Tags</span>0</div>
-        <div><span>Categories</span>0</div>
-    </div>
-    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
-            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
-            <div class="mdui-list-item-content">
-                回到首页
-            </div>
-        </a>
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives" title="文章归档">
-            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
-            <div class="mdui-list-item-content">
-                文章归档
-            </div>
-        </a>
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
-            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
-            <div class="mdui-list-item-content">
-                关于博客
-            </div>
-        </a>
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
-            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
-            <div class="mdui-list-item-content">
-                我的朋友
-            </div>
-        </a>
-        
-    </div>
-    <aside id="nexmoe-sidebar">
-  
-  <div class="nexmoe-widget-wrap">
-    <div class="nexmoe-widget nexmoe-search">
-        <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
-            <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
-        </form>
-    </div>
-</div>
-  
-  <div class="nexmoe-widget-wrap">
-    <h3 class="nexmoe-widget-title">Social</h3>
-    <div class="nexmoe-widget nexmoe-social">
-        <a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
-            <i class="nexmoefont icon-bilibili"></i>
-        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
-            <i class="nexmoefont icon-github"></i>
-        </a>
-    </div>
-</div>
-  
-  
-
-  
-  
-  
-  
-  <div class="nexmoe-widget-wrap">
-    <h3 class="nexmoe-widget-title">Archive</h3>
-    <div class="nexmoe-widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
-    </div>
-  </div>
-
-
-  
-</aside>
-    <div class="nexmoe-copyright">
-        &copy; 2020 John Doe
-        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
-    </div>
-</div><!-- .nexmoe-drawer -->
-  </div>
-  <div id="nexmoe-content">
-    <div class="nexmoe-primary">
-        <div class="nexmoe-post">
-  
-      <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
-          <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="为小白设计的电池教程（DSDT）" class="lazyload">
-          <h1>为小白设计的电池教程（DSDT）</h1>
-      </div>
-  
-  
-  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
-    <a><i class="nexmoefont icon-calendar-fill"></i>2020年05月16日</a>
-    <a><i class="nexmoefont icon-areachart"></i>4.2k 字</a>
-    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 19 分钟</a>
-</div>
-
-  <div class="nexmoe-post-right">
-    
-      <div class="nexmoe-fixed">
-        <div class="nexmoe-valign">
-            <div class="nexmoe-toc">
-                
-            </div>
-        </div>
-      </div>
-    
-  </div>
-
-  <article>
-    <p> <img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/05/08/f489ad3bacd013bab00a468e61af80f9.png" alt="f489ad3bacd013bab00a468e61af80f9.png" class="lazyload"></p>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="generator" content="Hexo 4.2.1"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>为小白设计的电池教程（DSDT） - Hexo</title><meta description="​                                 为小白设计的电池教程（DSDT） ​                                       编写者：G.Z.小白 这个教程会尽量写的简单，只要你认真，你绝对看得懂！ 此教程整理，修改，借鉴于：http:&amp;#x2F;&amp;#x2F;bbs.pcbeta.com&amp;#x2F;viewthread-1751487-1-1.html 对其进行了完善"><meta property="og:type" content="blog"><meta property="og:title" content="为小白设计的电池教程（DSDT）"><meta property="og:url" content="http://yoursite.com/2020/05/16/%E4%B8%BA%E5%B0%8F%E7%99%BD%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%94%B5%E6%B1%A0%E6%95%99%E7%A8%8B%EF%BC%88DSDT%EF%BC%89/"><meta property="og:site_name" content="Hexo"><meta property="og:description" content="​                                 为小白设计的电池教程（DSDT） ​                                       编写者：G.Z.小白 这个教程会尽量写的简单，只要你认真，你绝对看得懂！ 此教程整理，修改，借鉴于：http:&amp;#x2F;&amp;#x2F;bbs.pcbeta.com&amp;#x2F;viewthread-1751487-1-1.html 对其进行了完善"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://fp1.fghrsh.net/2020/05/08/f489ad3bacd013bab00a468e61af80f9.png"><meta property="og:image" content="http://fp1.fghrsh.net/2020/04/08/b456b320c3ef57b623dab19f40c4013b.png"><meta property="article:published_time" content="2020-05-16T14:10:18.000Z"><meta property="article:modified_time" content="2020-05-16T14:54:35.312Z"><meta property="article:author" content="John Doe"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="http://fp1.fghrsh.net/2020/05/08/f489ad3bacd013bab00a468e61af80f9.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://yoursite.com/2020/05/16/%E4%B8%BA%E5%B0%8F%E7%99%BD%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%94%B5%E6%B1%A0%E6%95%99%E7%A8%8B%EF%BC%88DSDT%EF%BC%89/"},"headline":"Hexo","image":["http://fp1.fghrsh.net/2020/05/08/f489ad3bacd013bab00a468e61af80f9.png","http://fp1.fghrsh.net/2020/04/08/b456b320c3ef57b623dab19f40c4013b.png"],"datePublished":"2020-05-16T14:10:18.000Z","dateModified":"2020-05-16T14:54:35.312Z","author":{"@type":"Person","name":"John Doe"},"description":"​                                 为小白设计的电池教程（DSDT） ​                                       编写者：G.Z.小白 这个教程会尽量写的简单，只要你认真，你绝对看得懂！ 此教程整理，修改，借鉴于：http:&#x2F;&#x2F;bbs.pcbeta.com&#x2F;viewthread-1751487-1-1.html 对其进行了完善"}</script><link rel="canonical" href="http://yoursite.com/2020/05/16/%E4%B8%BA%E5%B0%8F%E7%99%BD%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%94%B5%E6%B1%A0%E6%95%99%E7%A8%8B%EF%BC%88DSDT%EF%BC%89/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hexo" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><time class="level-item" dateTime="2020-05-16T14:10:18.000Z" title="2020-05-16T14:10:18.000Z">2020-05-16</time><span class="level-item">31 minutes read (About 4697 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">为小白设计的电池教程（DSDT）</h1><div class="content"><p> <img src="http://fp1.fghrsh.net/2020/05/08/f489ad3bacd013bab00a468e61af80f9.png" alt="f489ad3bacd013bab00a468e61af80f9.png"></p>
 <p>​                                 为小白设计的电池教程（DSDT）</p>
 <p>​                                       编写者：G.Z.小白</p>
 <p><strong><strong>这个教程会尽量写的简单，只要你认真，你绝对看得懂！</strong></strong></p>
-<p>此教程整理，修改，借鉴于：<a href="http://bbs.pcbeta.com/viewthread-1751487-1-1.html" target="_blank" rel="noopener">http://bbs.pcbeta.com/viewthread-1751487-1-1.html</a></p>
+<p>此教程整理，修改，借鉴于：<a href="http://bbs.pcbeta.com/viewthread-1751487-1-1.html">http://bbs.pcbeta.com/viewthread-1751487-1-1.html</a></p>
 <p>对其进行了完善，以及一些有问题的地方进行了修改。</p>
-<p>## <strong>初步了解</strong></p>
-<p>实现原理 : 由于苹果无法使用ACPI EC中超过8位的寄存器（<strong><strong>又叫EC缓冲区，Embedded Controller Buffer</strong></strong>），我们需要利用Hotpatch的原理更名涉及到EC的Method使其失效并在新建的SSDT补丁中重新定义它们，使macOS能够通过SMC电池驱动正确识别电池EC信息。</p>
+<h1 id="初步了解"><a href="#初步了解" class="headerlink" title="初步了解"></a>初步了解</h1><p>实现原理 : 由于苹果无法使用ACPI EC中超过8位的寄存器（<strong><strong>又叫EC缓冲区，Embedded Controller Buffer</strong></strong>），我们需要利用Hotpatch的原理更名涉及到EC的Method使其失效并在新建的SSDT补丁中重新定义它们，使macOS能够通过SMC电池驱动正确识别电池EC信息。</p>
 <p>好了，我觉得你应该得有个<strong><strong>可以用的DSDT</strong></strong>吧，如果没有请去提取自己的DSDT并反编译，排好错。具体见群文件的教程。</p>
 <p>首先打开我们的DSDT，搜索（Command + F）<strong><strong>Embeddedcontrol</strong></strong></p>
-<p><img data-sizes="auto" data-src="http://fp1.fghrsh.net/2020/04/08/b456b320c3ef57b623dab19f40c4013b.png" alt="b456b320c3ef57b623dab19f40c4013b.png" class="lazyload"></p>
+<p><img src="http://fp1.fghrsh.net/2020/04/08/b456b320c3ef57b623dab19f40c4013b.png" alt="b456b320c3ef57b623dab19f40c4013b.png"></p>
 <p>OperationRegion名称，此为<strong><strong>EC操作区</strong></strong>的名称，一般名称为<strong><strong>ERAM、ECF2、ECF3、ECOR</strong></strong>等，并且有的机器可能不止一个</p>
 <p>好了现在，我们找到了这里，仔细观察，发现它在EC0控制器下，具体路径是_SB.PCI0.LPCB.EC0。当然每个人的可能不一样，最后的EC0，还可能是ECDV、EC、H_EC。</p>
 <p>这里我们主要关注Field里的东西，就是那一堆四个字母的东西。在这一堆东西中，我们只要注意<strong><strong>8位以上</strong></strong>的就行（就是右边的数字）。因为电池驱动无法处理8位以上的字节，所以就需要我们手动来处理来。</p>
 <p>我们需要用到的工具：<strong><strong>计算器（Mac自带）</strong></strong>，<strong><strong>Maciasl</strong></strong>，<strong><strong>新建一个txt文件</strong></strong>。</p>
 <p>打开txt文件，我们先把一下代码复制进去（我会把这个做成样例放在<strong><strong>群文件</strong></strong>）</p>
 <p>处理方法补丁如下</p>
-<p>```</p>
-<p># created by GZxioabai</p>
-<p># add method B1B2 </p>
-<p>into method label B1B2 remove_entry;</p>
-<p>into definitionblock code_regex . insert</p>
-<p>begin</p>
-<p>Method (B1B2, 2, NotSerialized)\n</p>
-<p>{\n</p>
-<p>Return(Or(Arg0, ShiftLeft(Arg1, 8)))\n</p>
-<p>}\n</p>
-<p>end;</p>
-<p> # add method B1B4</p>
-<p>into method label B1B4 remove_entry;</p>
-<p>into definitionblock code_regex . insert</p>
-<p>begin</p>
-<p>Method (B1B4, 4, NotSerialized)\n</p>
-<p>{\n</p>
-<p>   Store(Arg3, Local0)\n</p>
-<p>   Or(Arg2, ShiftLeft(Local0, 8), Local0)\n</p>
-<p>   Or(Arg1, ShiftLeft(Local0, 8), Local0)\n</p>
-<p>   Or(Arg0, ShiftLeft(Local0, 8), Local0)\n</p>
-<p>   Return(Local0)\n</p>
-<p>}\n</p>
-<p>end;</p>
-<p># add utility methods to read/write buffers from/to _SB.PCI0.LPCB.EC0</p>
-<p>into method label RE1B parent_label _SB.PCI0.LPCB.EC0 remove_entry;</p>
-<p>into method label RECB parent_label _SB.PCI0.LPCB.EC0 remove_entry;</p>
-<p>into Device label EC0 insert</p>
-<p>begin</p>
-<p>Method (RE1B, 1, NotSerialized)\n</p>
-<p>{\n</p>
-<p>   OperationRegion(ERAM, EmbeddedControl, Arg0, 1)\n</p>
-<p>   Field(ERAM, ByteAcc, NoLock, Preserve) { BYTE, 8 }\n</p>
-<p>   Return(BYTE)\n</p>
-<p>}\n</p>
-<p>Method (RECB, 2, Serialized)\n</p>
-<p>// Arg0 - offset in bytes from zero-based _SB.PCI0.LPCB.EC0\n</p>
-<p>// Arg1 - size of buffer in bits\n</p>
-<p>{\n</p>
-<p>   ShiftRight(Arg1, 3, Arg1)\n</p>
-<p>   Name(TEMP, Buffer(Arg1) { })\n</p>
-<p>   Add(Arg0, Arg1, Arg1)\n</p>
-<p>   Store(0, Local0)\n</p>
-<p>   While (LLess(Arg0, Arg1))\n</p>
-<p>   {\n</p>
-<p>​       Store(RE1B(Arg0), Index(TEMP, Local0))\n</p>
-<p>​       Increment(Arg0)\n</p>
-<p>​       Increment(Local0)\n</p>
-<p>   }\n</p>
-<p>   Return(TEMP)\n</p>
-<p>}\n</p>
-<p>end;</p>
-<p>into method label WE1B parent_label _SB.PCI0.LPCB.EC0 remove_entry;</p>
-<p>into method label WECB parent_label _SB.PCI0.LPCB.EC0 remove_entry;</p>
-<p>into Device label EC0 insert</p>
-<p>begin</p>
-<p>Method (WE1B, 2, NotSerialized)\n</p>
-<p>{\n</p>
-<p>   OperationRegion(ERAM, EmbeddedControl, Arg0, 1)\n</p>
-<p>   Field(ERAM, ByteAcc, NoLock, Preserve) { BYTE, 8 }\n</p>
-<p>   Store(Arg1, BYTE)\n</p>
-<p>}\n</p>
-<p>Method (WECB, 3, Serialized)\n</p>
-<p>// Arg0 - offset in bytes from zero-based EC\n</p>
-<p>// Arg1 - size of buffer in bits\n</p>
-<p>// Arg2 - value to write\n</p>
-<p>{\n</p>
-<p>   ShiftRight(Arg1, 3, Arg1)\n</p>
-<p>   Name(TEMP, Buffer(Arg1) { })\n</p>
-<p>   Store(Arg2, TEMP)\n</p>
-<p>   Add(Arg0, Arg1, Arg1)\n</p>
-<p>   Store(0, Local0)\n</p>
-<p>   While (LLess(Arg0, Arg1))\n</p>
-<p>   {\n</p>
-<p>​       WE1B(Arg0, DerefOf(Index(TEMP, Local0)))\n</p>
-<p>​       Increment(Arg0)\n</p>
-<p>​       Increment(Local0)\n</p>
-<p>   }\n</p>
-<p>}\n</p>
-<p>end;</p>
-<p>```</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br></pre></td><td class="code"><pre><span class="line">\# created by GZxioabai</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\# add method B1B2 </span><br><span class="line"></span><br><span class="line">into method label B1B2 remove_entry;</span><br><span class="line"></span><br><span class="line">into definitionblock code_regex . insert</span><br><span class="line"></span><br><span class="line">begin</span><br><span class="line"></span><br><span class="line">Method (B1B2, 2, NotSerialized)\n</span><br><span class="line"></span><br><span class="line">&#123;\n</span><br><span class="line"></span><br><span class="line">Return(Or(Arg0, ShiftLeft(Arg1, 8)))\n</span><br><span class="line"></span><br><span class="line">&#125;\n</span><br><span class="line"></span><br><span class="line">end;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> \# add method B1B4</span><br><span class="line"></span><br><span class="line">into method label B1B4 remove_entry;</span><br><span class="line"></span><br><span class="line">into definitionblock code_regex . insert</span><br><span class="line"></span><br><span class="line">begin</span><br><span class="line"></span><br><span class="line">Method (B1B4, 4, NotSerialized)\n</span><br><span class="line"></span><br><span class="line">&#123;\n</span><br><span class="line"></span><br><span class="line">   Store(Arg3, Local0)\n</span><br><span class="line"></span><br><span class="line">   Or(Arg2, ShiftLeft(Local0, 8), Local0)\n</span><br><span class="line"></span><br><span class="line">   Or(Arg1, ShiftLeft(Local0, 8), Local0)\n</span><br><span class="line"></span><br><span class="line">   Or(Arg0, ShiftLeft(Local0, 8), Local0)\n</span><br><span class="line"></span><br><span class="line">   Return(Local0)\n</span><br><span class="line"></span><br><span class="line">&#125;\n</span><br><span class="line"></span><br><span class="line">end;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\# add utility methods to read&#x2F;write buffers from&#x2F;to \_SB.PCI0.LPCB.EC0</span><br><span class="line"></span><br><span class="line">into method label RE1B parent_label \_SB.PCI0.LPCB.EC0 remove_entry;</span><br><span class="line"></span><br><span class="line">into method label RECB parent_label \_SB.PCI0.LPCB.EC0 remove_entry;</span><br><span class="line"></span><br><span class="line">into Device label EC0 insert</span><br><span class="line"></span><br><span class="line">begin</span><br><span class="line"></span><br><span class="line">Method (RE1B, 1, NotSerialized)\n</span><br><span class="line"></span><br><span class="line">&#123;\n</span><br><span class="line"></span><br><span class="line">   OperationRegion(ERAM, EmbeddedControl, Arg0, 1)\n</span><br><span class="line"></span><br><span class="line">   Field(ERAM, ByteAcc, NoLock, Preserve) &#123; BYTE, 8 &#125;\n</span><br><span class="line"></span><br><span class="line">   Return(BYTE)\n</span><br><span class="line"></span><br><span class="line">&#125;\n</span><br><span class="line"></span><br><span class="line">Method (RECB, 2, Serialized)\n</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Arg0 - offset in bytes from zero-based \_SB.PCI0.LPCB.EC0\n</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Arg1 - size of buffer in bits\n</span><br><span class="line"></span><br><span class="line">&#123;\n</span><br><span class="line"></span><br><span class="line">   ShiftRight(Arg1, 3, Arg1)\n</span><br><span class="line"></span><br><span class="line">   Name(TEMP, Buffer(Arg1) &#123; &#125;)\n</span><br><span class="line"></span><br><span class="line">   Add(Arg0, Arg1, Arg1)\n</span><br><span class="line"></span><br><span class="line">   Store(0, Local0)\n</span><br><span class="line"></span><br><span class="line">   While (LLess(Arg0, Arg1))\n</span><br><span class="line"></span><br><span class="line">   &#123;\n</span><br><span class="line"></span><br><span class="line">​       Store(RE1B(Arg0), Index(TEMP, Local0))\n</span><br><span class="line"></span><br><span class="line">​       Increment(Arg0)\n</span><br><span class="line"></span><br><span class="line">​       Increment(Local0)\n</span><br><span class="line"></span><br><span class="line">   &#125;\n</span><br><span class="line"></span><br><span class="line">   Return(TEMP)\n</span><br><span class="line"></span><br><span class="line">&#125;\n</span><br><span class="line"></span><br><span class="line">end;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">into method label WE1B parent_label \_SB.PCI0.LPCB.EC0 remove_entry;</span><br><span class="line"></span><br><span class="line">into method label WECB parent_label \_SB.PCI0.LPCB.EC0 remove_entry;</span><br><span class="line"></span><br><span class="line">into Device label EC0 insert</span><br><span class="line"></span><br><span class="line">begin</span><br><span class="line"></span><br><span class="line">Method (WE1B, 2, NotSerialized)\n</span><br><span class="line"></span><br><span class="line">&#123;\n</span><br><span class="line"></span><br><span class="line">   OperationRegion(ERAM, EmbeddedControl, Arg0, 1)\n</span><br><span class="line"></span><br><span class="line">   Field(ERAM, ByteAcc, NoLock, Preserve) &#123; BYTE, 8 &#125;\n</span><br><span class="line"></span><br><span class="line">   Store(Arg1, BYTE)\n</span><br><span class="line"></span><br><span class="line">&#125;\n</span><br><span class="line"></span><br><span class="line">Method (WECB, 3, Serialized)\n</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Arg0 - offset in bytes from zero-based EC\n</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Arg1 - size of buffer in bits\n</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Arg2 - value to write\n</span><br><span class="line"></span><br><span class="line">&#123;\n</span><br><span class="line"></span><br><span class="line">   ShiftRight(Arg1, 3, Arg1)\n</span><br><span class="line"></span><br><span class="line">   Name(TEMP, Buffer(Arg1) &#123; &#125;)\n</span><br><span class="line"></span><br><span class="line">   Store(Arg2, TEMP)\n</span><br><span class="line"></span><br><span class="line">   Add(Arg0, Arg1, Arg1)\n</span><br><span class="line"></span><br><span class="line">   Store(0, Local0)\n</span><br><span class="line"></span><br><span class="line">   While (LLess(Arg0, Arg1))\n</span><br><span class="line"></span><br><span class="line">   &#123;\n</span><br><span class="line"></span><br><span class="line">​       WE1B(Arg0, DerefOf(Index(TEMP, Local0)))\n</span><br><span class="line"></span><br><span class="line">​       Increment(Arg0)\n</span><br><span class="line"></span><br><span class="line">​       Increment(Local0)\n</span><br><span class="line"></span><br><span class="line">   &#125;\n</span><br><span class="line"></span><br><span class="line">&#125;\n</span><br><span class="line"></span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+
+
 <p>以上的这些东西是同用的处理方法，包括<strong>B1B2（16字节处理），B1B4（32字节处理），WECB和RECB（这两个是处理32字节以上的）</strong></p>
-<p>## <strong>16位处理方法</strong></p>
-<p>接下来，我们来讲讲16位如何处理。</p>
+<h2 id="16位处理方法"><a href="#16位处理方法" class="headerlink" title="16位处理方法"></a>16位处理方法</h2><p>接下来，我们来讲讲16位如何处理。</p>
 <p>比如我们在Field下找到的这个<strong><strong>16位的BADC</strong></strong>，我们需要将它拆分掉，拆成来<strong><strong>两个8字节</strong></strong>，这样就能被电池驱动处理了。</p>
 <p><strong><strong>读取操作：</strong></strong></p>
 <p>我们还是先来解释一下吧，<strong><strong>什么是读取什么是写入</strong></strong>？在DSDT中常见的是下面两种语句。</p>
@@ -310,35 +70,15 @@
 <p>- <code>在method为SMTF这个范围里面，搜索“BADC,\s+16”, ，如果有，就把它替换为“DCA0,8,DCA1,8,” 。</code></p>
 <p>那么最后的处理结果是：</p>
 <p>未处理前：</p>
-<p>```Swift</p>
-<p>​            Method (SMTF, 1, NotSerialized)</p>
-<p>​            {</p>
-<p>​                If (LEqual (Arg0, Zero))</p>
-<p>​                {</p>
-<p>​                    Return (BADC)</p>
-<p>​                }</p>
-<p>​                If (LEqual (Arg0, One))</p>
-<p>​                {</p>
-<p>​                    Return (Zero)</p>
-<p>​                }</p>
-<p>​                Return (Zero)</p>
-<p>​            }</p>
-<p>```</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Method (SMTF, 1, NotSerialized)</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    If (LEqual (Arg0, Zero))</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        Return (BADC)</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    If (LEqual (Arg0, One))</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        Return (Zero)</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Return (Zero)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <p>打了补丁之后：</p>
-<p>```Swift</p>
-<p>​            Method (SMTF, 1, NotSerialized)</p>
-<p>​            {</p>
-<p>​                If (LEqual (Arg0, Zero))</p>
-<p>​                {</p>
-<p>​                    Return (B1B2 (DCA0, DCA1))</p>
-<p>​                }</p>
-<p>​                If (LEqual (Arg0, One))</p>
-<p>​                {</p>
-<p>​                    Return (Zero)</p>
-<p>​                }</p>
-<p>​                Return (Zero)</p>
-<p>​            }</p>
-<p>```</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">            Method (SMTF, 1, NotSerialized)</span><br><span class="line"></span><br><span class="line">​            &#123;</span><br><span class="line"></span><br><span class="line">​                If (LEqual (Arg0, Zero))</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Return (B1B2 (DCA0, DCA1))</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                If (LEqual (Arg0, One))</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Return (Zero)</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​                Return (Zero)</span><br><span class="line"></span><br><span class="line">​            &#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <p>当然啦，这仅仅是BADC如果是<strong><strong>读取</strong></strong>的时候的处理，那要是碰到<strong><strong>写入</strong></strong>的时候，我们就要像下面这样处理，<strong><strong>不能使用B1B2的方法了</strong></strong></p>
 <p>比如：</p>
 <p><strong><strong>Store (Arg0, BADC)  （BADC是16位的情况）</strong></strong></p>
@@ -353,16 +93,14 @@
 <p>其中这段文字中的\s代表的是一个空格，\n代表的是换行，也就是回车，主要的是在搜索那里，需要注意符号转义，在任何符号前都要加一个反斜杠转义，也就是加一个\</p>
 <p>那最后的处理结果是：</p>
 <p>未处理：</p>
-<p>```</p>
-<p>Store (Arg0, BADC)</p>
-<p>```</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Store (Arg0, BADC)</span><br></pre></td></tr></table></figure>
+
 <p>打了补丁后：</p>
-<p>```swift</p>
-<p>Store (ShiftRight(Arg0,8),DCA1)</p>
-<p>Store (Arg0,DCA0)</p>
-<p>```</p>
-<p>## <strong>32字节处理方法</strong></p>
-<p>32位字段的处理方法其实跟16位一样，用到的是B1B4，区别就是，16位拆除<strong><strong>2个</strong></strong>，32拆除<strong><strong>4个</strong></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Store (ShiftRight(Arg0,8),DCA1)</span><br><span class="line"></span><br><span class="line">Store (Arg0,DCA0)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="32字节处理方法"><a href="#32字节处理方法" class="headerlink" title="32字节处理方法"></a><strong>32字节处理方法</strong></h1><p>32位字段的处理方法其实跟16位一样，用到的是B1B4，区别就是，16位拆除<strong><strong>2个</strong></strong>，32拆除<strong><strong>4个</strong></strong></p>
 <p>在Field里查找32位的，这里我们也是举一个例子，比如<strong><strong>B1CH</strong></strong></p>
 <p>补丁如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">into Device label EC0 code_regex B1CH,\s+16, replace_matched begin CH10,8,CH11,8,CH12,CH13 end;</span><br></pre></td></tr></table></figure>
@@ -378,21 +116,16 @@
 <p>那这个也就不解释了，差不多的意思。其中<strong><strong>B1B4</strong></strong>是<strong><strong>32位</strong></strong>处理方法</p>
 <p>处理结果：</p>
 <p>未处理：</p>
-<p>```</p>
-<p>​            Method (_BIF, 0, NotSerialized)</p>
-<p>​            {</p>
-<p>​                Store (B1CH, IFCH)                                                  //未处理前</p>
-<p>​            }</p>
-<p>```</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">            Method (_BIF, 0, NotSerialized)</span><br><span class="line"></span><br><span class="line">​            &#123;</span><br><span class="line"></span><br><span class="line">​                Store (B1CH, IFCH)                                                  &#x2F;&#x2F;未处理前</span><br><span class="line"></span><br><span class="line">​            &#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <p>打了补丁后：</p>
-<p>```</p>
-<p>​            Method (_BIF, 0, NotSerialized)</p>
-<p>​            {</p>
-<p>​                Store (B1B4 (BC0H, BC1H, BC2H, BC3H), IFCH)                  //把被调用B1CH两处拆分为4个字节</p>
-<p>​            }</p>
-<p>```</p>
-<p>## <strong>偏移量计算</strong></p>
-<p>到了32位以上的字段处理，我们会使用到<strong><strong>RECB（读）</strong></strong>和<strong><strong>WECB（写）</strong></strong>两个处理方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">            Method (_BIF, 0, NotSerialized)</span><br><span class="line"></span><br><span class="line">​            &#123;</span><br><span class="line"></span><br><span class="line">​                Store (B1B4 (BC0H, BC1H, BC2H, BC3H), IFCH)                  &#x2F;&#x2F;把被调用B1CH两处拆分为4个字节</span><br><span class="line"></span><br><span class="line">​            &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="偏移量计算"><a href="#偏移量计算" class="headerlink" title="偏移量计算"></a><strong>偏移量计算</strong></h1><p>到了32位以上的字段处理，我们会使用到<strong><strong>RECB（读）</strong></strong>和<strong><strong>WECB（写）</strong></strong>两个处理方法</p>
 <p>我先给你看两个例子：</p>
 <p><strong><strong>RECB(0x98, 64)</strong></strong></p>
 <p><strong><strong>WECB (0x1C, 256, FB4)</strong></strong></p>
@@ -404,105 +137,35 @@
 <p><strong><strong>SMD0</strong></strong>是<strong><strong>256位的需要处理的字段</strong></strong>，在这里是<strong><strong>写入</strong></strong>，那么它的前参数，顾名思义就是前面那个<strong><strong>FB4</strong></strong></p>
 <p>那么其实，最主要的问题是<strong><strong>偏移量</strong></strong>了。</p>
 <p>举例1：</p>
-<p>```</p>
-<p>Offset (0x04), （基地址）</p>
-<p>CMCM,   8, //0x04</p>
-<p>CMD1,   8, //0x05</p>
-<p>CMD2,   8, //0x06</p>
-<p>CMD3,   8, //0x07</p>
-<p>Offset (0x18),</p>
-<p>Offset (0x19), （基地址）</p>
-<p>SMST,   8, //0x19</p>
-<p>MBMN,   80, //0x1A</p>
-<p>MBPN,   96, //0x24</p>
-<p>GPB1,   8, //0x30</p>
-<p>GPB2,   8, //0x31           </p>
-<p>GPB3,   8, //0x32        </p>
-<p>GPB4,   8, //0x33    </p>
-<p>```</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Offset (0x04), （基地址）</span><br><span class="line"></span><br><span class="line">CMCM,   8, &#x2F;&#x2F;0x04</span><br><span class="line"></span><br><span class="line">CMD1,   8, &#x2F;&#x2F;0x05</span><br><span class="line"></span><br><span class="line">CMD2,   8, &#x2F;&#x2F;0x06</span><br><span class="line"></span><br><span class="line">CMD3,   8, &#x2F;&#x2F;0x07</span><br><span class="line"></span><br><span class="line">Offset (0x18),</span><br><span class="line"></span><br><span class="line">Offset (0x19), （基地址）</span><br><span class="line"></span><br><span class="line">SMST,   8, &#x2F;&#x2F;0x19</span><br><span class="line"></span><br><span class="line">MBMN,   80, &#x2F;&#x2F;0x1A</span><br><span class="line"></span><br><span class="line">MBPN,   96, &#x2F;&#x2F;0x24</span><br><span class="line"></span><br><span class="line">GPB1,   8, &#x2F;&#x2F;0x30</span><br><span class="line"></span><br><span class="line">GPB2,   8, &#x2F;&#x2F;0x31           </span><br><span class="line"></span><br><span class="line">GPB3,   8, &#x2F;&#x2F;0x32        </span><br><span class="line"></span><br><span class="line">GPB4,   8, &#x2F;&#x2F;0x33</span><br></pre></td></tr></table></figure>
+
+
+
 <p>我们看这里的，<strong><strong>MBMN</strong></strong>是需要处理的<strong><strong>80位字段</strong></strong>，它的偏移量的计算就要涉及到它上面的<strong><strong>基地址</strong></strong>，我们看到了那个基地址是<strong><strong>0x19</strong></strong>，我们还可以发现它前面有个<strong><strong>8位的SMST</strong></strong>，我们将8除以8，得到1，再把0x19加上这个1，最后得到了<strong><strong>0x1A</strong></strong>，那么下面那个MBPN的偏移量怎么算呢，就是<strong><strong>将前面的都加起来除以8</strong></strong>，再加上<strong><strong>基地址</strong></strong>，就是8加上80得到88，除以8，等于11，转换为16进制就是B，0x19加上B，等于0x24.（<strong><strong>注意的是，在除以8后的数字，一定要转换为16进制，再加上基地址！</strong></strong>）</p>
 <p>举例二：</p>
-<p>```</p>
-<p>Offset (0x53),      //（基地址）     </p>
-<p>B0TP,   16,      // 从基地址起 ，为0x53   </p>
-<p>B0VL,   16,      //16，为2个字节；  计算：上一个的起始地址0x53+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x55</p>
-<p>B0CR,   16,      //16，为2个字节；  计算：上一个的起始地址0x55+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x57</p>
-<p>B0AC,   16,      //16，为2个字节；  计算：上一个的起始地址0x57+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x59</p>
-<p>B0ME,   16,      //16，为2个字节；  计算：上一个的起始地址0x59+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x5b</p>
-<p>B0RS,   16,      //16，为2个字节；  计算：上一个的起始地址0x5b+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x5d</p>
-<p>B0RC,   16,      //16，为2个字节；  计算：上一个的起始地址0x5d+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x5f</p>
-<p>B0FC,   16,      //16，为2个字节；  计算：上一个的起始地址0x5f+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x61</p>
-<p>B0MC,   16,     //16，为2个字节；  计算：上一个的起始地址0x61+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x63</p>
-<p>B0MV,   16,     //16，为2个字节；  计算：上一个的起始地址0x63+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x65</p>
-<p>B0ST,   16,      //16，为2个字节；  计算：上一个的起始地址0x65+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x67</p>
-<p>B0CC,   16,      //16，为2个字节；  计算：上一个的起始地址0x67+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x69</p>
-<p>B0DC,   16,      //16，为2个字节；  计算：上一个的起始地址0x69+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x6b</p>
-<p>B0DV,   16,      //16，为2个字节；  计算：上一个的起始地址0x6b+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x6d</p>
-<p>B0SI,   16,      //16，为2个字节；  计算：上一个的起始地址0x6d+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x6f</p>
-<p>B0SN,   32,     //32，为4个字节；  计算：上一个的起始地址0x6f+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x71      </p>
-<p>B0MN,   96,    //96，为12个字节  计算：上一个的起始地址0x71+0x4（上一个的32位占了4个字节，10转为16进制为0x4）值为0x75</p>
-<p>B0DN,   64,     // 64，为8个字节；计算：上一个的起始地址0x75+0xc（上一个的96位占了12个字节，10转为16进制为0xc）值为0x81</p>
-<p>B0CM,   48,    //  计算：上一个的起始地址0x81+0x8（64位占了8个字节，10转为16进制为0x8）值为0x89</p>
-<p>```</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">Offset (0x53),      &#x2F;&#x2F;（基地址）     </span><br><span class="line"></span><br><span class="line">B0TP,   16,      &#x2F;&#x2F; 从基地址起 ，为0x53   </span><br><span class="line"></span><br><span class="line">B0VL,   16,      &#x2F;&#x2F;16，为2个字节；  计算：上一个的起始地址0x53+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x55</span><br><span class="line"></span><br><span class="line">B0CR,   16,      &#x2F;&#x2F;16，为2个字节；  计算：上一个的起始地址0x55+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x57</span><br><span class="line"></span><br><span class="line">B0AC,   16,      &#x2F;&#x2F;16，为2个字节；  计算：上一个的起始地址0x57+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x59</span><br><span class="line"></span><br><span class="line">B0ME,   16,      &#x2F;&#x2F;16，为2个字节；  计算：上一个的起始地址0x59+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x5b</span><br><span class="line"></span><br><span class="line">B0RS,   16,      &#x2F;&#x2F;16，为2个字节；  计算：上一个的起始地址0x5b+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x5d</span><br><span class="line"></span><br><span class="line">B0RC,   16,      &#x2F;&#x2F;16，为2个字节；  计算：上一个的起始地址0x5d+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x5f</span><br><span class="line"></span><br><span class="line">B0FC,   16,      &#x2F;&#x2F;16，为2个字节；  计算：上一个的起始地址0x5f+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x61</span><br><span class="line"></span><br><span class="line">B0MC,   16,     &#x2F;&#x2F;16，为2个字节；  计算：上一个的起始地址0x61+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x63</span><br><span class="line"></span><br><span class="line">B0MV,   16,     &#x2F;&#x2F;16，为2个字节；  计算：上一个的起始地址0x63+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x65</span><br><span class="line"></span><br><span class="line">B0ST,   16,      &#x2F;&#x2F;16，为2个字节；  计算：上一个的起始地址0x65+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x67</span><br><span class="line"></span><br><span class="line">B0CC,   16,      &#x2F;&#x2F;16，为2个字节；  计算：上一个的起始地址0x67+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x69</span><br><span class="line"></span><br><span class="line">B0DC,   16,      &#x2F;&#x2F;16，为2个字节；  计算：上一个的起始地址0x69+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x6b</span><br><span class="line"></span><br><span class="line">B0DV,   16,      &#x2F;&#x2F;16，为2个字节；  计算：上一个的起始地址0x6b+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x6d</span><br><span class="line"></span><br><span class="line">B0SI,   16,      &#x2F;&#x2F;16，为2个字节；  计算：上一个的起始地址0x6d+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x6f</span><br><span class="line"></span><br><span class="line">B0SN,   32,     &#x2F;&#x2F;32，为4个字节；  计算：上一个的起始地址0x6f+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x71      </span><br><span class="line"></span><br><span class="line">B0MN,   96,    &#x2F;&#x2F;96，为12个字节  计算：上一个的起始地址0x71+0x4（上一个的32位占了4个字节，10转为16进制为0x4）值为0x75</span><br><span class="line"></span><br><span class="line">B0DN,   64,     &#x2F;&#x2F; 64，为8个字节；计算：上一个的起始地址0x75+0xc（上一个的96位占了12个字节，10转为16进制为0xc）值为0x81</span><br><span class="line"></span><br><span class="line">B0CM,   48,    &#x2F;&#x2F;  计算：上一个的起始地址0x81+0x8（64位占了8个字节，10转为16进制为0x8）值为0x89</span><br></pre></td></tr></table></figure>
+
+
+
 <p>这里我就不说明了，自己看右边的注释理解一下吧。</p>
 <p>举例3：</p>
-<p>```</p>
-<p>Offset (0x5D),     //（基地址）  </p>
-<p>ENIB,   16,     // 16，为2个字节；   从基地址起 ，为0x5D</p>
-<p>ENDD,   8,     //8，为1个字节；  计算：上一个的起始地址0x5D+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x5F</p>
-<p>SMPR,   8,     //8，为1个字节；  计算：上一个的起始地址0x5F+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x60</p>
-<p>SMST,   8,     //8，为1个字节；  计算：上一个的起始地址0x60+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x61</p>
-<p>SMAD,   8,   //8，为1个字节；  计算：上一个的起始地址0x61+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x62</p>
-<p>SMCM,   8,     //8，为1个字节；  计算：上一个的起始地址0x62+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x63</p>
-<p>SMD0,   256,    //256，为32个字节；  计算：上一个的起始地址0x63+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x64</p>
-<p>BCNT,   8,      //8，为1个字节；  计算：上一个的起始地址0x64+0x20（上一个的256位占了32个字节，10转为16进制为0x20）值为0x84</p>
-<p>SMAA,   24,      //8，为1个字节；  计算：上一个的起始地址0x84+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x85</p>
-<p>```</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Offset (0x5D),     &#x2F;&#x2F;（基地址）  </span><br><span class="line"></span><br><span class="line">ENIB,   16,     &#x2F;&#x2F; 16，为2个字节；   从基地址起 ，为0x5D</span><br><span class="line"></span><br><span class="line">ENDD,   8,     &#x2F;&#x2F;8，为1个字节；  计算：上一个的起始地址0x5D+0x2（上一个的16位占了2个字节，10转为16进制为0x2）值为0x5F</span><br><span class="line"></span><br><span class="line">SMPR,   8,     &#x2F;&#x2F;8，为1个字节；  计算：上一个的起始地址0x5F+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x60</span><br><span class="line"></span><br><span class="line">SMST,   8,     &#x2F;&#x2F;8，为1个字节；  计算：上一个的起始地址0x60+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x61</span><br><span class="line"></span><br><span class="line">SMAD,   8,   &#x2F;&#x2F;8，为1个字节；  计算：上一个的起始地址0x61+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x62</span><br><span class="line"></span><br><span class="line">SMCM,   8,     &#x2F;&#x2F;8，为1个字节；  计算：上一个的起始地址0x62+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x63</span><br><span class="line"></span><br><span class="line">SMD0,   256,    &#x2F;&#x2F;256，为32个字节；  计算：上一个的起始地址0x63+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x64</span><br><span class="line"></span><br><span class="line">BCNT,   8,      &#x2F;&#x2F;8，为1个字节；  计算：上一个的起始地址0x64+0x20（上一个的256位占了32个字节，10转为16进制为0x20）值为0x84</span><br><span class="line"></span><br><span class="line">SMAA,   24,      &#x2F;&#x2F;8，为1个字节；  计算：上一个的起始地址0x84+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x85</span><br></pre></td></tr></table></figure>
+
+
+
 <p>举例4  最为简单：</p>
-<p>```</p>
-<p>​            Field (ERAM, ByteAcc, NoLock, Preserve)</p>
-<p>​                {</p>
-<p>​                    Offset (0x04),</p>
-<p>​                    FLD0,   64          // 64，为8个字节；   从基地址起 ，为0x04（偏移量）</p>
-<p>​                }</p>
-<p>​            Field (ERAM, ByteAcc, NoLock, Preserve)</p>
-<p>​                {</p>
-<p>​                    Offset (0x04),</p>
-<p>​                    FLD1,   128          // 128，为16个字节；   从基地址起 ，为0x04（偏移量）</p>
-<p>​                }</p>
-<p>​            Field (ERAM, ByteAcc, NoLock, Preserve)</p>
-<p>​                {</p>
-<p>​                    Offset (0x04),</p>
-<p>​                    FLD2,   192          // 192，为24个字节；   从基地址起 ，为0x04（偏移量）</p>
-<p>​                }</p>
-<p>​            Field (ERAM, ByteAcc, NoLock, Preserve)</p>
-<p>​                {</p>
-<p>​                    Offset (0x04),</p>
-<p>​                    FLD3,   256          // 256，为32个字节；   从基地址起 ，为0x04（偏移量）</p>
-<p>​                }</p>
-<p>```</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">            Field (ERAM, ByteAcc, NoLock, Preserve)</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Offset (0x04),</span><br><span class="line"></span><br><span class="line">​                    FLD0,   64          &#x2F;&#x2F; 64，为8个字节；   从基地址起 ，为0x04（偏移量）</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​            Field (ERAM, ByteAcc, NoLock, Preserve)</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Offset (0x04),</span><br><span class="line"></span><br><span class="line">​                    FLD1,   128          &#x2F;&#x2F; 128，为16个字节；   从基地址起 ，为0x04（偏移量）</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​            Field (ERAM, ByteAcc, NoLock, Preserve)</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Offset (0x04),</span><br><span class="line"></span><br><span class="line">​                    FLD2,   192          &#x2F;&#x2F; 192，为24个字节；   从基地址起 ，为0x04（偏移量）</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​            Field (ERAM, ByteAcc, NoLock, Preserve)</span><br><span class="line"></span><br><span class="line">​                &#123;</span><br><span class="line"></span><br><span class="line">​                    Offset (0x04),</span><br><span class="line"></span><br><span class="line">​                    FLD3,   256          &#x2F;&#x2F; 256，为32个字节；   从基地址起 ，为0x04（偏移量）</span><br><span class="line"></span><br><span class="line">​                &#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <p>举例五 特殊：</p>
-<p>```</p>
-<p>OperationRegion (SMBX, EmbeddedControl, 0x18, 0x28)            //第三个值是起始地址</p>
-<p>Field (SMBX, ByteAcc, NoLock, Preserve)</p>
-<p>{</p>
-<p>​        PRTC,   8,      //8，为1个字节；  上面第三个值是起始地址0x18</p>
-<p>​        SSTS,   5,      //计算：上一个的起始地址0x18+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x19</p>
-<p>​            ,   1,</p>
-<p>​        ALFG,   1,</p>
-<p>​        CDFG,   1,      //上面 5+1+1+1才凑够8位（1字节）</p>
-<p>​        ADDR,   8,    //8，为1个字节；计算：上一个的起始地址0x19+0x1（上面 5+1+1+1才凑够8位占了1个字节，10转为16进制为0x1）值为0x19     0x1A</p>
-<p>​        CMDB,   8, //8，为1个字节；  计算：上一个的起始地址0x1A+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x1B   </p>
-<p>​        BDAT,   256, //256，为32个字节；计算：上一个的起始地址0x1B+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x1C</p>
-<p>​        BCNT,   8,</p>
-<p>​            ,   1,</p>
-<p>​        ALAD,   7,</p>
-<p>​        ALD0,   8,</p>
-<p>​        ALD1,   8</p>
-<p>}</p>
-<p>```</p>
-<p>## <strong>32位以上字段的处理（包括64，128，256等）</strong></p>
-<p>在Field下，我们需要对其进行<strong><strong>重命名</strong></strong>使其失效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">OperationRegion (SMBX, EmbeddedControl, 0x18, 0x28)            &#x2F;&#x2F;第三个值是起始地址</span><br><span class="line"></span><br><span class="line">Field (SMBX, ByteAcc, NoLock, Preserve)</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">​        PRTC,   8,      &#x2F;&#x2F;8，为1个字节；  上面第三个值是起始地址0x18</span><br><span class="line"></span><br><span class="line">​        SSTS,   5,      &#x2F;&#x2F;计算：上一个的起始地址0x18+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x19</span><br><span class="line"></span><br><span class="line">​            ,   1,</span><br><span class="line"></span><br><span class="line">​        ALFG,   1,</span><br><span class="line"></span><br><span class="line">​        CDFG,   1,      &#x2F;&#x2F;上面 5+1+1+1才凑够8位（1字节）</span><br><span class="line"></span><br><span class="line">​        ADDR,   8,    &#x2F;&#x2F;8，为1个字节；计算：上一个的起始地址0x19+0x1（上面 5+1+1+1才凑够8位占了1个字节，10转为16进制为0x1）值为0x19     0x1A</span><br><span class="line"></span><br><span class="line">​        CMDB,   8, &#x2F;&#x2F;8，为1个字节；  计算：上一个的起始地址0x1A+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x1B   </span><br><span class="line"></span><br><span class="line">​        BDAT,   256, &#x2F;&#x2F;256，为32个字节；计算：上一个的起始地址0x1B+0x1（上一个的8位占了1个字节，10转为16进制为0x1）值为0x1C</span><br><span class="line"></span><br><span class="line">​        BCNT,   8,</span><br><span class="line"></span><br><span class="line">​            ,   1,</span><br><span class="line"></span><br><span class="line">​        ALAD,   7,</span><br><span class="line"></span><br><span class="line">​        ALD0,   8,</span><br><span class="line"></span><br><span class="line">​        ALD1,   8</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="32位以上字段的处理（包括64，128，256等）"><a href="#32位以上字段的处理（包括64，128，256等）" class="headerlink" title="32位以上字段的处理（包括64，128，256等）"></a>32位以上字段的处理（包括64，128，256等）</h1><p>在Field下，我们需要对其进行<strong><strong>重命名</strong></strong>使其失效。</p>
 <p>补丁如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">into Device label EC0 code_regex (SMD0,)\s+(256) replace_matched begin SMDX,%2,&#x2F;&#x2F;%1%2 end;</span><br></pre></td></tr></table></figure>
 
@@ -525,66 +188,30 @@
 
 <p>值得注意的是，我们这边是<strong><strong>将整个Store语句进行了替换</strong></strong>，这也是<strong><strong>WECB</strong></strong>处理的不同之处。</p>
 <p>处理结果：<code>Store (FB4, SMD0) —&gt; WECB (0x1C, 256, FB4)</code></p>
-<p>## <strong>Mutex确认，最后检查</strong></p>
-<p>确保DSDT里的<strong><strong>Mutex</strong></strong>都是<strong><strong>0x00</strong></strong>，不然可能会出现电量显示0%的情况。</p>
+<h1 id="Mutex确认，最后检查"><a href="#Mutex确认，最后检查" class="headerlink" title="Mutex确认，最后检查"></a><strong>Mutex确认，最后检查</strong></h1><p>确保DSDT里的<strong><strong>Mutex</strong></strong>都是<strong><strong>0x00</strong></strong>，不然可能会出现电量显示0%的情况。</p>
 <p>在DSDT里搜索<strong><strong>Mutex</strong></strong>，如果有的不是0x00，你就自己手动改成0x00。</p>
-<p>## <strong>补充</strong></p>
-<p>当电池有时能正常显示电量，有时不能会出现一个小叉，则可能是多个电池的位置导致的，如图有两个位置，分别为“BAT0”和“BAT1”，我们需要禁用掉“BAT1”这个位置，以达到正常读取电量</p>
-
-  </article>
-
-  <div class="nexmoe-post-meta nexmoe-rainbow">
-    
-    
-</div>
-
-  <div class="nexmoe-post-footer">
-    
-      
-  <div class="nexmoe-post-copyright">
-    <strong>Author：</strong>John Doe<br>
-    <strong>Link：</strong><a href="http://yoursite.com/2020/05/16/%E4%B8%BA%E5%B0%8F%E7%99%BD%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%94%B5%E6%B1%A0%E6%95%99%E7%A8%8B%EF%BC%88DSDT%EF%BC%89/" title="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;05&#x2F;16&#x2F;%E4%B8%BA%E5%B0%8F%E7%99%BD%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%94%B5%E6%B1%A0%E6%95%99%E7%A8%8B%EF%BC%88DSDT%EF%BC%89&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;05&#x2F;16&#x2F;%E4%B8%BA%E5%B0%8F%E7%99%BD%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%94%B5%E6%B1%A0%E6%95%99%E7%A8%8B%EF%BC%88DSDT%EF%BC%89&#x2F;</a><br>
-    
-      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
-    
-  </div>
-
-
-    
-    <section class="nexmoe-comment">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
-<div id="gitalk"></div>
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-    var gitalk = new Gitalk({
-        clientID: '80b2453b6d5f37ad6225',
-        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
-        id: window.location.pathname,
-        repo: 'nexmoe.github.io',
-        owner: 'nexmoe',
-        admin: 'nexmoe'
-    })
-    gitalk.render('gitalk')
-</script>
-</section>
-  </div>
-</div>
-    </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
-<script >hljs.initHighlightingOnLoad();</script>
-
-
-    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
-
-
-<script src="/js/app.js?v=1589639942443"></script>
-  
-
-
-
-
-
-</body>
-
-</html>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a><strong>补充</strong></h1><p>当电池有时能正常显示电量，有时不能会出现一个小叉，则可能是多个电池的位置导致的，如图有两个位置，分别为“BAT0”和“BAT1”，我们需要禁用掉“BAT1”这个位置，以达到正常读取电量</p>
+</div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button is-info donate"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" style="background-color:rgba(255,128,62,.87);border-color:transparent;color:white;" target="_blank" rel="noopener"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button is-danger donate" href="/" target="_blank" rel="noopener"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button is-success donate"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2020/05/16/%E8%BF%9B%E9%98%B6%EF%BC%9A%E7%94%B5%E6%B1%A0%E7%83%AD%E8%A1%A5%E4%B8%81%EF%BC%88Battery-Hotpatch%EF%BC%89%E4%B9%8B%E8%B7%AF/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">进阶：电池热补丁（Battery-Hotpatch）之路</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/05/16/Hackintosh%E5%AE%89%E8%A3%85%E5%85%A8%E6%94%BB%E7%95%A5/"><span class="level-item">Hackintosh安装全攻略</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="" src="/img/avatar.png" alt="Your name"></figure><p class="title is-size-4 is-block line-height-inherit">Your name</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Your location</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">6</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">0</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ppoffice" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/ppoffice"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Links</h3><ul class="menu-list"><li><a class="level is-mobile is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><!--!--><div class="card widget"><div class="card-content"><h3 class="menu-label">Recent</h3><article class="media"><div class="media-content size-small"><p><time dateTime="2020-05-16T14:14:36.000Z">2020-05-16</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/16/%E7%94%A8%E7%83%AD%E8%A1%A5%E4%B8%81%E4%BF%AE%E7%90%86%E4%BD%A0%E7%9A%84%E8%A7%A6%E6%91%B8%E6%9D%BF%EF%BC%88TouchPad-Hotpatch%EF%BC%89/">用热补丁修理你的触摸板（TouchPad-Hotpatch）(正在施工)</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-05-16T14:12:45.000Z">2020-05-16</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/16/%E5%A6%82%E4%BD%95%E7%AE%80%E5%8D%95%E7%9A%84%E7%BC%96%E8%AF%91OpenCore/">如何简单的编译OpenCore</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-05-16T14:12:07.000Z">2020-05-16</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/16/%E8%BF%9B%E9%98%B6%EF%BC%9A%E7%94%B5%E6%B1%A0%E7%83%AD%E8%A1%A5%E4%B8%81%EF%BC%88Battery-Hotpatch%EF%BC%89%E4%B9%8B%E8%B7%AF/">进阶：电池热补丁（Battery-Hotpatch）之路</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-05-16T14:10:18.000Z">2020-05-16</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/16/%E4%B8%BA%E5%B0%8F%E7%99%BD%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%94%B5%E6%B1%A0%E6%95%99%E7%A8%8B%EF%BC%88DSDT%EF%BC%89/">为小白设计的电池教程（DSDT）</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-05-16T14:09:02.000Z">2020-05-16</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/16/Hackintosh%E5%AE%89%E8%A3%85%E5%85%A8%E6%94%BB%E7%95%A5/">Hackintosh安装全攻略</a></p><p class="is-uppercase"></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/archives/2020/05/"><span class="level-start"><span class="level-item">May 2020</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></div></div></div><!--!--><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Subscribe to Updates</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button is-primary" type="submit" value="Subscribe"></div></div></form></div></div></div><div class="card widget"><div class="card-content"><div class="notification is-danger">You need to set <code>client_id</code> and <code>slot_id</code> to show this AD unit. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Hexo" height="28"></a><p class="size-small"><span>&copy; 2020 John Doe</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            site: {
+                url: 'http://yoursite.com',
+                external_link: {"enable":true,"exclude":[]}
+            },
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to Top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
