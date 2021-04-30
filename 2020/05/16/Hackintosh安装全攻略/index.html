@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Hackintosh安装全攻略 - 神楽小白(GZ小白)的部落阁</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="神楽小白(GZ小白)的部落阁"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="神楽小白(GZ小白)的部落阁"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="以下内容基本摘自Eternal Qiu的博客，日后准备进行修改链接：https:&amp;#x2F;&amp;#x2F;blog.qiuxiangzhi.top&amp;#x2F;2019&amp;#x2F;07&amp;#x2F;15&amp;#x2F;macOS-Guide&amp;#x2F;"><meta property="og:type" content="blog"><meta property="og:title" content="Hackintosh安装全攻略"><meta property="og:url" content="http://example.com/2020/05/16/Hackintosh%E5%AE%89%E8%A3%85%E5%85%A8%E6%94%BB%E7%95%A5/"><meta property="og:site_name" content="神楽小白(GZ小白)的部落阁"><meta property="og:description" content="以下内容基本摘自Eternal Qiu的博客，日后准备进行修改链接：https:&amp;#x2F;&amp;#x2F;blog.qiuxiangzhi.top&amp;#x2F;2019&amp;#x2F;07&amp;#x2F;15&amp;#x2F;macOS-Guide&amp;#x2F;"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://fp1.fghrsh.net/2020/05/08/5da10200a4e3148f16260962f51ce44a.jpg"><meta property="article:published_time" content="2020-05-16T14:09:02.000Z"><meta property="article:modified_time" content="2021-04-30T12:05:06.619Z"><meta property="article:author" content="神楽小白(GZ小白)"><meta property="article:tag" content="黑苹果"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="http://fp1.fghrsh.net/2020/05/08/5da10200a4e3148f16260962f51ce44a.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2020/05/16/Hackintosh%E5%AE%89%E8%A3%85%E5%85%A8%E6%94%BB%E7%95%A5/"},"headline":"神楽小白(GZ小白)的部落阁","image":["http://fp1.fghrsh.net/2020/05/08/5da10200a4e3148f16260962f51ce44a.jpg"],"datePublished":"2020-05-16T14:09:02.000Z","dateModified":"2021-04-30T12:05:06.619Z","author":{"@type":"Person","name":"神楽小白(GZ小白)"},"description":"以下内容基本摘自Eternal Qiu的博客，日后准备进行修改链接：https:&#x2F;&#x2F;blog.qiuxiangzhi.top&#x2F;2019&#x2F;07&#x2F;15&#x2F;macOS-Guide&#x2F;"}</script><link rel="canonical" href="http://example.com/2020/05/16/Hackintosh%E5%AE%89%E8%A3%85%E5%85%A8%E6%94%BB%E7%95%A5/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="神楽小白(GZ小白)的部落阁" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/archives">档案</a><a class="navbar-item" href="/categories">类别</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于本站</a><a class="navbar-item" href="/youlian">友链</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/GZXiaoBai"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="http://fp1.fghrsh.net/2020/05/08/5da10200a4e3148f16260962f51ce44a.jpg" alt="Hackintosh安装全攻略"></span></div><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-05-16T14:09:02.000Z" title="2020/5/16 下午10:09:02">2020-05-16</time>发表</span><span class="level-item"><time dateTime="2021-04-30T12:05:06.619Z" title="2021/4/30 下午8:05:06">2021-04-30</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></span><span class="level-item">20 分钟读完 (大约3015个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">Hackintosh安装全攻略</h1><div class="content"><p>以下内容基本摘自<strong>Eternal Qiu</strong>的博客，日后准备进行修改<br>链接：<a target="_blank" rel="noopener" href="https://blog.qiuxiangzhi.top/2019/07/15/macOS-Guide/">https://blog.qiuxiangzhi.top/2019/07/15/macOS-Guide/</a></p>
+<span id="more"></span>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我打算写一个教程来引导小白入坑，不在本文介绍那些复杂需要折腾的驱动问题。</p>
+<h1 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h1><p>请注意，本贴只做技术与学习探讨，不做任何商业和违法用途。同时请各位在实践学习后，于<strong>24小时内自行消除</strong>。</p>
+<p>在非苹果设备上安装macOS操作系统需要承担一定责任，希望各位明确用途后，仔细思考。<strong>作者不提倡</strong>读者进行下面的操作，本贴<strong>仅供技术参考</strong>。</p>
+<p>可能涉及到的法律问题：<strong>macOS1014</strong>；</p>
+<p><strong>如果您是非个人用户或用作商业用途，您应该观看上述材料中所提及问题，并不要接触实施下述操作。</strong></p>
+<h1 id="资源准备工作"><a href="#资源准备工作" class="headerlink" title="资源准备工作"></a>资源准备工作</h1><ol>
+<li>一台电脑，最好是搭载Windows 7及以上的操作系统，<strong>推荐Windows 10</strong>；</li>
+<li>一个不少于4G的U盘，<strong>8GB起步</strong>；如果安装macOS10.15（Catalina）请使用<strong>16G</strong>的U盘。</li>
+<li>工具软件（<a target="_blank" rel="noopener" href="http://www.diskgenius.cn/">DiskGenius专业版</a>，<a target="_blank" rel="noopener" href="https://www.balena.io/etcher/">balenaEtcher官方版</a>，<a target="_blank" rel="noopener" href="http://www.wepe.com.cn/download.html">微PE官方版</a>）；</li>
+<li>原版镜像（这里提供的是<a target="_blank" rel="noopener" href="https://mirrors.dtops.cc/iso/MacOS/daliansky_macos/">黑果小兵的镜像</a>，侵权删）；</li>
+<li>解压工具（此处链接的是<a target="_blank" rel="noopener" href="https://www.7-zip.org/">7-Zip</a>）；</li>
+<li><strong>知道如何百度</strong>；</li>
+</ol>
+<p>知道如何百度是<strong>非常重要</strong>的一件事情，因为里面涉及到一些概念，这些概念比较不那么专业，但确实也不是很常见，因此需要有一定的百度能力（主要还是有一些小白太懒了，常见诸如如何进BIOS都不愿意去百度了解）。</p>
+<h1 id="电脑调试工作"><a href="#电脑调试工作" class="headerlink" title="电脑调试工作"></a>电脑调试工作</h1><ol>
+<li><p>下载或安装好上述软件，其中<strong>DiskGenius专业版</strong>最好是免安装版的。</p>
+</li>
+<li><p>打开DiskGenius专业版，右键自己的<strong>磁盘</strong>（不是分区），查看是否是<strong>GPT分区</strong>，若不是，需要在PE下转换。</p>
+</li>
+</ol>
+<ol start="3">
+<li><p>双击微PE.exe，点击右下角生成.iso文件，解压该iso文件到你的（<strong>确保它是Fat 32格式并最好转移其他文件</strong>）U盘里。</p>
+</li>
+<li><p>进入BIOS，找到<strong>你的BIOS里面</strong>的这几个选项，并将其设置成对应状态。主要有：<strong>DVMT-Preallocted（&gt;64MB）,Security Boot（disabled），SATA Mode/磁盘模式（AHCI），UEFI启动（纯），CSM（关闭），启动顺序（U盘第一位）</strong>，保存重启。</p>
+</li>
+<li><p>进入<strong>微PE</strong>，找到自己下载的<strong>DiskGenius专业版</strong>，双击打开。若硬盘格式是MBR，则将该软件挪到U盘里面，再双击打开。右键有<strong>操作系统</strong>及<strong>想安装macOS的磁盘</strong>，将其<strong>转换成GPT（GUID）格式</strong>。</p>
+</li>
+</ol>
+<ol start="6">
+<li><p>查看将被安装macOS的磁盘，是否存在一个&gt;200MB的EFI分区。若没有，则可<strong>删除所有已存在的MSR分区及EFI分区</strong>，此时若磁盘最前部的空闲空间&gt;200MB，则可以<strong>直接建立EFI（EFI Partition）分区</strong>。若仍少于200MB，则右键磁盘此时的<strong>第一分区</strong>，选择调整磁盘大小，在<strong>前部空间</strong>分出200MB大小空闲空间，并新建EFI（EFI Partition）分区。</p>
+</li>
+<li><p>检查好磁盘均是<strong>GPT（GUID）格式</strong>、（<strong>Windows所在磁盘和macOS将安装的所在磁盘上</strong>）存在&gt;200MB的EFI分区，确保好这两点之后，点击PE桌面上的Dism++，选择自己的<strong>Windows操作系统</strong>，选择引导修复，（一般）无脑下一步即可。</p>
+</li>
+</ol>
+<p><code>注意事项：转换为GUID格式，会删除该硬盘的扩展分区</code></p>
+<ol start="8">
+<li>电脑准备工作完成。</li>
+</ol>
+<h1 id="安装调试过程"><a href="#安装调试过程" class="headerlink" title="安装调试过程"></a>安装调试过程</h1><ol>
+<li><p>打开<strong>balenaEtcher</strong>，插入U盘，按照提示操作，选择<strong>下载好的镜像</strong>进行烧录。</p>
+</li>
+<li><p>烧录好后可以有两种选择，一步一步继续往下走或者<strong>直接跳转到第6步</strong>，（若下载的镜像为我推荐的则）两种方式都可以完成安装，推荐一步一步走。</p>
+</li>
+<li><p>在<a target="_blank" rel="noopener" href="https://github.com/daliansky/Hackintosh">这里</a>找到你的机型或类似配置的EFI，下载备用。若找不到请<strong>直接跳第6步操作</strong>。</p>
+</li>
+<li><p>打开DiskGenius软件，将<strong>U盘EFI分区内的所有文件删除</strong>，并<strong>使用Ctrl+V的快捷键</strong>方式将下载的EFI文件夹粘贴进去。注意，EFI文件夹下若还有一个EFI文件夹，存在嵌套情况，请直接将<strong>最里层的EFI复制进U盘的EFI分区</strong>。</p>
+</li>
+</ol>
+<ol start="5">
+<li><p>检查EFI/CLOVER/ACPI/Patched/，若存在DSDT文件，直接删除。</p>
+</li>
+<li><p>重启，选择<strong>U盘作为第一启动项</strong>，选择<strong>Boot macOS install from macOS Mojave installation（macOS图标那一项）</strong>，如果你没有更换原有EFI，接着就是跑代码过程了。如果更换过了EFI，那么在移动到安装项之后，按下<strong>空格键</strong>，同样空格选择**-v<strong>，再</strong>ESC回到原有界面**安装即可。</p>
+</li>
+<li><p>若启动不顺利，碰到直接重启，卡死在某一界面，我的建议是：安装时候进行录像，将<strong>卡死</strong>或者<strong>导致重启</strong>的代码截图出来，在群里寻求帮助。当然，我更加推荐前往<a target="_blank" rel="noopener" href="http://bbs.pcbeta.com/forum.php?gid=86">远景论坛</a>查贴或者直接<strong>百度</strong>卡死代码解决这些问题。</p>
+</li>
+<li><p>若一切安装顺利，则它将进入安装界面。在安装界面选择<strong>磁盘工具</strong>，将预安装分区<strong>抹除成HFS分区</strong>，也即<strong>日志式</strong>，若你是<strong>固态硬盘</strong>，也可选择<strong>apfs</strong>。磁盘名字自己任意给定，白果磁盘名字为Macintosh HD，尽量避免这个名字。</p>
+</li>
+<li><p>接下来就可以进行安装了，一路下一步，选择自己刚刚命名的磁盘安装，等待安装完成。</p>
+</li>
+<li><p>安装完成会重启回到引导界面，此时选择<strong>Boot macOS install From 【你自己起的磁盘名字】</strong>，空格同样可以选择代码模式。进入第二次安装，此时不需要手动操作，等待安装完成重启即可。</p>
+</li>
+<li><p>此时回到引导界面应是已经安装完成，选择<strong>Boot macOS From 【你自己起的磁盘名字】</strong>，进入设置界面，接下来等着你的就是macOS的全新体验了。</p>
+</li>
+</ol>
+<h1 id="macOS、Windows-双引导"><a href="#macOS、Windows-双引导" class="headerlink" title="macOS、Windows 双引导"></a>macOS、Windows 双引导</h1><p>在安装完成之后，要做的就是进行引导的设置。</p>
+<p>有两种设置引导的方式，此处推荐使用的是PE进行引导的建立，也介绍Windows下设置引导的方法介绍。</p>
+<ol>
+<li><strong>Windows环境下完成引导的设置。</strong></li>
+</ol>
+<p><code>在Windows下设置引导需要借助软件完成，软件名称及官网下载[在这里](https://www.easyuefi.com/index-us.html)。该软件我们需要的是企业版，普通版本没有添加引导的功能，注意甄别。</code></p>
+<p>下载完软件后，先打开DiskGenius，将<strong>U盘里面的ESP（EFI）分区中Clover文件夹</strong>整个复制到桌面。再<strong>通过Ctrl+V</strong>的方式，粘贴在<strong>Windows启动磁盘的ESP分区中EFI文件夹</strong>下。</p>
+<p>（<strong>Windows、macOS在不同磁盘下时</strong>）也可以复制整个EFI文件夹到macOS所在磁盘的ESP分区。<br>新手小白建议前述操作。</p>
+<p>接下来打开easyUEFI，选择新建引导项，引导类型选择“<strong>Linux或其他</strong>”，名称只<strong>能输入英文</strong>，可随意填写。选择你所放引导的ESP分区，找到Clover文件夹下的<strong>CLOVERX64.efi</strong>文件，选中完成即可。</p>
+<p><code>注意事项：如果未看到CLOVER.efi文件（EasyUEFI下），请重启电脑即可看到</code></p>
+<ol start="2">
+<li><strong>PE下完成引导的设置。</strong></li>
+</ol>
+<p><code>进入PE，然后同样，打开DiskGenius，将**U盘里面的ESP（EFI）分区中Clover**文件夹整个复制到桌面。再**通过Ctrl+V**的方式，粘贴在**Windows启动磁盘的ESP分区中EFI文件夹**下。</code></p>
+<p>（<strong>Windows、macOS在不同磁盘下时</strong>）也可以复制整个EFI文件夹到macOS所在磁盘的ESP分区。<br>新手小白建议前述操作。</p>
+<p>此处的引导建立使用<strong>Bootice</strong>这款软件，选择引导，UEFI设置。引导文件同样选择<strong>CLOVERX64.efi</strong>，名称随意，选择粘贴了引导文件的分区。</p>
+<h1 id="安装过程常见问题解答"><a href="#安装过程常见问题解答" class="headerlink" title="安装过程常见问题解答"></a>安装过程常见问题解答</h1><ol>
+<li>抹除时出现“磁盘空间不足，无法完成操作”怎么办？</li>
+</ol>
+<p>``答：这是你在<strong>电脑调试阶段</strong>中，给ESP分区空间预留不足200MB，需要重新操作，将空间扩大`。</p>
+<ol start="2">
+<li>怎么才知道我的磁盘是不是GPT格式呢？`</li>
+</ol>
+<p><code>答：当你在DiskGenius专业版软件中，右键该磁盘时，若“转换到GUID格式”为**灰色不可选中**，则表示该磁盘格式为GPT。</code></p>
+<ol start="3">
+<li>为什么我在安装的时候找不到我的硬盘？</li>
+</ol>
+<p><code>答：若为三星的PM981或者PM981a，或者其他的出名不可安装macOS（百度可以知道是否难以安装）的硬盘，建议小白放弃。愿意折腾的话可以查看这篇我的[**PM981安装教程**](http://bbs.pcbeta.com/viewthread-1814806-1-1.html)（发布在远景），不保证在所有机型上稳定。</code><br><code>若不是上述硬盘，则我建议更新clover版本，对小白最简单的方式是，更换镜像版本或者镜像源。</code></p>
+<ol start="4">
+<li>BIOS设置时找不到一模一样的选项怎么办？</li>
+</ol>
+<p><code>答：并不是所有的BIOS都有我所提到的选项名称，这很正常。你需要找到意思相近的名称项，设置好就可以。如有的BIOS将**Security Boot**叫做**Security/安全启动**，名称变化很正常。**只有DVMT Pre-allocated项**，大部分笔记本BIOS会选择隐藏，可以不用纠结。其余选项都应存在你的BIOS中，并需要设置好。</code></p>
+<ol start="5">
+<li>安装时，-v滚代码卡apfs_moudle_start怎么办（一般是10.15的问题）</li>
+</ol>
+<p>答：打补丁如下<br><code>Comment                   Find*[HEX]      Replace[HEX]</code><br><code>**change EC0 to EC   4543305f        45435f5f**</code><br><code>change H_EC to EC     485f4543         45435f5f</code><br><code>change ECDV to EC    45434456        45435f5f</code></p>
+<p>一般只需选第一条加粗补丁即可</p>
+<ol start="6">
+<li>安装10.15时，卡<strong>VoodooPS2Controller</strong>怎么办(一般是<strong>10.15</strong>的问题)</li>
+</ol>
+<p>到<strong>EFI/CLOVER/kexts/others/<strong>目录下，删除</strong>VoodooPS2Controller.kexts</strong></p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>我希望各位小白，在明确步骤后，可以通过自己百度、找帖子之后解决掉大部分问题，之后才是找大神寻求帮助。</p>
+<p><strong>我比较推荐以下方式问问题：</strong></p>
+<ol>
+<li>这个我应该怎么做？Not 大神帮我搞定！</li>
+<li>这个在哪里有具体操作？Not 大神帮我搞定！</li>
+</ol>
+<p><strong>帮完忙，比较喜欢这种回复：</strong></p>
+<ol>
+<li>我知道了，谢谢你！Not 好/嗯/哦。</li>
+</ol>
+<p>如果希望别人帮你安装，自己不想动手不想研究的话，希望你还是左转淘宝或者别接触黑苹果以及玩黑果的人，白嫖可耻，时间宝贵。</p>
+<h1 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h1><p>感谢<code>QQ群：706372078</code>里的群主Eternal Qiu<br>本人QQ：<code>3467365604</code></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Hackintosh安装全攻略</p><p><a href="http://example.com/2020/05/16/Hackintosh安装全攻略/">http://example.com/2020/05/16/Hackintosh安装全攻略/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>神楽小白(GZ小白)</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-05-16</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-04-30</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/">黑苹果</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://twitter.com" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>爱发电</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2020/05/16/%E4%B8%BA%E5%B0%8F%E7%99%BD%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%94%B5%E6%B1%A0%E6%95%99%E7%A8%8B%EF%BC%88DSDT%EF%BC%89/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">为小白设计的电池教程（DSDT）</span></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="content" id="valine-thread"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script><script>new Valine({
+            el: '#valine-thread' ,
+            appId: "xdhPalFq7FfARDsLrNHlcC7R-gzGzoHsz",
+            appKey: "RVJYL4J9T8rRz4kcLAi5XlvH",
+            
+            avatar: "mm",
+            
+            meta: ["nick","mail","link"],
+            pageSize: 10,
+            lang: "zh-CN",
+            
+            highlight: true,
+            
+            
+            
+            
+            
+            requiredFields: [],
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="神楽小白(GZ小白)"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">神楽小白(GZ小白)</p><p class="is-size-6 is-block">学生</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">10</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">2</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">4</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/GZXiaoBai" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/GZXiaoBai"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#前言"><span class="level-left"><span class="level-item">1</span><span class="level-item">前言</span></span></a></li><li><a class="level is-mobile" href="#警告"><span class="level-left"><span class="level-item">2</span><span class="level-item">警告</span></span></a></li><li><a class="level is-mobile" href="#资源准备工作"><span class="level-left"><span class="level-item">3</span><span class="level-item">资源准备工作</span></span></a></li><li><a class="level is-mobile" href="#电脑调试工作"><span class="level-left"><span class="level-item">4</span><span class="level-item">电脑调试工作</span></span></a></li><li><a class="level is-mobile" href="#安装调试过程"><span class="level-left"><span class="level-item">5</span><span class="level-item">安装调试过程</span></span></a></li><li><a class="level is-mobile" href="#macOS、Windows-双引导"><span class="level-left"><span class="level-item">6</span><span class="level-item">macOS、Windows 双引导</span></span></a></li><li><a class="level is-mobile" href="#安装过程常见问题解答"><span class="level-left"><span class="level-item">7</span><span class="level-item">安装过程常见问题解答</span></span></a></li><li><a class="level is-mobile" href="#其他"><span class="level-left"><span class="level-item">8</span><span class="level-item">其他</span></span></a></li><li><a class="level is-mobile" href="#感谢"><span class="level-left"><span class="level-item">9</span><span class="level-item">感谢</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E6%8A%80%E6%9C%AF/"><span class="level-start"><span class="level-item">技术</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%9D%82%E8%B0%88/"><span class="level-start"><span class="level-item">杂谈</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/%E4%BA%8C%E6%AC%A1%E5%85%83-%E5%8A%A8%E6%BC%AB/"><span class="tag">二次元/动漫</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%B3%BB%E7%BB%9F/"><span class="tag">系统</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB/"><span class="tag">软件分享</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/"><span class="tag">黑苹果</span><span class="tag">6</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="card widget"><div class="card-content"><div class="notification is-danger">You need to set <code>client_id</code> and <code>slot_id</code> to show this AD unit. Please set it in <code>_config.yml</code>.</div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-08-11T06:01:07.000Z">2020-08-11</time></p><p class="title"><a href="/2020/08/11/%E9%BB%91%E8%8B%B9%E6%9E%9C%E8%AE%BA%E5%9D%9B%E5%BF%85%E5%A4%87App-%E4%B8%80%E4%B8%AA%E9%9B%86%E6%88%90%E7%83%AD%E9%97%A8%E8%AE%BA%E5%9D%9Bapp/">黑苹果论坛必备App-一个集成热门论坛app</a></p><p class="categories"><a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2020/06/20/Mac%E4%B8%AA%E6%80%A7%E5%8C%96%E5%92%8C%E7%BE%8E%E5%8C%96/"><img src="http://fp1.fghrsh.net/2020/06/20/06c509190391c4421310cdfbce7000ef.png" alt="Mac个性化和美化"></a></figure><div class="media-content"><p class="date"><time dateTime="2020-06-20T10:58:03.000Z">2020-06-20</time></p><p class="title"><a href="/2020/06/20/Mac%E4%B8%AA%E6%80%A7%E5%8C%96%E5%92%8C%E7%BE%8E%E5%8C%96/">Mac个性化和美化</a></p><p class="categories"><a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2020/06/06/%E8%AE%A1%E7%AE%97Slide%E8%A7%A3%E5%86%B3%E5%86%85%E5%AD%98%E6%8A%A5%E9%94%99/"><img src="http://fp1.fghrsh.net/2020/06/06/8691cc523b96dad94b5f726f40b3d8fe.png" alt="计算Slide解决内存报错"></a></figure><div class="media-content"><p class="date"><time dateTime="2020-06-06T04:38:14.000Z">2020-06-06</time></p><p class="title"><a href="/2020/06/06/%E8%AE%A1%E7%AE%97Slide%E8%A7%A3%E5%86%B3%E5%86%85%E5%AD%98%E6%8A%A5%E9%94%99/">计算Slide解决内存报错</a></p><p class="categories"><a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2020/05/23/QQ%E5%92%8C%E5%BE%AE%E4%BF%A1%E5%B0%8F%E5%8A%A9%E6%89%8B/"><img src="http://fp1.fghrsh.net/2020/05/23/804c53670d0f2e4ebd3a74461cc5c0d4.jpg" alt="macOS下的QQ和微信小助手"></a></figure><div class="media-content"><p class="date"><time dateTime="2020-05-23T06:01:07.000Z">2020-05-23</time></p><p class="title"><a href="/2020/05/23/QQ%E5%92%8C%E5%BE%AE%E4%BF%A1%E5%B0%8F%E5%8A%A9%E6%89%8B/">macOS下的QQ和微信小助手</a></p><p class="categories"><a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2020/05/23/%E7%96%AF%E7%8B%82%E5%8D%B3%E6%98%AF%E7%BE%8E%E4%B8%BD-%E7%89%A9%E8%AF%AD%E7%B3%BB%E5%88%97/"><img src="http://fp1.fghrsh.net/2020/05/23/fa0fee05102b2323a9b968b109884f2e.jpg" alt="疯狂即是美丽-物语系列"></a></figure><div class="media-content"><p class="date"><time dateTime="2020-05-23T00:50:54.000Z">2020-05-23</time></p><p class="title"><a href="/2020/05/23/%E7%96%AF%E7%8B%82%E5%8D%B3%E6%98%AF%E7%BE%8E%E4%B8%BD-%E7%89%A9%E8%AF%AD%E7%B3%BB%E5%88%97/">疯狂即是美丽-物语系列</a></p><p class="categories"><a href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2020/08/"><span class="level-start"><span class="level-item">八月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/06/"><span class="level-start"><span class="level-item">六月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/05/"><span class="level-start"><span class="level-item">五月 2020</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="神楽小白(GZ小白)的部落阁" height="28"></a><p class="is-size-7"><span>&copy; 2021 神楽小白(GZ小白)</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
